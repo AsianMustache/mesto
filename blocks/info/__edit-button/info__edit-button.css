@@ -9,3 +9,7 @@
     margin-bottom: 9px;
     padding: 0;
 }
+
+.info__edit-button:hover {
+    opacity: 0.5;
+}

@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link  rel="stylesheet" href="./pages/index.css" type="text/css">
+    <script src="./index.js" defer></script>
     <title>MESTO Russia</title>
 </head>
 <body class="body">
@@ -89,6 +90,15 @@
         <footer class="footer" aria-label="Подвал сайта">
             <p class="footer__copyright">© 2020 Mesto Russia</p>
         </footer>
+        <aside class="popup">
+            <button class="popup__close-button"></button>
+            <div class="popup-container">
+                <h2 class="popup-container__title">Редактировать профиль</h2>
+                <input type="text" placeholder="Жак-Ив Кусто" class="popup-container__name">
+                <input type="text" placeholder="Исследователь океана" class="popup-container__description">
+                <button class="popup-container__button">Сохранить</button>
+            </div>
+        </aside>
     </div>
     
 </body>

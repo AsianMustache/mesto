@@ -1,0 +1,14 @@
+.popup-container__button {
+    width: 358px;
+    height: 50px;
+    background-color: #000;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    text-align: center;
+    color: #FFFFFF;
+    margin: 0 36px 37px;
+    cursor: pointer;
+}
