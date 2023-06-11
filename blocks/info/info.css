@@ -1,0 +1,14 @@
+.info {
+    max-width: 336px;
+    max-height: 73px;
+    align-self: center;
+    display: flex;
+    flex-wrap: wrap;
+
+    /* max-width: 336px;
+    max-height: 73px;
+    align-self: center;
+    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr; */
+}
