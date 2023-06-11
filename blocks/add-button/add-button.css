@@ -1,4 +1,8 @@
 .add-button {
     width: 150px;
     height: 50px;
+    margin: 35px 0 85px 244px;
+    background-color: transparent;
+    border: 2px solid white;
+    cursor: pointer;
 }
