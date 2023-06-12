@@ -16,5 +16,5 @@ Web Технологии, которые используются в проек�
 
 ## Ссылка на деплой
 
-[Mesto Russia](https://asianmustache.github.io/russian-travel/)
+[Mesto Russia](https://asianmustache.github.io/mesto/)
 
