@@ -6,3 +6,16 @@
     line-height: 22px;
     color: #545454;
 }
+
+@media (max-width: 1250px) {
+    .footer__copyright {
+        min-width: 320px;
+    }
+}
+
+@media (max-width: 750px) {
+    .footer__copyright {
+        font-size: 14px;
+        line-height: 17px;
+    }
+}

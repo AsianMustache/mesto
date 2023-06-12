@@ -8,3 +8,17 @@
     margin: 0;
     margin-bottom: 16px;
 }
+
+@media (max-width: 1250px) {
+    .info__name {
+        font-size: 27px;
+        margin-bottom: 8px;
+    }
+}
+
+@media (max-width: 750px) {
+    .info__name {
+        line-height: 33px;
+        text-align: center;
+    }
+}

@@ -10,3 +10,16 @@
 .add-button:hover {
     opacity: 0.5;
 }
+
+@media (max-width: 1250px) {
+    .add-button {
+        margin: 35px 0 85px 0px;
+    }
+}
+
+@media (max-width: 750px) {
+    .add-button {
+        width: 282px;
+        margin: 0 19px;
+    }
+}

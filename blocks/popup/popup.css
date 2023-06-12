@@ -9,3 +9,9 @@
     background-color: rgba(0, 0, 0, 0.5);
     display: none;
 }
+
+@media (max-width: 750px) {
+    .popup {
+        padding: 123px 19px;
+    }
+}
