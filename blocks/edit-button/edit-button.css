@@ -1,4 +1,4 @@
-.info__edit-button {
+.edit-button {
     background: transparent;
     border: 0;
     cursor: pointer;
@@ -6,16 +6,16 @@
     height: 24px;
     align-self: center;
     margin-left: 18px;
-    margin-bottom: 9px;
+    margin-bottom: 18px;
     padding: 0;
 }
 
-.info__edit-button:hover {
+.edit-button:hover {
     opacity: 0.5;
 }
 
 @media (max-width: 750px) {
-    .info__edit-button {
+    .edit-button {
         width: 18px;
         height: 18px;
         margin-left: 10px;
