@@ -11,6 +11,7 @@
 @import url(../blocks/info/__name/info__name.css);
 @import url(../blocks/info/__description/info__description.css);
 @import url(../blocks/edit-button/edit-button.css);
+@import url(../blocks/edit-button/__image/edit-button__image.css);
 @import url(../blocks/add-button/add-button.css);
 @import url(../blocks/elements/elements.css);
 @import url(../blocks/element/element.css);

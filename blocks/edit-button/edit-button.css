@@ -18,6 +18,7 @@
     .edit-button {
         width: 18px;
         height: 18px;
-        margin-left: 10px;
+        position: absolute;
+        margin: 154px 38px 64px 264px;
     }
 }

@@ -1,18 +1,20 @@
-const editButtonElement = document.querySelector('.edit-button');
-const closeButtonElement = document.querySelector('.popup__close-button');
-const popupElement = document.querySelector('.popup');
+const editButtonElement = document.querySelector('.edit-button'); //Находим кнопку редактирования профиля
+const closeButtonElement = document.querySelector('.popup__close-button'); //находим кнопку закрытия формы
+const popupElement = document.querySelector('.popup'); //Находим саму Попап форму
 
+//Добавляем слушатель по клику на кнопку редактирования
 editButtonElement.addEventListener('click', () => {
     popupElement.classList.toggle('popup_opened');
 });
 
+//Добавляем слушатель по клику на кнопку закрытия формы
 closeButtonElement.addEventListener('click', () => {
     popupElement.classList.toggle('popup_opened')});
 
 
-let formElement = document.querySelector('.popup');
-let nameInput = document.querySelector('.popup-container__name');
-let descriptionInput = document.querySelector('.popup-container__description');
+let formElement = document.querySelector('.popup'); //Находим ПОПАП форму и присваиваем переменную
+let nameInput = document.querySelector('.popup-container__name'); //Находим поле ввода имени и присваиваем переменную
+let descriptionInput = document.querySelector('.popup-container__description'); //Находим поле ввода описания и присваиваем переменную
 
 function handleFormSubmit (evt) {
     evt.preventDefault();
