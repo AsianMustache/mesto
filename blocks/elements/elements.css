@@ -17,6 +17,5 @@
     .elements {
         grid-template-columns: 1fr;
         max-width: 282px;
-        max-height: 2268px;
     }
 }

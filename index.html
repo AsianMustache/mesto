@@ -5,84 +5,65 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link  rel="stylesheet" href="./pages/index.css" type="text/css">
-    <script src="./index.js" defer></script>
+    <script src="./scripts/index.js" defer></script>
     <title>MESTO Russia</title>
 </head>
 <body class="body">
     <div class="page">
         <header class="header">
             <a href="/" class="header__logo"><img src="./images/logo.svg" alt="Место - Россия" class="header__logo-image" /></a>
-            <div class="header__line"></div>
         </header>
         <main class="content">
             <section class="profile">
-                <img class="avatar" src="./images/jacq.jpg" alt="Жак Ив Кусто" />
-                <div class="info">
-                    <h2 class="info__name">Жак-Ив Кусто</h2>
-                    <p class="info__description">Исследователь океана</p>
+                <img class="profile__avatar" src="./images/jacq.jpg" alt="Жак Ив Кусто" />
+                <div class="profile__info">
+                    <h2 class="profile__info-name">Жак-Ив Кусто</h2>
+                    <p class="profile__info-description">Исследователь океана</p>
                 </div>
-                <button class="edit-button"><img src="./images/Edit Button.svg" class="edit-button__image" alt="Редактирование кнопка" /></button>
-                <button class="add-button"><img src="./images/Vector.png" alt="Добавление" /></button>
+                <button type="button" class="profile__edit-button"><img src="./images/Edit Button.svg" class="profile__edit-button-image" alt="Редактирование кнопка" /></button>
+                <button type="button" class="profile__add-button"><img src="./images/Vector.png" alt="Добавление" /></button>
             </section>
             <section class="elements">
                 <article class="element">
                     <img src="./images/dombai.png" class="element__image" alt="Домбай" />
-                    <div class="group">
-                        <h2 class="group__title">Домбай</h2>
-                        <img src="./images/favorite.svg" class="group__favorite" alt="Избранное" />
-                        <!-- <svg width="22" height="19" xmlns="http://www.w3.org/2000/svg" class="group__favorite">
-                            <path d="M20.2991 9.78586C22.567 7.54338 22.567 3.90213 20.2991 1.68186C18.0311 -0.560619 14.3486 -0.560619 12.0806 1.68186L10.9804 2.792L9.88007 1.70406C7.61215 -0.560619 3.92957 -0.560619 1.6841 1.68186C0.583822 2.76979 0 4.21297 0 5.74496C0 7.27695 0.606277 8.72013 1.6841 9.80806L10.9804 19L20.2991 9.78586ZM1.4371 5.74496C1.4371 4.59042 1.8862 3.52469 2.71702 2.72539C3.5703 1.88168 4.67058 1.45983 5.77086 1.45983C6.87114 1.45983 7.97142 1.88168 8.8247 2.72539L10.9804 4.83465L13.136 2.70318C14.8201 1.03798 17.582 1.03798 19.2437 2.70318C20.0521 3.50248 20.5236 4.56821 20.5236 5.72276C20.5236 6.8773 20.0745 7.94303 19.2437 8.74233L10.9804 16.9351L2.71702 8.76453C1.90865 7.94303 1.4371 6.8773 1.4371 5.74496Z"/>
-                        </svg> -->
+                    <div class="element__group">
+                        <h2 class="element__group-title">Домбай</h2>
+                        <button type="button" class="element__group-button"><img src="./images/favorite.svg" class="element__group-favorite" alt="Избранное" /></button>
                     </div>
                 </article>
                 <article class="element">
                     <img src="./images/elbrus.png" class="element__image" alt="Эльбрус" />
-                    <div class="group">
-                        <h2 class="group__title">Гора Эльбрус</h2>
-                        <img src="./images/favorite.svg" class="group__favorite" alt="Избранное" />
-                        <!-- <svg width="22" height="19" xmlns="http://www.w3.org/2000/svg" class="group__favorite">
-                            <path d="M20.2991 9.78586C22.567 7.54338 22.567 3.90213 20.2991 1.68186C18.0311 -0.560619 14.3486 -0.560619 12.0806 1.68186L10.9804 2.792L9.88007 1.70406C7.61215 -0.560619 3.92957 -0.560619 1.6841 1.68186C0.583822 2.76979 0 4.21297 0 5.74496C0 7.27695 0.606277 8.72013 1.6841 9.80806L10.9804 19L20.2991 9.78586ZM1.4371 5.74496C1.4371 4.59042 1.8862 3.52469 2.71702 2.72539C3.5703 1.88168 4.67058 1.45983 5.77086 1.45983C6.87114 1.45983 7.97142 1.88168 8.8247 2.72539L10.9804 4.83465L13.136 2.70318C14.8201 1.03798 17.582 1.03798 19.2437 2.70318C20.0521 3.50248 20.5236 4.56821 20.5236 5.72276C20.5236 6.8773 20.0745 7.94303 19.2437 8.74233L10.9804 16.9351L2.71702 8.76453C1.90865 7.94303 1.4371 6.8773 1.4371 5.74496Z"/>
-                        </svg> -->
+                    <div class="element__group">
+                        <h2 class="element__group-title">Эльбрус</h2>
+                        <button type="button" class="element__group-button"><img src="./images/favorite.svg" class="element__group-favorite" alt="Избранное" /></button>
                     </div>
                 </article>
                 <article class="element">
                     <img src="./images/KCHR.jpg" class="element__image" alt="КЧР" />
-                    <div class="group">
-                        <h2 class="group__title">Карачаево-Черкессия</h2>
-                        <img src="./images/favorite.svg" class="group__favorite" alt="Избранное" />
-                        <!-- <svg width="22" height="19" xmlns="http://www.w3.org/2000/svg" class="group__favorite">
-                            <path d="M20.2991 9.78586C22.567 7.54338 22.567 3.90213 20.2991 1.68186C18.0311 -0.560619 14.3486 -0.560619 12.0806 1.68186L10.9804 2.792L9.88007 1.70406C7.61215 -0.560619 3.92957 -0.560619 1.6841 1.68186C0.583822 2.76979 0 4.21297 0 5.74496C0 7.27695 0.606277 8.72013 1.6841 9.80806L10.9804 19L20.2991 9.78586ZM1.4371 5.74496C1.4371 4.59042 1.8862 3.52469 2.71702 2.72539C3.5703 1.88168 4.67058 1.45983 5.77086 1.45983C6.87114 1.45983 7.97142 1.88168 8.8247 2.72539L10.9804 4.83465L13.136 2.70318C14.8201 1.03798 17.582 1.03798 19.2437 2.70318C20.0521 3.50248 20.5236 4.56821 20.5236 5.72276C20.5236 6.8773 20.0745 7.94303 19.2437 8.74233L10.9804 16.9351L2.71702 8.76453C1.90865 7.94303 1.4371 6.8773 1.4371 5.74496Z"/>
-                        </svg> -->
+                    <div class="element__group">
+                        <h2 class="element__group-title">Карачаево-Черкессия</h2>
+                        <button type="button" class="element__group-button"><img src="./images/favorite.svg" class="element__group-favorite" alt="Избранное" /></button>
                     </div>
                 </article>
                 <article class="element">
                     <img src="./images/dombai.png" class="element__image" alt="Домбай" />
-                    <div class="group">
-                        <h2 class="group__title">Домбай</h2>
-                        <img src="./images/favorite.svg" class="group__favorite" alt="Избранное" />
-                        <!-- <svg width="22" height="19" xmlns="http://www.w3.org/2000/svg" class="group__favorite">
-                            <path d="M20.2991 9.78586C22.567 7.54338 22.567 3.90213 20.2991 1.68186C18.0311 -0.560619 14.3486 -0.560619 12.0806 1.68186L10.9804 2.792L9.88007 1.70406C7.61215 -0.560619 3.92957 -0.560619 1.6841 1.68186C0.583822 2.76979 0 4.21297 0 5.74496C0 7.27695 0.606277 8.72013 1.6841 9.80806L10.9804 19L20.2991 9.78586ZM1.4371 5.74496C1.4371 4.59042 1.8862 3.52469 2.71702 2.72539C3.5703 1.88168 4.67058 1.45983 5.77086 1.45983C6.87114 1.45983 7.97142 1.88168 8.8247 2.72539L10.9804 4.83465L13.136 2.70318C14.8201 1.03798 17.582 1.03798 19.2437 2.70318C20.0521 3.50248 20.5236 4.56821 20.5236 5.72276C20.5236 6.8773 20.0745 7.94303 19.2437 8.74233L10.9804 16.9351L2.71702 8.76453C1.90865 7.94303 1.4371 6.8773 1.4371 5.74496Z"/>
-                        </svg> -->
+                    <div class="element__group">
+                        <h2 class="element__group-title">Домбай</h2>
+                        <button type="button" class="element__group-button"><img src="./images/favorite.svg" class="element__group-favorite" alt="Избранное" /></button>
                     </div>
                 </article>
                 <article class="element">
                     <img src="./images/elbrus.png" class="element__image" alt="Эльбрус" />
-                    <div class="group">
-                        <h2 class="group__title">Гора Эльбрус</h2>
-                        <img src="./images/favorite.svg" class="group__favorite" alt="Избранное" />
-                        <!-- <svg width="22" height="19" xmlns="http://www.w3.org/2000/svg" class="group__favorite">
-                            <path d="M20.2991 9.78586C22.567 7.54338 22.567 3.90213 20.2991 1.68186C18.0311 -0.560619 14.3486 -0.560619 12.0806 1.68186L10.9804 2.792L9.88007 1.70406C7.61215 -0.560619 3.92957 -0.560619 1.6841 1.68186C0.583822 2.76979 0 4.21297 0 5.74496C0 7.27695 0.606277 8.72013 1.6841 9.80806L10.9804 19L20.2991 9.78586ZM1.4371 5.74496C1.4371 4.59042 1.8862 3.52469 2.71702 2.72539C3.5703 1.88168 4.67058 1.45983 5.77086 1.45983C6.87114 1.45983 7.97142 1.88168 8.8247 2.72539L10.9804 4.83465L13.136 2.70318C14.8201 1.03798 17.582 1.03798 19.2437 2.70318C20.0521 3.50248 20.5236 4.56821 20.5236 5.72276C20.5236 6.8773 20.0745 7.94303 19.2437 8.74233L10.9804 16.9351L2.71702 8.76453C1.90865 7.94303 1.4371 6.8773 1.4371 5.74496Z"/>
-                        </svg> -->
+                    <div class="element__group">
+                        <h2 class="element__group-title">Эльбрус</h2>
+                        <button type="button" class="element__group-button"><img src="./images/favorite.svg" class="element__group-favorite" alt="Избранное" /></button>
                     </div>
                 </article>
                 <article class="element">
                     <img src="./images/KCHR.jpg" class="element__image" alt="КЧР" />
-                    <div class="group">
-                        <h2 class="group__title">Карачаево-Черкессия</h2>
-                        <img src="./images/favorite.svg" class="group__favorite" alt="Избранное" />
-                        <!-- <svg width="22" height="19" xmlns="http://www.w3.org/2000/svg" class="group__favorite">
-                            <path d="M20.2991 9.78586C22.567 7.54338 22.567 3.90213 20.2991 1.68186C18.0311 -0.560619 14.3486 -0.560619 12.0806 1.68186L10.9804 2.792L9.88007 1.70406C7.61215 -0.560619 3.92957 -0.560619 1.6841 1.68186C0.583822 2.76979 0 4.21297 0 5.74496C0 7.27695 0.606277 8.72013 1.6841 9.80806L10.9804 19L20.2991 9.78586ZM1.4371 5.74496C1.4371 4.59042 1.8862 3.52469 2.71702 2.72539C3.5703 1.88168 4.67058 1.45983 5.77086 1.45983C6.87114 1.45983 7.97142 1.88168 8.8247 2.72539L10.9804 4.83465L13.136 2.70318C14.8201 1.03798 17.582 1.03798 19.2437 2.70318C20.0521 3.50248 20.5236 4.56821 20.5236 5.72276C20.5236 6.8773 20.0745 7.94303 19.2437 8.74233L10.9804 16.9351L2.71702 8.76453C1.90865 7.94303 1.4371 6.8773 1.4371 5.74496Z"/>
-                        </svg> -->
+                    <div class="element__group">
+                        <h2 class="element__group-title">Карачаево-Черкессия</h2>
+                        <button type="button" class="element__group-button"><img src="./images/favorite.svg" class="element__group-favorite" alt="Избранное" /></button>
                     </div>
                 </article>
             </section>
@@ -90,15 +71,15 @@
         <footer class="footer" aria-label="Подвал сайта">
             <p class="footer__copyright">© 2020 Mesto Russia</p>
         </footer>
-        <aside class="popup">
-            <button class="popup__close-button"></button>
-            <div class="popup-container">
-                <h2 class="popup-container__title">Редактировать профиль</h2>
-                <input type="text" placeholder="Жак-Ив Кусто" class="popup-container__name">
-                <input type="text" placeholder="Исследователь океана" class="popup-container__description">
-                <button class="popup-container__button">Сохранить</button>
+        <div class="popup">
+            <div class="popup__container">
+                <button type="button" class="popup__container-close-button"></button>
+                <h2 class="popup__container-title">Редактировать профиль</h2>
+                <input type="text" name="name" placeholder="Жак-Ив Кусто" class="popup__container-name">
+                <input type="text" name="description" placeholder="Исследователь океана" class="popup__container-description">
+                <button class="popup__container-button">Сохранить</button>
             </div>
-        </aside>
+        </div>
     </div>
     
 </body>

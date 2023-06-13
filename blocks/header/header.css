@@ -1,37 +1,12 @@
 .header {
     max-width: 880px;
-    max-height: 74px;
     margin: 45px 200px 40px;
-}
-
-@media (max-width: 1250px) {
-    .header {
-        margin: 45px 160px 40px;
-    }
-}
-
-@media (max-width: 920px) {
-   .header {
-       margin: 45px 140px 40px;
-    }
-}
-
-@media (max-width: 860px) {
-    .header {
-        margin: 45px 120px 40px;
-    }
-}
-
-@media (max-width: 780px) {
-    .header {
-        margin: 45px 70px 40px;
-    }
+    border-bottom: solid 1px #545454;
 }
 
 @media (max-width: 750px) {
     .header {
         max-width: 320px;
-        max-height: 56px;
         margin: 28px 0 42px 0;
     }
 }

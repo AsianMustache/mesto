@@ -1,12 +1,18 @@
 .header__logo {
     display: flex;
     margin-bottom: 41px;
+    width: 142px;
+    height: 43px;
+}
+
+.header__logo:hover {
+    opacity: 0.8;
 }
 
 @media (max-width: 750px) {
     .header__logo {
         width: 104px;
         height: 24px;
-        margin: 28px 190px 32px 27px;
+        margin: 28px auto 32px 27px;
     }
 }
