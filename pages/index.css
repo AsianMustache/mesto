@@ -4,7 +4,6 @@
 @import url(../blocks/page/page.css);
 @import url(../blocks/header/header.css);
 @import url(../blocks/header/__logo/header__logo.css);
-@import url(../blocks/header/__line/header__line.css);
 @import url(../blocks/header/__logo-image/header__logo-image.css);
 @import url(../blocks/profile/profile.css);
 @import url(../blocks/profile/__avatar/profile__avatar.css);
@@ -24,11 +23,14 @@
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__copyright/footer__copyright.css);
 @import url(../blocks/popup/popup.css);
-@import url(../blocks/popup/__container/popup__container.css);
-@import url(../blocks/popup/__container-title/popup__container-title.css);
-@import url(../blocks/popup/__container-button/popup__container-button.css);
-@import url(../blocks/popup/__container-close-button/popup__container-close-button.css);
+@import url(../blocks/popup-container/popup-container.css);
+@import url(../blocks/popup-container/__close-button/popup__container-close-button.css);
+@import url(../blocks/popup-container/__title/popup-container__title.css);
+@import url(../blocks/edit-form/edit-form.css);
+@import url(../blocks/edit-form/__text/edit-form__text.css);
+@import url(../blocks/edit-form/__text/_input-name/edit-form__text_input-name.css);
+@import url(../blocks/edit-form/__text/_input-description/edit-form__text_input-description.css);
+@import url(../blocks/edit-form/__container-button/edit-form__container-button.css);
 @import url(../blocks/popup/_opened/popup_opened.css);
-@import url(../blocks/popup/__edit-form/popup__edit-form.css);
-@import url(../blocks/popup/__edit-form/_input-name/popup__edit-form_input-name.css);
-@import url(../blocks/popup/__edit-form/_input-description/popup__edit-form_input-description.css);
+
+* { outline: 1px solid yellow; }

@@ -1,7 +1,7 @@
 const editButtonElement = document.querySelector('.profile__edit-button'); //Находим кнопку редактирования профиля
-const closeButtonElement = document.querySelector('.popup__container-close-button'); //находим кнопку закрытия формы
+const closeButtonElement = document.querySelector('.popup-container__close-button'); //находим кнопку закрытия формы
 const popupElement = document.querySelector('.popup'); //Находим саму Попап форму
-let formElement = document.querySelector('.popup__edit-form');
+let formElement = document.querySelector('.edit-form');
 //Функция открытия/закрытия формы
 function toggleForm () {
     popupElement.classList.toggle('popup_opened');
@@ -13,8 +13,8 @@ editButtonElement.addEventListener('click', toggleForm);
 //Добавляем слушатель по клику на кнопку закрытия формы
 closeButtonElement.addEventListener('click', toggleForm);
 
-let nameInput = document.querySelector('.popup__edit-form_input-name'); //Находим поле ввода имени и присваиваем переменную
-let descriptionInput = document.querySelector('.popup__edit-form_input-description'); //Находим поле ввода описания и присваиваем переменную
+let nameInput = document.querySelector('.edit-form__text_input-name'); //Находим поле ввода имени и присваиваем переменную
+let descriptionInput = document.querySelector('.edit-form__text_input-description'); //Находим поле ввода описания и присваиваем переменную
 
 // Выбираем элементы, куда должны быть вставлены значения полей
 let infoName = document.querySelector('.profile__info-name');
@@ -32,4 +32,4 @@ function handleFormSubmit (evt) {
     toggleForm();
 }
 
-const closeSaveButton = formElement.addEventListener('submit', handleFormSubmit);
+formElement.addEventListener('submit', handleFormSubmit);

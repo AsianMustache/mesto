@@ -1,6 +1,10 @@
+.profile__edit-button-image {
+    border: 1px solid #fff;
+    padding: 7px;
+}
+
 @media (max-width: 950px) {
     .profile__edit-button-image {
-        width: 18px;
-        height: 18px;
+        padding: 5.25px;
     }
 }

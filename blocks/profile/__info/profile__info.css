@@ -7,11 +7,11 @@
 
 @media (max-width: 1250px) {
     .profile__info {
-        min-width: 200px;
+        max-width: 282px;
     }
 }
 
-@media (max-width: 950px) {
+@media (max-width: 1050px) {
     .profile__info {
         align-items: center;
         justify-content: center;

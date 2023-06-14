@@ -1,4 +1,4 @@
-.popup__edit-form {
+.edit-form {
     width: 358px;
     margin: 54px 36px 37px;
     border: 0;
@@ -12,7 +12,7 @@
 }
 
 @media (max-width: 750px) {
-    .popup__edit-form {
+    .edit-form {
         width: 238px;
     }
 }

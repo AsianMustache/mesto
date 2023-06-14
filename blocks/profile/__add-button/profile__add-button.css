@@ -3,7 +3,7 @@
     height: 50px;
     margin: 35px 0 auto auto;
     background-color: transparent;
-    border: 2px solid white;
+    border: 0;
     cursor: pointer;
     border-radius: 2px;
 }
@@ -13,7 +13,7 @@
     transition: ease-in-out 0.2s;
 }
 
-@media (max-width: 950px) {
+@media (max-width: 1050px) {
     .profile__add-button {
         width: 282px;
         margin: 0 19px;
