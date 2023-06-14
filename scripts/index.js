@@ -1,7 +1,7 @@
 const editButtonElement = document.querySelector('.profile__edit-button'); //Находим кнопку редактирования профиля
 const closeButtonElement = document.querySelector('.popup__container-close-button'); //находим кнопку закрытия формы
 const popupElement = document.querySelector('.popup'); //Находим саму Попап форму
-
+let formElement = document.querySelector('.popup__edit-form');
 //Функция открытия/закрытия формы
 function toggleForm () {
     popupElement.classList.toggle('popup_opened');
@@ -29,9 +29,7 @@ function handleFormSubmit (evt) {
     // Вставляем новые значения с помощью textContent
     infoName.textContent = nameValue; 
     infoDescription.textContent = descriptionValue;
+    toggleForm();
 }
 
-//Сохраняем значения по кнопке и закрываем форму
-const closeSaveButton = document.querySelector('.popup__container-button');
-closeSaveButton.addEventListener('click', handleFormSubmit);
-closeSaveButton.addEventListener('click', toggleForm);
+const closeSaveButton = formElement.addEventListener('submit', handleFormSubmit);
