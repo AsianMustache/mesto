@@ -32,5 +32,3 @@
 @import url(../blocks/edit-form/__text/_input-description/edit-form__text_input-description.css);
 @import url(../blocks/edit-form/__container-button/edit-form__container-button.css);
 @import url(../blocks/popup/_opened/popup_opened.css);
-
-* { outline: 1px solid yellow; }
