@@ -9,7 +9,7 @@
     line-height: 22px;
     text-align: center;
     color: #fff;
-    margin: 0 36px 37px;
+    margin: 0 auto;
     cursor: pointer;
     border-radius: 2px;
     border: 0;
@@ -19,7 +19,7 @@
     .popup__container-button {
         width: 238px;
         height: 46px;
-        margin: 0 22px 25px;
+        margin: 0 auto;
         font-size: 14px;
         line-height: 17px;
     }

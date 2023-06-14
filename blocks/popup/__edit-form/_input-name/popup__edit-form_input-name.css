@@ -1,0 +1,12 @@
+.popup__edit-form_input-name {
+    margin: 0 auto;
+    margin-bottom: 30px;
+}
+
+@media (max-width: 750px) {
+    .popup__container-name {
+        width: 238px;
+        height: 14px;
+        margin: 75px 22px 30px;
+    }
+}

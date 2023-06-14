@@ -2,19 +2,23 @@ const editButtonElement = document.querySelector('.profile__edit-button'); //Н�
 const closeButtonElement = document.querySelector('.popup__container-close-button'); //находим кнопку закрытия формы
 const popupElement = document.querySelector('.popup'); //Находим саму Попап форму
 
-//Добавляем слушатель по клику на кнопку редактирования
-editButtonElement.addEventListener('click', () => {
+//Функция открытия/закрытия формы
+function toggleForm () {
     popupElement.classList.toggle('popup_opened');
-});
+};
+
+//Добавляем слушатель по клику на кнопку редактирования
+editButtonElement.addEventListener('click', toggleForm);
 
 //Добавляем слушатель по клику на кнопку закрытия формы
-closeButtonElement.addEventListener('click', () => {
-    popupElement.classList.toggle('popup_opened')});
+closeButtonElement.addEventListener('click', toggleForm);
 
+let nameInput = document.querySelector('.popup__edit-form_input-name'); //Находим поле ввода имени и присваиваем переменную
+let descriptionInput = document.querySelector('.popup__edit-form_input-description'); //Находим поле ввода описания и присваиваем переменную
 
-let formElement = document.querySelector('.popup'); //Находим ПОПАП форму и присваиваем переменную
-let nameInput = document.querySelector('.popup__container-name'); //Находим поле ввода имени и присваиваем переменную
-let descriptionInput = document.querySelector('.popup__container-description'); //Находим поле ввода описания и присваиваем переменную
+// Выбираем элементы, куда должны быть вставлены значения полей
+let infoName = document.querySelector('.profile__info-name');
+let infoDescription = document.querySelector('.profile__info-description');
 
 function handleFormSubmit (evt) {
     evt.preventDefault();
@@ -22,20 +26,12 @@ function handleFormSubmit (evt) {
     let nameValue = nameInput.value; // Получаем значение поля nameInput из свойства value
     let descriptionValue = descriptionInput.value; // Получаем значение поля descriptionInput из свойства value
 
-    // Выбираем элементы, куда должны быть вставлены значения полей
-    let infoName = document.querySelector('.profile__info-name'); 
-    let infoDescription = document.querySelector('.profile__info-description');
-
     // Вставляем новые значения с помощью textContent
     infoName.textContent = nameValue; 
     infoDescription.textContent = descriptionValue;
-
-    
 }
 
 //Сохраняем значения по кнопке и закрываем форму
-let saveButton = document.querySelector('.popup__container-button');
 const closeSaveButton = document.querySelector('.popup__container-button');
-saveButton.addEventListener('click', handleFormSubmit);
-closeSaveButton.addEventListener('click', () => {
-    popupElement.classList.toggle('popup_opened')});
+closeSaveButton.addEventListener('click', handleFormSubmit);
+closeSaveButton.addEventListener('click', toggleForm);

@@ -1,0 +1,12 @@
+.popup__edit-form_input-description {
+    margin: 0 auto;
+    margin-bottom: 48px;
+}
+
+@media (max-width: 750px) {
+    .popup__container-description {
+        width: 238px;
+        height: 14px;
+        margin: 0 22px 45px;
+    }
+}
