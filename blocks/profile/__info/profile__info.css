@@ -2,7 +2,7 @@
     align-self: center;
     display: flex;
     flex-direction: column;
-    width: 294px;
+    max-width: 294px;
 }
 
 @media (max-width: 1250px) {
