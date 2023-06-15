@@ -3,10 +3,27 @@ const closeButtonElement = document.querySelector('.popup__container-close-butto
 const popupElement = document.querySelector('.popup'); //Находим саму Попап форму
 let formElement = document.querySelector('.edit-form');
 
+let nameInput = document.querySelector('.edit-form__text_input_edit_profile-name'); //Находим поле ввода имени и присваиваем переменную
+let descriptionInput = document.querySelector('.edit-form__text_input_edit_profile-description'); //Находим поле ввода описания и присваиваем переменную
+
+function setDefaultValues () {
+    let defaultName = "Жак-Ив Кусто";
+    let defaultDescription = "Исследователь океана";
+
+    if (nameInput.value === "") {
+        nameInput.value = defaultName;
+        infoName.value = defaultName;
+      }
+      if (descriptionInput.value === "") {
+        descriptionInput.value = defaultDescription;
+        infoDescription.value = defaultDescription;
+      }
+}
 
 //Функция открытия/закрытия формы
 function toggleForm () {
     popupElement.classList.toggle('popup_opened');
+    setDefaultValues();
 };
 
 //Добавляем слушатель по клику на кнопку редактирования
@@ -15,8 +32,7 @@ editButtonElement.addEventListener('click', toggleForm);
 //Добавляем слушатель по клику на кнопку закрытия формы
 closeButtonElement.addEventListener('click', toggleForm);
 
-let nameInput = document.querySelector('.edit-form__text_input_edit_profile-name'); //Находим поле ввода имени и присваиваем переменную
-let descriptionInput = document.querySelector('.edit-form__text_input_edit_profile-description'); //Находим поле ввода описания и присваиваем переменную
+
 
 // Выбираем элементы, куда должны быть вставлены значения полей
 let infoName = document.querySelector('.profile__info-name');
