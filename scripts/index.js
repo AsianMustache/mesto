@@ -3,8 +3,8 @@ const closeButtonElement = document.querySelector('.popup__container-close-butto
 const popupElement = document.querySelector('.popup'); //Находим саму Попап форму
 let formElement = document.querySelector('.edit-form');
 
-let nameInput = document.querySelector('.edit-form__text_input_edit_profile-name'); //Находим поле ввода имени и присваиваем переменную
-let descriptionInput = document.querySelector('.edit-form__text_input_edit_profile-description'); //Находим поле ввода описания и присваиваем переменную
+let nameInput = document.querySelector('.edit-form__text_input_name'); //Находим поле ввода имени и присваиваем переменную
+let descriptionInput = document.querySelector('.edit-form__text_input_description'); //Находим поле ввода описания и присваиваем переменную
 
 function setDefaultValues () {
     let defaultName = "Жак-Ив Кусто";
