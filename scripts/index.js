@@ -1,36 +1,37 @@
 const editButtonElement = document.querySelector('.profile__info-edit-button'); //Находим кнопку редактирования профиля
 const closeButtonElement = document.querySelector('.popup__container-close-button'); //находим кнопку закрытия формы
 const popupElement = document.querySelector('.popup'); //Находим саму Попап форму
-let formElement = document.querySelector('.edit-form');
+const formElement = document.querySelector('.edit-form');
 
-let nameInput = document.querySelector('.edit-form__text_input_name'); //Находим поле ввода имени и присваиваем переменную
-let descriptionInput = document.querySelector('.edit-form__text_input_description'); //Находим поле ввода описания и присваиваем переменную
+// Выбираем элементы, куда должны быть вставлены значения полей
+const infoName = document.querySelector('.profile__info-name');
+const infoDescription = document.querySelector('.profile__info-description');
+
+const nameInput = document.querySelector('.edit-form__text_input_name'); //Находим поле ввода имени и присваиваем переменную
+const descriptionInput = document.querySelector('.edit-form__text_input_description'); //Находим поле ввода описания и присваиваем переменную
 
 
 //Функция открытия формы
-function openForm () {
+function openPopup () {
   popupElement.classList.add('popup_opened');
-  nameValue = infoName.textContent;
-  descriptionValue = infoDescription.textContent;
+  nameInput.value = infoName.textContent;
+  descriptionInput.value = infoDescription.textContent;
 }
 
 
 //Функция закрытия формы
-function closeForm () {
+function closePopup () {
   popupElement.classList.remove('popup_opened')
 }
 
 //Добавляем слушатель по клику на кнопку редактирования
-editButtonElement.addEventListener('click', openForm);
+editButtonElement.addEventListener('click', openPopup);
 
 //Добавляем слушатель по клику на кнопку закрытия формы
-closeButtonElement.addEventListener('click', closeForm);
+closeButtonElement.addEventListener('click', closePopup);
 
 
 
-// Выбираем элементы, куда должны быть вставлены значения полей
-let infoName = document.querySelector('.profile__info-name');
-let infoDescription = document.querySelector('.profile__info-description');
 
 function handleFormSubmit (evt) {
     evt.preventDefault();
@@ -41,7 +42,7 @@ function handleFormSubmit (evt) {
     // Вставляем новые значения с помощью textContent
     infoName.textContent = nameValue; 
     infoDescription.textContent = descriptionValue;
-    closeForm();
+    closePopup();
 }
 
 formElement.addEventListener('submit', handleFormSubmit);
