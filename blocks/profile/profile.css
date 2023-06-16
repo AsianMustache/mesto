@@ -1,6 +1,6 @@
 .profile {
     max-width: 880px;
-    margin: 0 200px 50px;
+    margin: 40px 200px 47px;
     display: flex;
 }
 
@@ -11,5 +11,6 @@
         align-items: center;
         margin: 0 auto;
         margin-bottom: 36px;
+        margin-top: 40px;
     }
 }
