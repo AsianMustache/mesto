@@ -6,31 +6,25 @@ let formElement = document.querySelector('.edit-form');
 let nameInput = document.querySelector('.edit-form__text_input_name'); //Находим поле ввода имени и присваиваем переменную
 let descriptionInput = document.querySelector('.edit-form__text_input_description'); //Находим поле ввода описания и присваиваем переменную
 
-function setDefaultValues () {
-    let defaultName = "Жак-Ив Кусто";
-    let defaultDescription = "Исследователь океана";
 
-    if (nameInput.value === "") {
-        nameInput.value = defaultName;
-        infoName.value = defaultName;
-      }
-      if (descriptionInput.value === "") {
-        descriptionInput.value = defaultDescription;
-        infoDescription.value = defaultDescription;
-      }
+//Функция открытия формы
+function openForm () {
+  popupElement.classList.add('popup_opened');
+  nameValue = infoName.textContent;
+  descriptionValue = infoDescription.textContent;
 }
 
-//Функция открытия/закрытия формы
-function toggleForm () {
-    popupElement.classList.toggle('popup_opened');
-    setDefaultValues();
-};
+
+//Функция закрытия формы
+function closeForm () {
+  popupElement.classList.remove('popup_opened')
+}
 
 //Добавляем слушатель по клику на кнопку редактирования
-editButtonElement.addEventListener('click', toggleForm);
+editButtonElement.addEventListener('click', openForm);
 
 //Добавляем слушатель по клику на кнопку закрытия формы
-closeButtonElement.addEventListener('click', toggleForm);
+closeButtonElement.addEventListener('click', closeForm);
 
 
 
@@ -47,7 +41,7 @@ function handleFormSubmit (evt) {
     // Вставляем новые значения с помощью textContent
     infoName.textContent = nameValue; 
     infoDescription.textContent = descriptionValue;
-    toggleForm();
+    closeForm();
 }
 
 formElement.addEventListener('submit', handleFormSubmit);
