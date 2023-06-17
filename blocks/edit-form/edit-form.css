@@ -8,7 +8,8 @@
     color: #000;
     display: grid;
     grid-template-columns: 1fr;
-    gap: 35px;
+    /* gap: 35px; */
+    gap: 37px;
 }
 
 @media (max-width: 750px) {

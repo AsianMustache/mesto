@@ -30,5 +30,6 @@
     .profile__info {
         margin-top: 0;
         margin-bottom: 13px;
+        width: 100%;
     }
 }
