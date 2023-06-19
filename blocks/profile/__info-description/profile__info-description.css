@@ -11,6 +11,7 @@
     overflow: hidden;
     max-width: 294px;
     width: 100%;
+    grid-column: 1 / 2;
 }
 
 @media (max-width: 1250px) {

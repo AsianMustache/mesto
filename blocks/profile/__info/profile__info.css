@@ -1,9 +1,10 @@
 .profile__info {
     align-self: center;
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: max-content auto;
+    /* flex-direction: column; */
     max-width: 294px;
-    margin-top: 20px;
+    /* margin-top: 20px; */
 }
 
 @media (max-width: 1250px) {
@@ -17,6 +18,8 @@
         align-items: center;
         justify-content: center;
         margin-bottom: 36px;
+        display: flex;
+        flex-direction: column;
     }
 }
 

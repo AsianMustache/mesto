@@ -8,10 +8,12 @@
     margin-right: auto;
     padding: 0;
     /* transform: translate(294px, -72px); */
-    position: relative;
-    bottom: 62px;
-    left: 294px;
+    /* position: relative; */
+    /* bottom: 62px;
+    left: 294px; */
     border: 1px solid #fff;
+    grid-row: 1;
+    grid-column: 2;
 }
 
 .profile__info-edit-button:hover {
