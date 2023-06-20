@@ -7,8 +7,11 @@ const formElement = document.querySelector('.edit-form');
 const infoName = document.querySelector('.profile__info-name');
 const infoDescription = document.querySelector('.profile__info-description');
 
-const nameInput = document.querySelector('.edit-form__text_input_name'); //Находим поле ввода имени и присваиваем переменную
-const descriptionInput = document.querySelector('.edit-form__text_input_description'); //Находим поле ввода описания и присваиваем переменную
+const nameInput = formElement.querySelector('.edit-form__text_input_name'); //Находим поле ввода имени и присваиваем переменную
+const descriptionInput = formElement.querySelector('.edit-form__text_input_description'); //Находим поле ввода описания и присваиваем переменную
+
+// let nameValue = nameInput.value; // Получаем значение поля nameInput из свойства value
+// let descriptionValue = descriptionInput.value; // Получаем значение поля descriptionInput из свойства value
 
 
 //Функция открытия формы
@@ -35,13 +38,11 @@ closeButtonElement.addEventListener('click', closePopup);
 
 function handleFormSubmit (evt) {
     evt.preventDefault();
-    
-    let nameValue = nameInput.value; // Получаем значение поля nameInput из свойства value
-    let descriptionValue = descriptionInput.value; // Получаем значение поля descriptionInput из свойства value
+       
 
     // Вставляем новые значения с помощью textContent
-    infoName.textContent = nameValue; 
-    infoDescription.textContent = descriptionValue;
+    infoName.textContent = nameInput.value; 
+    infoDescription.textContent = descriptionInput.value;
     closePopup();
 }
 
