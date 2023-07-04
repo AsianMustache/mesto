@@ -1,3 +1,30 @@
+const initialCards = [
+  {
+    name: 'Архыз',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+  },
+  {
+    name: 'Челябинская область',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+  },
+  {
+    name: 'Иваново',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+  },
+  {
+    name: 'Камчатка',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+  },
+  {
+    name: 'Холмогорский район',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+  },
+  {
+    name: 'Байкал',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+  }
+];
+
 const editButtonElement = document.querySelector('.profile__info-edit-button'); //Находим кнопку редактирования профиля
 const closeButtonElement = document.querySelector('.popup__container-close-button'); //находим кнопку закрытия формы
 const popupElement = document.querySelector('.popup'); //Находим саму Попап форму
@@ -47,3 +74,51 @@ function handleFormSubmit (evt) {
 }
 
 formElement.addEventListener('submit', handleFormSubmit);
+
+
+document.addEventListener('DOMContentLoaded', function() {
+  
+
+  const cardsContainer = document.querySelector('.elements');
+
+  function createCard(name, link) {
+    const cardTemplate = document.createElement('article');
+    cardTemplate.classList.add('element');
+
+    const cardImage = document.createElement('img');
+    cardImage.classList.add('element__image');
+    cardImage.src = link;
+    cardImage.alt = name;
+    cardTemplate.appendChild(cardImage);
+
+    const cardGroup = document.createElement('div');
+    cardGroup.classList.add('element__group');
+    cardTemplate.appendChild(cardGroup);
+
+    const cardTitle = document.createElement('h2');
+    cardTitle.classList.add('element__group-title');
+    cardTitle.textContent = name;
+    cardGroup.appendChild(cardTitle);
+
+    const cardButton = document.createElement('button');
+    cardButton.classList.add('element__group-button');
+    cardGroup.appendChild(cardButton);
+
+    const cardButtonImage = document.createElement('img');
+    cardButtonImage.classList.add('element__group-favorite');
+    cardButtonImage.src = './images/favorite.svg';
+    cardButtonImage.alt = 'Избранное';
+    cardButton.appendChild(cardButtonImage);
+
+    return cardTemplate;
+  }
+
+  function renderCards() {
+    initialCards.forEach(function(card) {
+      const cardElement = createCard(card.name, card.link);
+      cardsContainer.appendChild(cardElement);
+    });
+  }
+
+  renderCards();
+});
