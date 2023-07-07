@@ -7,10 +7,6 @@
     margin-left: 18px;
     margin-right: auto;
     padding: 0;
-    /* transform: translate(294px, -72px); */
-    /* position: relative; */
-    /* bottom: 62px;
-    left: 294px; */
     border: 1px solid #fff;
     grid-row: 1;
     grid-column: 2;
@@ -24,7 +20,6 @@
 @media (max-width: 1050px) {
     .profile__info-edit-button {
         position: relative;
-        /* transform: translate(164px, -17px); */
         bottom: 64px;
         left: 283px;
     }
@@ -32,7 +27,6 @@
 
 @media (max-width: 950px) {
     .profile__info-edit-button {
-        /* transform: translate(105px, -17px); */
         bottom: 52px;
         left: 189px;
         margin-left: 10px;
@@ -44,7 +38,6 @@
         width: 18px;
         height: 18px;
         bottom: 51px;
-        /* left: 187px; */
         left: 235px;
     }
 }

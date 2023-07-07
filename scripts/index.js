@@ -85,6 +85,16 @@ document.addEventListener('DOMContentLoaded', function() {
     const cardTemplate = document.createElement('article');
     cardTemplate.classList.add('element');
 
+    const cardDeleteButton = document.createElement('button');
+    cardDeleteButton.classList.add('element__delete-button');
+    cardTemplate.appendChild(cardDeleteButton);
+
+    const cardDeleteImg = document.createElement('img');
+    cardDeleteImg.classList.add('element__delete-image');
+    cardDeleteImg.src = "./images/Trash.svg";
+    cardDeleteImg.alt = "Кнопка удаления"
+    cardDeleteButton.appendChild(cardDeleteImg);
+    
     const cardImage = document.createElement('img');
     cardImage.classList.add('element__image');
     cardImage.src = link;
@@ -121,4 +131,19 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   renderCards();
+
+  function deleteCards() {
+    const buttonsDelete = document.querySelectorAll('.element__delete-button');
+
+    buttonsDelete.forEach(function(buttonDelete) {
+      buttonDelete.addEventListener('click', function() {
+        const card = buttonDelete.closest('.element');
+        card.remove();
+      });
+    });
+  }
+
+  deleteCards();
 });
+
+
