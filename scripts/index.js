@@ -69,13 +69,6 @@ function closeAddPopup () {
   addPopupElement.classList.remove('add-popup_opened')
 }
 
-function handleAddFormSubmit (ev) {
-  ev.preventDefault();
-  closeAddPopup();
-}
-
-addFormElement.addEventListener('submit', handleAddFormSubmit);
-
 function handleFormSubmit (evt) {
     evt.preventDefault();
        
@@ -88,76 +81,6 @@ function handleFormSubmit (evt) {
 
 formElement.addEventListener('submit', handleFormSubmit);
 
-
-// document.addEventListener('DOMContentLoaded', function() {
-  
-
-//   const cardsContainer = document.querySelector('.elements');
-
-//   function createCard(name, link) {
-//     const cardTemplate = document.createElement('article');
-//     cardTemplate.classList.add('element');
-
-//     const cardDeleteButton = document.createElement('button');
-//     cardDeleteButton.classList.add('element__delete-button');
-//     cardTemplate.appendChild(cardDeleteButton);
-
-//     const cardDeleteImg = document.createElement('img');
-//     cardDeleteImg.classList.add('element__delete-image');
-//     cardDeleteImg.src = "./images/Trash.svg";
-//     cardDeleteImg.alt = "Кнопка удаления"
-//     cardDeleteButton.appendChild(cardDeleteImg);
-    
-//     const cardImage = document.createElement('img');
-//     cardImage.classList.add('element__image');
-//     cardImage.src = link;
-//     cardImage.alt = name;
-//     cardTemplate.appendChild(cardImage);
-
-//     const cardGroup = document.createElement('div');
-//     cardGroup.classList.add('element__group');
-//     cardTemplate.appendChild(cardGroup);
-
-//     const cardTitle = document.createElement('h2');
-//     cardTitle.classList.add('element__group-title');
-//     cardTitle.textContent = name;
-//     cardGroup.appendChild(cardTitle);
-
-//     const cardButton = document.createElement('button');
-//     cardButton.classList.add('element__group-button');
-//     cardGroup.appendChild(cardButton);
-
-//     const cardButtonImage = document.createElement('img');
-//     cardButtonImage.classList.add('element__group-favorite');
-//     cardButtonImage.src = './images/favorite.svg';
-//     cardButtonImage.alt = 'Избранное';
-//     cardButton.appendChild(cardButtonImage);
-
-//     return cardTemplate;
-//   }
-
-//   function renderCards() {
-//     initialCards.forEach(function(card) {
-//       const cardElement = createCard(card.name, card.link);
-//       cardsContainer.appendChild(cardElement);
-//     });
-//   }
-
-//   renderCards();
-
-//   function deleteCards() {
-//     const buttonsDelete = document.querySelectorAll('.element__delete-button');
-
-//     buttonsDelete.forEach(function(buttonDelete) {
-//       buttonDelete.addEventListener('click', function() {
-//         const card = buttonDelete.closest('.element');
-//         card.remove();
-//       });
-//     });
-//   }
-
-//   deleteCards();
-// });
 
 document.addEventListener('DOMContentLoaded', function() {
   const cardsContainer = document.querySelector('.elements');
@@ -195,4 +118,18 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     renderCards();
-})
+
+    function handleAddFormSubmit(ev) {
+      ev.preventDefault();
+  
+      const textName = document.querySelector('.add-form__text_input_title').value;
+      const urlName = document.querySelector('.add-form__text_input_url').value;
+  
+      const newCardElement = createCard(textName, urlName);
+      cardsContainer.appendChild(newCardElement);
+  
+      closeAddPopup();
+    }
+  
+    addFormElement.addEventListener('submit', handleAddFormSubmit);
+});
