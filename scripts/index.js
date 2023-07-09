@@ -29,18 +29,16 @@ const editButtonElement = document.querySelector('.profile__info-edit-button'); 
 const closeButtonElement = document.querySelector('.popup__container-close-button'); //находим кнопку закрытия формы
 const popupElement = document.querySelector('.popup'); //Находим саму Попап форму
 const formElement = document.querySelector('.edit-form');
-
 const addButtonElement = document.querySelector('.profile__add-button'); //Находим кнопку добавления нового места
 const closeButtonAddFormElement = document.querySelector('.add-popup__container-close-button'); //находим кнопку закрытия формы добавления
 const addPopupElement = document.querySelector('.add-popup'); //Находим саму форму добавления
 const addFormElement = document.querySelector('.add-form');
-
 // Выбираем элементы, куда должны быть вставлены значения полей
 const infoName = document.querySelector('.profile__info-name');
 const infoDescription = document.querySelector('.profile__info-description');
-
 const nameInput = formElement.querySelector('.edit-form__text_input_name'); //Находим поле ввода имени и присваиваем переменную
 const descriptionInput = formElement.querySelector('.edit-form__text_input_description'); //Находим поле ввода описания и присваиваем переменную
+
 
 //Функция открытия формы
 function openPopup () {
@@ -58,6 +56,7 @@ function closePopup () {
 editButtonElement.addEventListener('click', openPopup);
 //Добавляем слушатель по клику на кнопку закрытия формы
 closeButtonElement.addEventListener('click', closePopup);
+
 
 addButtonElement.addEventListener('click', openAddPopup);
 closeButtonAddFormElement.addEventListener('click', closeAddPopup);
@@ -104,7 +103,8 @@ document.addEventListener('DOMContentLoaded', function() {
       deleteImageButton.src = './images/Trash.svg';
       deleteImageButton.alt = 'Кнопка удаления'
       deleteButton.addEventListener('click', function() {
-        cardElement.remove();
+        const card = deleteButton.closest('.element');
+        card.remove();
       });
 
       return cardElement;

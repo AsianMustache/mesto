@@ -40,5 +40,7 @@
 @import url(../blocks/add-form/add-form.css);
 @import url(../blocks/add-form/__text/add-form__text.css);
 @import url(../blocks/add-form/__container-button/add-form__container-button.css);
+@import url(../blocks/image-popup/image-popup.css);
+@import url(../blocks/image-popup/_opened/image-popup_opened.css);
 
 /* * { outline: 1px solid yellow; } */
