@@ -40,6 +40,7 @@ const nameInput = formElement.querySelector('.edit-form__text_input_name'); //Н
 const descriptionInput = formElement.querySelector('.edit-form__text_input_description'); //Находим поле ввода описания и присваиваем переменную
 
 
+
 //Функция открытия формы
 function openPopup () {
   popupElement.classList.add('popup_opened');
@@ -107,6 +108,10 @@ document.addEventListener('DOMContentLoaded', function() {
         card.remove();
       });
 
+      cardImage.addEventListener('click', () => {
+        openPopupImage(link, name);
+      })
+
       return cardElement;
     }
 
@@ -132,4 +137,23 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   
     addFormElement.addEventListener('submit', handleAddFormSubmit);
+
+    function openPopupImage (imageUrl, name) {
+      const imagePopup = document.querySelector('.image-popup');
+      const popupImage = imagePopup.querySelector('.image-popup__image-fullscreen');
+      const popupImageTitle = imagePopup.querySelector('.image-popup__title-fullscreen')
+
+      popupImage.src = imageUrl;
+      popupImage.alt = 'Увеличенная картинка';
+      popupImageTitle.textContent = name;
+      imagePopup.classList.add('image-popup_opened');
+    }
+
+    function closePopupImage () {
+      const imagePopup = document.querySelector('.image-popup');
+      imagePopup.classList.remove('image-popup_opened');
+    }
+
+    const popupCloseButton = document.querySelector('.image-popup__close-button');
+    popupCloseButton.addEventListener('click', closePopupImage);
 });
