@@ -40,7 +40,6 @@ const nameInput = formElement.querySelector('.edit-form__text_input_name'); //Н
 const descriptionInput = formElement.querySelector('.edit-form__text_input_description'); //Находим поле ввода описания и присваиваем переменную
 
 
-
 //Функция открытия формы
 function openPopup () {
   popupElement.classList.add('popup_opened');
@@ -120,6 +119,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const cardElement = createCard(card.name, card.link);
         cardsContainer.appendChild(cardElement);
       });
+
     }
 
     renderCards();
