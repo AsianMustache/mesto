@@ -16,6 +16,12 @@
     transition: ease-in-out 0.2s;
 }
 
+@media (max-width: 1250px) {
+    .image-popup__close-button {
+        top: -10px;
+    }
+}
+
 @media (max-width: 750px) {
     .image-popup__close-button {
         top: -36px;

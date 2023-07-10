@@ -12,8 +12,15 @@
     align-self: center;
 }
 
+@media (max-width: 1250px) {
+    .image-popup__container {
+        width: 648px;
+    }
+}
+
 @media (max-width: 750px) {
     .image-popup__container {
-        width: 282px;
+        width: 240px;
+        height: 299px;
     }
 }
