@@ -32,8 +32,8 @@ const popupEditForm = document.querySelector('.popup_form_edit'); //Находи
 const editForm = document.querySelector('.edit-form'); //Поиск формы редактирования
 const addButtonElement = document.querySelector('.profile__add-button'); //Находим кнопку добавления нового места
 const closeButtonAddFormElement = document.querySelector('.popup-container__add-popup-close-button'); //Находим кнопку закрытия формы добавления
-const popupAddForm = document.querySelector('.popup_form_add'); //Форма добавления нового места
-const addForm = popupAddForm.querySelector('.add-form');
+const popupAddForm = document.querySelector('.popup_form_add'); //Контейнер добавления нового места
+const addForm = popupAddForm.querySelector('.add-form'); //Находим саму форму добавления нового места
 // Выбираем элементы, куда должны быть вставлены значения полей
 const infoName = document.querySelector('.profile__info-name');
 const infoDescription = document.querySelector('.profile__info-description');
@@ -130,7 +130,7 @@ function handleAddFormSubmit(ev) {
   const textName = document.querySelector('.add-form__text_input_title').value;
   const urlName = document.querySelector('.add-form__text_input_url').value;
   const newCardElement = createCard(textName, urlName);
-  
+
   cardsContainer.prepend(newCardElement);
 
   closePopup(popupAddForm);
