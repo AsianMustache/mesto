@@ -28,11 +28,12 @@ const initialCards = [
 ];
 const editButtonElement = document.querySelector('.profile__info-edit-button'); //Находим кнопку редактирования профиля
 const closeButtonElement = document.querySelector('.popup-container__close-button'); //Находим кнопку закрытия формы
-const popupEditForm = document.querySelector('.popup_form_edit'); //Находим саму Попап форму
+const popupEditForm = document.querySelector('.popup_form_edit'); //Находим саму Попап форму редактирования
 const editForm = document.querySelector('.edit-form'); //Поиск формы редактирования
 const addButtonElement = document.querySelector('.profile__add-button'); //Находим кнопку добавления нового места
 const closeButtonAddFormElement = document.querySelector('.popup-container__add-popup-close-button'); //Находим кнопку закрытия формы добавления
-const popupAddForm = document.querySelector('.popup_form_add');
+const popupAddForm = document.querySelector('.popup_form_add'); //Форма добавления нового места
+const addForm = popupAddForm.querySelector('.add-form');
 // Выбираем элементы, куда должны быть вставлены значения полей
 const infoName = document.querySelector('.profile__info-name');
 const infoDescription = document.querySelector('.profile__info-description');
@@ -46,11 +47,12 @@ const popupCloseButton = document.querySelector('.popup-image-container__close-b
 const popupImage = popupImageForm.querySelector('.popup-image-container__image-fullscreen'); //Поиск селектора изображения полноэкранного
 const popupImageTitle = popupImageForm.querySelector('.popup-image-container__title-fullscreen'); //Поиск селектора названия карточки изображения
 
+//Функции
+
 //Общая функция открытия форм
 function openPopup (popup) {
   popup.classList.add('popup_opened');
 }
-
 //Общая функция закрытия форм
 function closePopup (popup) {
   popup.classList.remove('popup_opened');
@@ -71,10 +73,9 @@ function createCard(name, link) {
   const cardImage = cardElement.querySelector('.element__image');
   const cardTitle = cardElement.querySelector('.element__group-title');
   const cardButtonImage = cardElement.querySelector('.element__group-favorite');
-
-  cardButtonImage.src = './images/favorite.svg';
-  cardButtonImage.alt = 'Избранное';
   
+  cardButtonImage.src = './images/favorite.svg';
+  cardButtonImage.alt = 'Избранное';  
   cardImage.src = link;
   cardImage.alt = name;
   cardTitle.textContent = name;
@@ -108,6 +109,20 @@ function renderCards() {
   });
 
 }
+
+//Функция занесения данных при открытии формы редактирования
+function assignValuesToFields () {
+  nameInput.value = infoName.textContent;
+  descriptionInput.value = infoDescription.textContent;
+  openPopup(popupEditForm);
+}
+
+//Функция закрытия попапа добавления нового места через кнопку и сброс полей
+function closePopupAddForm () {
+  closePopup(popupAddForm);
+  addForm.reset();
+}
+
 //Функция сохранения данных (Сабмита) формы добавления карточки
 function handleAddFormSubmit(ev) {
   ev.preventDefault();
@@ -119,12 +134,12 @@ function handleAddFormSubmit(ev) {
   cardsContainer.prepend(newCardElement);
 
   closePopup(popupAddForm);
-  popupAddForm.reset();
+  addForm.reset();
 }
 //Функция открытия попапа изображения
 function openPopupImage(imageUrl, name) {
   popupImage.src = imageUrl;
-  popupImage.alt = 'Увеличенная картинка';
+  popupImage.alt = `Увеличенное изображение - ${name}`;
   popupImageTitle.textContent = name;
   openPopup(popupImageForm);
 }
@@ -136,10 +151,10 @@ function closePopupImage() {
 }
 
 //Обработчики событий (>>>Не получается передать именнованной функции обработчика - выдает ошибку, по вашему примеру<<<)
-editButtonElement.addEventListener('click', () => {openPopup(popupEditForm)}); //Слушатель клика для открытия формы редактирования 
+editButtonElement.addEventListener('click', assignValuesToFields); //Слушатель клика для открытия формы редактирования 
 closeButtonElement.addEventListener('click', () => {closePopup(popupEditForm)}); //Слушатель клика для закрытия формы редактирования
 addButtonElement.addEventListener('click', () => {openPopup(popupAddForm)}); //Слушатель клика для открытия формы добавления нового места
-closeButtonAddFormElement.addEventListener('click', () => {closePopup(popupAddForm)}); //Слушатель клика для закрытия формы нового места
+closeButtonAddFormElement.addEventListener('click', closePopupAddForm); //Слушатель клика для закрытия формы нового места
 editForm.addEventListener('submit', handleFormSubmit); //Слушатель сабмита по кнопке формы редактирования
 popupAddForm.addEventListener('submit', handleAddFormSubmit); //Слушатель сабмита по кнопке формы добавления
 popupCloseButton.addEventListener('click', () => {closePopup(popupImageForm)}); //Слушатель клика по кнопке закрытия формы изображения
