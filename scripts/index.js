@@ -129,8 +129,8 @@ function handleAddFormSubmit(ev) {
 
   const textName = document.querySelector('.add-form__text_input_title').value;
   const urlName = document.querySelector('.add-form__text_input_url').value;
-
   const newCardElement = createCard(textName, urlName);
+  
   cardsContainer.prepend(newCardElement);
 
   closePopup(popupAddForm);
