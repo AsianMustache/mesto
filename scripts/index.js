@@ -82,7 +82,7 @@ function createCard(name, link) {
 
   deleteImageButton.src = './images/Trash.svg';
   deleteImageButton.alt = 'Кнопка удаления'
-  deleteButton.addEventListener('click', function() {
+  deleteButton.addEventListener('click', function handleDeleteElement () {
     const card = deleteButton.closest('.element');
     card.remove();
   });
