@@ -111,14 +111,14 @@ function renderCards() {
 }
 
 //Функция занесения данных при открытии формы редактирования
-function assignValuesToFields () {
+function handleAssignValuesToFields () {
   nameInput.value = infoName.textContent;
   descriptionInput.value = infoDescription.textContent;
   openPopup(popupEditForm);
 }
 
 //Функция закрытия попапа добавления нового места через кнопку и сброс полей
-function closePopupAddForm () {
+function handleClosePopupAddForm () {
   closePopup(popupAddForm);
   addForm.reset();
 }
@@ -151,10 +151,10 @@ function closePopupImage() {
 }
 
 //Обработчики событий (>>>Не получается передать именнованной функции обработчика - выдает ошибку, по вашему примеру<<<)
-editButtonElement.addEventListener('click', assignValuesToFields); //Слушатель клика для открытия формы редактирования 
+editButtonElement.addEventListener('click', handleAssignValuesToFields); //Слушатель клика для открытия формы редактирования 
 closeButtonElement.addEventListener('click', () => {closePopup(popupEditForm)}); //Слушатель клика для закрытия формы редактирования
 addButtonElement.addEventListener('click', () => {openPopup(popupAddForm)}); //Слушатель клика для открытия формы добавления нового места
-closeButtonAddFormElement.addEventListener('click', closePopupAddForm); //Слушатель клика для закрытия формы нового места
+closeButtonAddFormElement.addEventListener('click', handleClosePopupAddForm); //Слушатель клика для закрытия формы нового места
 editForm.addEventListener('submit', handleFormSubmit); //Слушатель сабмита по кнопке формы редактирования
 popupAddForm.addEventListener('submit', handleAddFormSubmit); //Слушатель сабмита по кнопке формы добавления
 popupCloseButton.addEventListener('click', () => {closePopup(popupImageForm)}); //Слушатель клика по кнопке закрытия формы изображения
