@@ -1,6 +1,7 @@
 .popup-image-container {
     border-radius: 10px;
-    max-height: 540px;
+    max-height: 75vh;
+    max-width: 75vw;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -19,7 +20,7 @@
 
 @media (max-width: 1250px) {
     .popup-image-container {
-        width: 648px;
+        max-height: 50vh;
     }
 }
 
