@@ -27,14 +27,11 @@ const initialCards = [
   }
 ];
 const editButtonElement = document.querySelector('.profile__info-edit-button'); //Находим кнопку редактирования профиля
-// const closeButtonElement = document.querySelector('.popup-container__close-button'); //Находим кнопку закрытия формы
 const popupEditForm = document.querySelector('.popup_form_edit'); //Находим саму Попап форму редактирования
 const editForm = popupEditForm.querySelector('.edit-form'); //Поиск формы редактирования
 const addButtonElement = document.querySelector('.profile__add-button'); //Находим кнопку добавления нового места
-// const closeButtonAddFormElement = document.querySelector('.popup-container__add-popup-close-button'); //Находим кнопку закрытия формы добавления
 const popupAddForm = document.querySelector('.popup_form_add'); //Контейнер добавления нового места
 const addForm = popupAddForm.querySelector('.add-form'); //Находим саму форму добавления нового места
-// Выбираем элементы, куда должны быть вставлены значения полей
 const infoName = document.querySelector('.profile__info-name');
 const infoDescription = document.querySelector('.profile__info-description');
 const nameInput = editForm.querySelector('.edit-form__text_input_name'); //Находим поле ввода имени и присваиваем переменную
@@ -42,7 +39,6 @@ const descriptionInput = editForm.querySelector('.edit-form__text_input_descript
 const cardsContainer = document.querySelector('.elements'); //Находим поле для создания карточек
 const cardTemplate = document.querySelector('#template-elements').content; //Находим шаблон для создания карточек
 const popupImageForm = document.querySelector('.popup_form_image'); //Попап картинки
-// const popupCloseButton = document.querySelector('.popup-image-container__close-button'); //Кнопка закрытия попапа изображения
 const popupImage = popupImageForm.querySelector('.popup-image-container__image-fullscreen'); //Поиск селектора изображения полноэкранного
 const popupImageTitle = popupImageForm.querySelector('.popup-image-container__title-fullscreen'); //Поиск селектора названия карточки изображения
 const textName = addForm.querySelector('.add-form__text_input_title'); //Поиск поля для ввода названия, формы добавления нового места
@@ -97,14 +93,6 @@ function createCard(name, link) {
     openPopupImage(link, name);
   })
 
-  // likeButton.addEventListener('click', () => {
-  //   if (likeButton.src.includes('Favorite-active.svg')) {
-  //     likeButton.src = './images/favorite.svg';
-  //   } else {
-  //     likeButton.src = './images/Favorite-active.svg';
-  //   }
-  // });
-
   likeButton.addEventListener('click', () => {
     if (likeButton.getAttribute('src') === likeActiveButtonPath) {
       likeButton.src = likeButtonPath;
@@ -129,12 +117,6 @@ function handleEditButtonClick () {
   nameInput.value = infoName.textContent;
   descriptionInput.value = infoDescription.textContent;
   openPopup(popupEditForm);
-}
-
-//Функция закрытия попапа добавления нового места через кнопку и сброс полей
-function handleClosePopupAddForm () {
-  closePopup(popupAddForm);
-  addForm.reset();
 }
 
 //Функция сохранения данных (Сабмита) формы добавления карточки
@@ -163,12 +145,9 @@ closeButtons.forEach((button) => {
 
 //Обработчики событий (>>>Не получается передать именнованной функции обработчика - выдает ошибку, по вашему примеру<<<)
 editButtonElement.addEventListener('click', handleEditButtonClick); //Слушатель клика для открытия формы редактирования 
-// closeButtonElement.addEventListener('click', () => {closePopup(popupEditForm)}); //Слушатель клика для закрытия формы редактирования
 addButtonElement.addEventListener('click', () => {openPopup(popupAddForm)}); //Слушатель клика для открытия формы добавления нового места
-// closeButtonAddFormElement.addEventListener('click', handleClosePopupAddForm); //Слушатель клика для закрытия формы нового места
 editForm.addEventListener('submit', handleEditFormSubmit); //Слушатель сабмита по кнопке формы редактирования
 popupAddForm.addEventListener('submit', handleAddFormSubmit); //Слушатель сабмита по кнопке формы добавления
-// popupCloseButton.addEventListener('click', () => {closePopup(popupImageForm)}); //Слушатель клика по кнопке закрытия формы изображения
 
 //Вызов функций
 renderCards();
