@@ -43,11 +43,13 @@ const popupImage = popupImageForm.querySelector('.popup-image-container__image-f
 const popupImageTitle = popupImageForm.querySelector('.popup-image-container__title-fullscreen'); //Поиск селектора названия карточки изображения
 const textName = addForm.querySelector('.add-form__text_input_title'); //Поиск поля для ввода названия, формы добавления нового места
 const urlName = addForm.querySelector('.add-form__text_input_url'); //Поиск поля для ввода УРЛ, формы добавления нового места
-
 const closeButtons = document.querySelectorAll('.popup-close') //Поиск всех кнопок закрытия попапов
+const containerPopup = document.querySelector('.popup-container');
+const containerPopupImage = document.querySelector('.popup-image-container');
+const popups = document.querySelectorAll('.popup');
+
 
 //Функции
-
 //Общая функция открытия форм
 function openPopup (popup) {
   popup.classList.add('popup_opened');
@@ -124,7 +126,7 @@ function handleAddFormSubmit(ev) {
   ev.preventDefault();
   const newCardElement = createCard(textName.value, urlName.value);
   cardsContainer.prepend(newCardElement);
-
+  
   closePopup(popupAddForm);
   addForm.reset();
 }
@@ -143,11 +145,83 @@ closeButtons.forEach((button) => {
   button.addEventListener('click', () => closePopup(popup));
 });
 
-//Обработчики событий (>>>Не получается передать именнованной функции обработчика - выдает ошибку, по вашему примеру<<<)
+
+// popupEditForm.addEventListener('click', (evt) => {
+//   const target = evt.target;
+//   const clickOutsideForm = !containerPopup.contains(target);
+
+//   if(clickOutsideForm ) {
+//     closePopup(popupEditForm);
+//   }
+// });
+
+// document.addEventListener('keydown', (evt) => {
+//     if (evt.key === 'Escape') {
+//     closePopup(popupEditForm);
+//   }
+// });
+
+// popupAddForm.addEventListener('click', (evt) => {
+//   const target = evt.target;
+//   const clickOutsideForm = !containerPopup.contains(target);
+
+//   if(clickOutsideForm) {
+//     closePopup(popupAddForm);
+//   }
+// });
+
+// document.addEventListener('keydown', (evt) => {
+//     if (evt.key === 'Escape') {
+//     closePopup(popupAddForm);
+//   }
+// });
+
+// popupImageForm.addEventListener('click', (evt) => {
+//   const target = evt.target;
+//   const clickOutsideForm = !containerPopupImage.contains(target);
+
+//   if(clickOutsideForm) {
+//     closePopup(popupImageForm);
+//   }
+// });
+
+// document.addEventListener('keydown', (evt) => {
+//     if (evt.key === 'Escape') {
+//     closePopup(popupImageForm);
+//   }
+// });
+
+function handlePopupEvents(event) {
+  const target = event.target;
+  
+  if (target === popupEditForm || target === popupAddForm || target === popupImageForm) {
+    const container = target.querySelector('.popup-container') || target.querySelector('.popup-image-container');
+    const clickOutsideForm = !container.contains(target);
+
+    if (clickOutsideForm || event.key === 'Escape') {
+      closePopup(target);
+    }
+  }
+}
+
+document.addEventListener('click', handlePopupEvents);
+
+document.addEventListener('keydown', (evt) => {
+  const target = evt.target;
+    if (evt.key === 'Escape') {
+    closePopup(target);
+  }
+});
+
+
+
+//Обработчики событий
 editButtonElement.addEventListener('click', handleEditButtonClick); //Слушатель клика для открытия формы редактирования 
 addButtonElement.addEventListener('click', () => {openPopup(popupAddForm)}); //Слушатель клика для открытия формы добавления нового места
 editForm.addEventListener('submit', handleEditFormSubmit); //Слушатель сабмита по кнопке формы редактирования
 popupAddForm.addEventListener('submit', handleAddFormSubmit); //Слушатель сабмита по кнопке формы добавления
+
+
 
 //Вызов функций
 renderCards();
