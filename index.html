@@ -45,8 +45,14 @@
                 <button type="button" class="popup-container__close-button popup-close"></button>
                 <h2 class="popup-container__title">Редактировать профиль</h2>
                 <form name="edit-form" class="edit-form">
-                    <input type="text" name="name" value="Жак-Ив Кусто" class="edit-form__text edit-form__text_input_name">
-                    <input type="text" name="description" value="Исследователь океана" class="edit-form__text edit-form__text_input_description">
+                    <label class="popup__label">
+                        <input type="text" id="name" name="name" value="Жак-Ив Кусто" class="edit-form__text edit-form__text_input_name" required>
+                        <span class="name-error popup__input-error"></span>
+                    </label>
+                    <label class="popup__label">
+                        <input type="text" id="description"  name="description" value="Исследователь океана" class="edit-form__text edit-form__text_input_description" required>
+                        <span class="description-error popup__input-error"></span>
+                    </label>
                     <button type="submit" class="edit-form__container-button">Сохранить</button>
                 </form>
             </div>
@@ -56,8 +62,14 @@
                 <button type="button" class="popup-container__add-popup-close-button popup-close"></button>
                 <h2 class="popup-container__title">Новое место</h2>
                 <form name="add-form" class="add-form">
-                    <input type="text" placeholder="Название" class="add-form__text add-form__text_input_title">
-                    <input type="url" placeholder="Ссылка на картинку" class="add-form__text add-form__text_input_url">
+                    <label class="popup__label">
+                        <input type="text" id="name-place" name="name-place"  placeholder="Название" class="add-form__text add-form__text_input_title" required>
+                        <span class="name-place-error popup__input-error"></span>
+                    </label>
+                    <label class="popup__label">
+                        <input type="url" name="url" id="url" placeholder="Ссылка на картинку" class="add-form__text add-form__text_input_url" required>
+                        <span class="url-error popup__input-error"></span>
+                    </label>
                     <button type="submit" class="add-form__container-button">Создать</button>
                 </form>
             </div>
