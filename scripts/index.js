@@ -190,7 +190,7 @@ closeButtons.forEach((button) => {
 //     closePopup(popupImageForm);
 //   }
 // });
-
+//Функция закрытия попапов по клику за пределами форм
 function handlePopupEvents(event) {
   const target = event.target;
   
@@ -202,16 +202,9 @@ function handlePopupEvents(event) {
       closePopup(target);
     }
   }
+
 }
 
-document.addEventListener('click', handlePopupEvents);
-
-document.addEventListener('keydown', (evt) => {
-  const target = evt.target;
-    if (evt.key === 'Escape') {
-    closePopup(target);
-  }
-});
 
 
 
@@ -220,7 +213,15 @@ editButtonElement.addEventListener('click', handleEditButtonClick); //Слуша
 addButtonElement.addEventListener('click', () => {openPopup(popupAddForm)}); //Слушатель клика для открытия формы добавления нового места
 editForm.addEventListener('submit', handleEditFormSubmit); //Слушатель сабмита по кнопке формы редактирования
 popupAddForm.addEventListener('submit', handleAddFormSubmit); //Слушатель сабмита по кнопке формы добавления
-
+document.addEventListener('click', handlePopupEvents);//Обработчик закрытия попапов за пределами попапа
+//Обработчик закрытия форм по нажатию клавиши Esc
+document.addEventListener('keydown', (evt) => {
+  if (evt.key === 'Escape') {
+    closePopup(popupEditForm);
+    closePopup(popupAddForm);
+    closePopup(popupImageForm);
+  }
+});
 
 
 //Вызов функций
