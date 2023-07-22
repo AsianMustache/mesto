@@ -28,16 +28,20 @@ const initialCards = [
 ];
 
 const validationConfig = {
-  formSelector: '.popup__form',
   formEditSelector: '.edit-form',
-  inputSelector: '.popup__input',
-  inputEditSelectorName: '.edit-form__text_input_name',
-  submitButtonSelector: '.popup__button',
+  formAddSelector: '.add-form',
+  inputEditSelector: '.edit-form__text',
+  inputAddSelector: '.add-form__text',
+  submitEditButtonSelector: '.edit-form__container-button',
+  submitAddButtonSelector: '.add-form__container-button',
+  submitAddButtonError: 'add-form__container-button_invalid',
   inactiveButtonClass: 'popup__button_disabled',
   inputErrorClass: 'popup__input_type_error',
-  inputErrorEditClass: 'edit-form__text_input_type_error',
-  errorClass: 'popup__error_visible'
-}; 
+  inputErrorEditClass: 'edit-form__container-button_invalid',
+  inputErrorAddClass: 'add-form__text_input_type_error',
+  errorClass: 'popup__error_visible',
+  inputAddEmail: 'add-form__text_input_url'
+};
 
 const editButtonElement = document.querySelector('.profile__info-edit-button'); //Находим кнопку редактирования профиля
 const popupEditForm = document.querySelector('.popup_form_edit'); //Находим саму Попап форму редактирования
@@ -194,4 +198,5 @@ document.addEventListener('keydown', (evt) => {
 
 //Вызов функций
 renderCards();
-enableValidation(validationConfig);
+// enableValidation(validationConfig);
+enableAddValidation(validationConfig);

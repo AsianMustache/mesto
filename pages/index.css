@@ -41,12 +41,12 @@
 @import url(../blocks/add-form/add-form.css);
 @import url(../blocks/add-form/__text/add-form__text.css);
 @import url(../blocks/add-form/__container-button/add-form__container-button.css);
-
+@import url(../blocks/add-form/__text/_input_type_error/add-form__text_input_type_error.css);
 @import url(../blocks/popup-container/popup-container.css);
 @import url(../blocks/popup-container/__close-button/popup-container__close-button.css);
 @import url(../blocks/popup-container/__title/popup-container__title.css);
 @import url(../blocks/popup-container/__add-popup-close-button/popup-container__add-popup-close-button.css);
-
+@import url(../blocks/add-form/__container-button/_invalid/add-form__container-button_invalid.css);
 @import url(../blocks/popup-image-container/popup-image-container.css);
 @import url(../blocks/popup-image-container/__image-fullscreen/popup-image-container__image-fullscreen.css);
 @import url(../blocks/popup-image-container/__title-fullscreen/popup-image-container__title-fullscreen.css);
