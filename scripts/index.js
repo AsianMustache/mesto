@@ -143,7 +143,6 @@ function handleAddFormSubmit(ev) {
   ev.preventDefault();
   const newCardElement = createCard(textName.value, urlName.value);
   cardsContainer.prepend(newCardElement);
-  
   closePopup(popupAddForm);
   addForm.reset();
 }
@@ -198,5 +197,5 @@ document.addEventListener('keydown', (evt) => {
 
 //Вызов функций
 renderCards();
-// enableValidation(validationConfig);
+enableValidation(validationConfig);
 enableAddValidation(validationConfig);
