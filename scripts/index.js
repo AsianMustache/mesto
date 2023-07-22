@@ -26,6 +26,19 @@ const initialCards = [
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   }
 ];
+
+const validationConfig = {
+  formSelector: '.popup__form',
+  formEditSelector: '.edit-form',
+  inputSelector: '.popup__input',
+  inputEditSelectorName: '.edit-form__text_input_name',
+  submitButtonSelector: '.popup__button',
+  inactiveButtonClass: 'popup__button_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  inputErrorEditClass: 'edit-form__text_input_type_error',
+  errorClass: 'popup__error_visible'
+}; 
+
 const editButtonElement = document.querySelector('.profile__info-edit-button'); //Находим кнопку редактирования профиля
 const popupEditForm = document.querySelector('.popup_form_edit'); //Находим саму Попап форму редактирования
 const editForm = popupEditForm.querySelector('.edit-form'); //Поиск формы редактирования
@@ -145,51 +158,6 @@ closeButtons.forEach((button) => {
   button.addEventListener('click', () => closePopup(popup));
 });
 
-
-// popupEditForm.addEventListener('click', (evt) => {
-//   const target = evt.target;
-//   const clickOutsideForm = !containerPopup.contains(target);
-
-//   if(clickOutsideForm ) {
-//     closePopup(popupEditForm);
-//   }
-// });
-
-// document.addEventListener('keydown', (evt) => {
-//     if (evt.key === 'Escape') {
-//     closePopup(popupEditForm);
-//   }
-// });
-
-// popupAddForm.addEventListener('click', (evt) => {
-//   const target = evt.target;
-//   const clickOutsideForm = !containerPopup.contains(target);
-
-//   if(clickOutsideForm) {
-//     closePopup(popupAddForm);
-//   }
-// });
-
-// document.addEventListener('keydown', (evt) => {
-//     if (evt.key === 'Escape') {
-//     closePopup(popupAddForm);
-//   }
-// });
-
-// popupImageForm.addEventListener('click', (evt) => {
-//   const target = evt.target;
-//   const clickOutsideForm = !containerPopupImage.contains(target);
-
-//   if(clickOutsideForm) {
-//     closePopup(popupImageForm);
-//   }
-// });
-
-// document.addEventListener('keydown', (evt) => {
-//     if (evt.key === 'Escape') {
-//     closePopup(popupImageForm);
-//   }
-// });
 //Функция закрытия попапов по клику за пределами форм
 function handlePopupEvents(event) {
   const target = event.target;
@@ -226,3 +194,4 @@ document.addEventListener('keydown', (evt) => {
 
 //Вызов функций
 renderCards();
+enableValidation(validationConfig);

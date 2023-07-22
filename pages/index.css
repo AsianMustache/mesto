@@ -1,4 +1,5 @@
 @import url(../vendor/normalize.css);
+@import url(../scripts/validate.js);
 @import url(../fonts/fonts.css);
 @import url(../blocks/body/body.css);
 @import url(../blocks/page/page.css);
@@ -29,6 +30,8 @@
 @import url(../blocks/edit-form/edit-form.css);
 @import url(../blocks/edit-form/__text/edit-form__text.css);
 @import url(../blocks/edit-form/__container-button/edit-form__container-button.css);
+@import url(../blocks/edit-form/__container-button/_invalid/edit-form__container-button_invalid.css);
+@import url(../blocks/edit-form/__text/_input_type_error/edit-form__text_input_type_error.css);
 @import url(../blocks/popup/_opened/popup_opened.css);
 @import url(../blocks/add-popup/add-popup.css);
 @import url(../blocks/add-popup/_opened/add-popup_opened.css);
@@ -49,5 +52,6 @@
 @import url(../blocks/popup-image-container/__title-fullscreen/popup-image-container__title-fullscreen.css);
 @import url(../blocks/popup-image-container/__close-button/popup-image-container__close-button.css);
 @import url(../blocks/popup/_form/popup_form_image.css);
+@import url(../blocks/popup/__input-error/_visible/popup__input-error_visible.css);
 
 /* * { outline: 1px solid yellow; } */
