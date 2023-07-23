@@ -1,4 +1,6 @@
 function enableValidation (config) {
+    //Валидация для формы редакирования профиля
+    
     const showInputError = (form, input) => {
         input.classList.add(config.inputErrorEditClass);
         const span = form.querySelector(`.${input.id}-error`);
@@ -54,10 +56,9 @@ function enableValidation (config) {
     forms.forEach(form => {
         setInputEventListeners(form)
     })
-}
 
+    //Валидация для формы добавления нового места
 
-function enableAddValidation(config) {
     const showInputAddError = (form, input) => {
         input.classList.add(config.inputErrorAddClass);
         const span = form.querySelector(`.${input.id}-error`);
@@ -127,3 +128,4 @@ function enableAddValidation(config) {
         setInputAddEventListeners(form);
     })
 }
+

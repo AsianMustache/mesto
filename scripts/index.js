@@ -198,4 +198,3 @@ document.addEventListener('keydown', (evt) => {
 //Вызов функций
 renderCards();
 enableValidation(validationConfig);
-enableAddValidation(validationConfig);
