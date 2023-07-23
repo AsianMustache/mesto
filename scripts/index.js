@@ -145,6 +145,7 @@ function handleAddFormSubmit(ev) {
   cardsContainer.prepend(newCardElement);
   closePopup(popupAddForm);
   addForm.reset();
+  enableValidation(validationConfig);
 }
 //Функция открытия попапа изображения
 function openPopupImage(imageUrl, name) {
