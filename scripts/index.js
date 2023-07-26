@@ -65,7 +65,6 @@ const containerPopup = document.querySelector('.popup-container');
 const containerPopupImage = document.querySelector('.popup-image-container');
 const popups = document.querySelectorAll('.popup');
 
-
 //Функции
 //Общая функция открытия форм
 function openPopup (popup) {
@@ -187,7 +186,10 @@ editButtonElement.addEventListener('click', handleEditButtonClick); //Слуша
 addButtonElement.addEventListener('click', () => {openPopup(popupAddForm)}); //Слушатель клика для открытия формы добавления нового места
 editForm.addEventListener('submit', handleEditFormSubmit); //Слушатель сабмита по кнопке формы редактирования
 popupAddForm.addEventListener('submit', handleAddFormSubmit); //Слушатель сабмита по кнопке формы добавления
-document.addEventListener('click', handlePopupEvents);//Обработчик закрытия попапов за пределами попапа
+// document.addEventListener('click', handlePopupEvents);//Обработчик закрытия попапов за пределами попапа
+popups.forEach((popup) => {
+  popup.addEventListener('click', handlePopupEvents);
+});
 //Обработчик закрытия форм по нажатию клавиши Esc
 document.addEventListener('keydown', (evt) => {
   if (evt.key === 'Escape') {
