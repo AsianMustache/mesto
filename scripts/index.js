@@ -167,14 +167,6 @@ closeButtons.forEach((button) => {
 function handlePopupEvents(event) {
   const target = event.target;
   const isPopup = target.classList.contains('popup');
-  // if (target === popupEditForm || target === popupAddForm || target === popupImageForm) {
-  //   const container = target.querySelector('.popup-container') || target.querySelector('.popup-image-container');
-  //   const clickOutsideForm = !container.contains(target);
-
-  //   if (clickOutsideForm || event.key === 'Escape') {
-  //     closePopup(target);
-  //   }
-  // }
   if (isPopup) {
     closePopup(target);
   }
@@ -195,20 +187,10 @@ editButtonElement.addEventListener('click', handleEditButtonClick); //Слуша
 addButtonElement.addEventListener('click', () => {openPopup(popupAddForm)}); //Слушатель клика для открытия формы добавления нового места
 editForm.addEventListener('submit', handleEditFormSubmit); //Слушатель сабмита по кнопке формы редактирования
 popupAddForm.addEventListener('submit', handleAddFormSubmit); //Слушатель сабмита по кнопке формы добавления
-// document.addEventListener('click', handlePopupEvents);//Обработчик закрытия попапов за пределами попапа
+//Пробегаем по массиву popup для закрытия попапов за пределами попапа
 popups.forEach((popup) => {
   popup.addEventListener('click', handlePopupEvents);
 });
-
-//Обработчик закрытия форм по нажатию клавиши Esc
-// document.addEventListener('keydown', (evt) => {
-//   if (evt.key === 'Escape') {
-//     closePopup(popupEditForm);
-//     closePopup(popupAddForm);
-//     closePopup(popupImageForm);
-//   }
-// });
-
 
 //Вызов функций
 renderCards();
