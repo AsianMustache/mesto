@@ -69,10 +69,12 @@ const popups = document.querySelectorAll('.popup');
 //Общая функция открытия форм
 function openPopup (popup) {
   popup.classList.add('popup_opened');
+  document.addEventListener('keydown', closeByEsc);
 }
 //Общая функция закрытия форм
 function closePopup (popup) {
   popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closeByEsc);
 }
 //Функция сохранения данных (Сабмита) формы редактирования
 function handleEditFormSubmit (evt) {
@@ -179,6 +181,13 @@ function handlePopupEvents(event) {
 
 }
 
+function closeByEsc(evt) {
+  if (evt.key === "Escape") {
+    const openedPopup = document.querySelector('.popup_opened');
+    closePopup(openedPopup); 
+  }
+}  
+
 
 
 //Обработчики событий
@@ -190,14 +199,15 @@ popupAddForm.addEventListener('submit', handleAddFormSubmit); //Слушател
 popups.forEach((popup) => {
   popup.addEventListener('click', handlePopupEvents);
 });
+
 //Обработчик закрытия форм по нажатию клавиши Esc
-document.addEventListener('keydown', (evt) => {
-  if (evt.key === 'Escape') {
-    closePopup(popupEditForm);
-    closePopup(popupAddForm);
-    closePopup(popupImageForm);
-  }
-});
+// document.addEventListener('keydown', (evt) => {
+//   if (evt.key === 'Escape') {
+//     closePopup(popupEditForm);
+//     closePopup(popupAddForm);
+//     closePopup(popupImageForm);
+//   }
+// });
 
 
 //Вызов функций
