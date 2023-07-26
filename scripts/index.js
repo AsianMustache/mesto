@@ -165,18 +165,20 @@ closeButtons.forEach((button) => {
 //Функция закрытия попапов по клику за пределами форм
 function handlePopupEvents(event) {
   const target = event.target;
-  
-  if (target === popupEditForm || target === popupAddForm || target === popupImageForm) {
-    const container = target.querySelector('.popup-container') || target.querySelector('.popup-image-container');
-    const clickOutsideForm = !container.contains(target);
+  const isPopup = target.classList.contains('popup');
+  // if (target === popupEditForm || target === popupAddForm || target === popupImageForm) {
+  //   const container = target.querySelector('.popup-container') || target.querySelector('.popup-image-container');
+  //   const clickOutsideForm = !container.contains(target);
 
-    if (clickOutsideForm || event.key === 'Escape') {
-      closePopup(target);
-    }
+  //   if (clickOutsideForm || event.key === 'Escape') {
+  //     closePopup(target);
+  //   }
+  // }
+  if (isPopup) {
+    closePopup(target);
   }
 
 }
-
 
 
 
