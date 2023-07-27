@@ -28,19 +28,12 @@ const initialCards = [
 ];
 
 const validationConfig = {
-  formEditSelector: '.edit-form',
-  formAddSelector: '.add-form',
-  inputEditSelector: '.edit-form__text',
-  inputAddSelector: '.add-form__text',
-  submitEditButtonSelector: '.edit-form__container-button',
-  submitAddButtonSelector: '.add-form__container-button',
-  submitAddButtonError: 'add-form__container-button_invalid',
-  inactiveButtonClass: 'popup__button_disabled',
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button',
+  disabledButtonClass: 'popup__button_disabled',
   inputErrorClass: 'popup__input_type_error',
-  inputErrorEditClass: 'edit-form__container-button_invalid',
-  inputErrorAddClass: 'add-form__text_input_type_error',
-  errorClass: 'popup__error_visible',
-  inputAddEmail: 'add-form__text_input_url'
+  errorClass: 'popup__input-error_visible'
 };
 
 const editButtonElement = document.querySelector('.profile__info-edit-button'); //Находим кнопку редактирования профиля
@@ -160,7 +153,10 @@ closeButtons.forEach((button) => {
   // находим 1 раз ближайший к крестику попап 
   const popup = button.closest('.popup');
   // устанавливаем обработчик закрытия на крестик
-  button.addEventListener('click', () => closePopup(popup));
+  button.addEventListener('click', () => {
+    closePopup(popup)
+    addForm.reset();
+  });
 });
 
 //Функция закрытия попапов по клику за пределами форм
@@ -169,14 +165,15 @@ function handlePopupEvents(event) {
   const isPopup = target.classList.contains('popup');
   if (isPopup) {
     closePopup(target);
+    addForm.reset();
   }
-
 }
 
 function closeByEsc(evt) {
   if (evt.key === "Escape") {
     const openedPopup = document.querySelector('.popup_opened');
-    closePopup(openedPopup); 
+    closePopup(openedPopup);
+    addForm.reset();
   }
 }  
 
@@ -184,7 +181,10 @@ function closeByEsc(evt) {
 
 //Обработчики событий
 editButtonElement.addEventListener('click', handleEditButtonClick); //Слушатель клика для открытия формы редактирования 
-addButtonElement.addEventListener('click', () => {openPopup(popupAddForm)}); //Слушатель клика для открытия формы добавления нового места
+addButtonElement.addEventListener('click', () => {
+  openPopup(popupAddForm)
+  enableValidation(validationConfig);
+}); //Слушатель клика для открытия формы добавления нового места
 editForm.addEventListener('submit', handleEditFormSubmit); //Слушатель сабмита по кнопке формы редактирования
 popupAddForm.addEventListener('submit', handleAddFormSubmit); //Слушатель сабмита по кнопке формы добавления
 //Пробегаем по массиву popup для закрытия попапов за пределами попапа
