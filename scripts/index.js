@@ -172,7 +172,7 @@ function closeByEsc(evt) {
     const openedPopup = document.querySelector('.popup_opened');
     closePopup(openedPopup);
   }
-}  
+}
 
 
 
