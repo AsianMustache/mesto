@@ -68,6 +68,7 @@ function openPopup (popup) {
 function closePopup (popup) {
   popup.classList.remove('popup_opened');
   document.removeEventListener('keydown', closeByEsc);
+  addForm.reset();
 }
 //Функция сохранения данных (Сабмита) формы редактирования
 function handleEditFormSubmit (evt) {
@@ -88,8 +89,7 @@ function createCard(name, link) {
   const likeButtonPath = './images/favorite.svg';
   const likeActiveButtonPath = './images/Favorite-active.svg';
   likeButton.src = likeButtonPath;
-  
-  // likeButton.src = './images/favorite.svg';
+
   likeButton.alt = 'Избранное';  
   cardImage.src = link;
   cardImage.alt = name;
@@ -138,8 +138,8 @@ function handleAddFormSubmit(ev) {
   const newCardElement = createCard(textName.value, urlName.value);
   cardsContainer.prepend(newCardElement);
   closePopup(popupAddForm);
-  addForm.reset();
-  enableValidation(validationConfig);
+  ev.submitter.classList.add('popup__button_disabled')
+  ev.submitter.disabled = true;
 }
 //Функция открытия попапа изображения
 function openPopupImage(imageUrl, name) {
@@ -155,7 +155,6 @@ closeButtons.forEach((button) => {
   // устанавливаем обработчик закрытия на крестик
   button.addEventListener('click', () => {
     closePopup(popup)
-    addForm.reset();
   });
 });
 
