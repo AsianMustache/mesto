@@ -164,7 +164,6 @@ function handlePopupEvents(event) {
   const isPopup = target.classList.contains('popup');
   if (isPopup) {
     closePopup(target);
-    addForm.reset();
   }
 }
 
@@ -172,7 +171,6 @@ function closeByEsc(evt) {
   if (evt.key === "Escape") {
     const openedPopup = document.querySelector('.popup_opened');
     closePopup(openedPopup);
-    addForm.reset();
   }
 }  
 
