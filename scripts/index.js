@@ -1,4 +1,5 @@
 //Переменные
+import Card from '.Card.js';
 
 const initialCards = [
   {
@@ -79,51 +80,57 @@ function handleEditFormSubmit (evt) {
   closePopup(popupEditForm);
 }
 //Функция отрисовки карточек при загрузке страницы
-function createCard(name, link) {
-  const cardElement = cardTemplate.querySelector('.element').cloneNode(true);
-  const deleteImageButton = cardElement.querySelector('.element__image-delete');
-  const deleteButton = cardElement.querySelector('.element__delete-button');
-  const cardImage = cardElement.querySelector('.element__image');
-  const cardTitle = cardElement.querySelector('.element__group-title');
-  const likeButton = cardElement.querySelector('.element__group-favorite');
-  const likeButtonPath = './images/favorite.svg';
-  const likeActiveButtonPath = './images/Favorite-active.svg';
-  likeButton.src = likeButtonPath;
+// function createCard(name, link) {
+//   const cardElement = cardTemplate.querySelector('.element').cloneNode(true);
+//   const deleteImageButton = cardElement.querySelector('.element__image-delete');
+//   const deleteButton = cardElement.querySelector('.element__delete-button');
+//   const cardImage = cardElement.querySelector('.element__image');
+//   const cardTitle = cardElement.querySelector('.element__group-title');
+//   const likeButton = cardElement.querySelector('.element__group-favorite');
+//   const likeButtonPath = './images/favorite.svg';
+//   const likeActiveButtonPath = './images/Favorite-active.svg';
+//   likeButton.src = likeButtonPath;
 
-  likeButton.alt = 'Избранное';  
-  cardImage.src = link;
-  cardImage.alt = name;
-  cardTitle.textContent = name;
+//   likeButton.alt = 'Избранное';  
+//   cardImage.src = link;
+//   cardImage.alt = name;
+//   cardTitle.textContent = name;
 
-  deleteImageButton.src = './images/Trash.svg';
-  deleteImageButton.alt = 'Кнопка удаления';
-  deleteButton.addEventListener('click', function handleDeleteElement () {
-    const card = deleteButton.closest('.element');
-    card.remove();
-  });
+//   deleteImageButton.src = './images/Trash.svg';
+//   deleteImageButton.alt = 'Кнопка удаления';
+//   deleteButton.addEventListener('click', function handleDeleteElement () {
+//     const card = deleteButton.closest('.element');
+//     card.remove();
+//   });
 
-  cardImage.addEventListener('click', () => {
-    openPopupImage(link, name);
-  })
+//   cardImage.addEventListener('click', () => {
+//     openPopupImage(link, name);
+//   })
 
-  likeButton.addEventListener('click', () => {
-    if (likeButton.getAttribute('src') === likeActiveButtonPath) {
-      likeButton.src = likeButtonPath;
-    } else {
-      likeButton.src = likeActiveButtonPath;
-    }
-  });
+//   likeButton.addEventListener('click', () => {
+//     if (likeButton.getAttribute('src') === likeActiveButtonPath) {
+//       likeButton.src = likeButtonPath;
+//     } else {
+//       likeButton.src = likeActiveButtonPath;
+//     }
+//   });
 
-  return cardElement;
+//   return cardElement;
+// }
+
+// function renderCards() {
+//   initialCards.forEach(function(card) {
+//     const cardElement = createCard(card.name, card.link);
+//     cardsContainer.appendChild(cardElement);
+//   });
+
+// }
+
+const renderCards = (name, link) => {
+  const card = new Card (name, link);
+  createCard.prepend(card.getView())
 }
 
-function renderCards() {
-  initialCards.forEach(function(card) {
-    const cardElement = createCard(card.name, card.link);
-    cardsContainer.appendChild(cardElement);
-  });
-
-}
 
 //Функция занесения данных при открытии формы редактирования
 function handleEditButtonClick () {
