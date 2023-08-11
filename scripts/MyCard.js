@@ -1,3 +1,5 @@
+import { openPopup } from './index.js';
+
 class Card {
     constructor({ name, link }) {
         this._name = name;
@@ -25,16 +27,7 @@ class Card {
         this. card = null;
     }
 
-    _openPopupImage() {  
-        const imageUrl = this._link;  
-        const cardImage = this._newCard.querySelector('.element__image');
-        this.popupImage.src = imageUrl;  
-        this.popupImage.alt = `Увеличенное изображение - ${this._name}`;
-        this.popupImageTitle.textContent = this._name;
-        this.openPopup(this.popupImageForm);
-    }
-
-    _setListeners() {  
+    _setListeners() {
         const deleteImageButton = this._newCard.querySelector('.element__image-delete');
         deleteImageButton.src = './images/Trash.svg';
         deleteImageButton.alt = 'Кнопка удаления';
@@ -65,6 +58,30 @@ class Card {
         this._setData();
         this._setListeners();
         return this._newCard;
+    }
+
+    // _openPopupImage() {
+    //     this.imageUrl = this._link;  
+    //     this.cardImage = this._newCard.querySelector('.element__image');
+    //     this.popupImageForm = this._newCard.querySelector('.popup_form_image');
+    //     this.popupImage = this._newCard.querySelector('.popup-image-container__image-fullscreen')
+    //     this.popupImage.src = this._link;  
+    //     this.popupImage.alt = `Увеличенное изображение - ${this._name}`;
+    //     this.popupImageTitle.textContent = this._name;
+    //     this.openPopup(this.popupImageForm);
+    //     console.log(this._link);
+    // }
+
+    _openPopupImage() {
+        const imageUrl = this._link;
+        const popupImageForm = document.querySelector('.popup_form_image');
+        const popupImage = popupImageForm.querySelector('.popup-image-container__image-fullscreen');
+        const popupImageTitle = popupImageForm.querySelector('.popup-image-container__title-fullscreen');
+        
+        popupImage.src = imageUrl;
+        popupImage.alt = `Увеличенное изображение - ${this._name}`;
+        popupImageTitle.textContent = this._name;
+        openPopup(popupImageForm);
     }
 }
 

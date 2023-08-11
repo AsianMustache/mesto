@@ -201,3 +201,5 @@ popups.forEach((popup) => {
 //Вызов функций
 renderCards();
 enableValidation(validationConfig);
+
+export { openPopup }
