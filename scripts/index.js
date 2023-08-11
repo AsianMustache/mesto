@@ -1,5 +1,5 @@
 //Переменные
-import Card from '.Card.js';
+import Card from "./MyCard.js";
 
 const initialCards = [
   {
@@ -126,11 +126,13 @@ function handleEditFormSubmit (evt) {
 
 // }
 
-const renderCards = (name, link) => {
-  const card = new Card (name, link);
-  createCard.prepend(card.getView())
-}
 
+function renderCards() {
+  initialCards.forEach((card) => {
+    const cardElement = new Card(card);
+    cardsContainer.appendChild(cardElement.getCard());
+  });
+}
 
 //Функция занесения данных при открытии формы редактирования
 function handleEditButtonClick () {
