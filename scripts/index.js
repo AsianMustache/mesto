@@ -1,5 +1,5 @@
 //Переменные
-import Card from "./MyCard.js";
+import Card from "./Card.js";
 
 const initialCards = [
   {
