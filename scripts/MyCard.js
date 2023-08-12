@@ -1,9 +1,9 @@
-import { openPopup } from './index.js';
-
 class Card {
-    constructor({ name, link }) {
+    constructor({ name, link, openPopupImage, openPopup }) {
         this._name = name;
         this._link = link;
+        this._openPopupImage = openPopupImage;
+        this._openPopup = openPopup;
     }
 
     _getTemplate() {
@@ -26,6 +26,8 @@ class Card {
         this._card.remove();
         this. card = null;
     }
+
+    
 
     _setListeners() {
         const deleteImageButton = this._newCard.querySelector('.element__image-delete');
@@ -53,36 +55,24 @@ class Card {
         });
     }
 
-    getCard () {
+    getCard() {
         this._newCard = this._getTemplate();
         this._setData();
         this._setListeners();
         return this._newCard;
     }
 
-    // _openPopupImage() {
-    //     this.imageUrl = this._link;  
-    //     this.cardImage = this._newCard.querySelector('.element__image');
-    //     this.popupImageForm = this._newCard.querySelector('.popup_form_image');
-    //     this.popupImage = this._newCard.querySelector('.popup-image-container__image-fullscreen')
-    //     this.popupImage.src = this._link;  
-    //     this.popupImage.alt = `Увеличенное изображение - ${this._name}`;
-    //     this.popupImageTitle.textContent = this._name;
-    //     this.openPopup(this.popupImageForm);
-    //     console.log(this._link);
-    // }
-
     _openPopupImage() {
-        const imageUrl = this._link;
-        const popupImageForm = document.querySelector('.popup_form_image');
-        const popupImage = popupImageForm.querySelector('.popup-image-container__image-fullscreen');
-        const popupImageTitle = popupImageForm.querySelector('.popup-image-container__title-fullscreen');
-        
-        popupImage.src = imageUrl;
-        popupImage.alt = `Увеличенное изображение - ${this._name}`;
-        popupImageTitle.textContent = this._name;
-        openPopup(popupImageForm);
-    }
+      const imageUrl = this._link;
+      const popupImageForm = document.querySelector('.popup_form_image');
+      const popupImage = popupImageForm.querySelector('.popup-image-container__image-fullscreen');
+      const popupImageTitle = popupImageForm.querySelector('.popup-image-container__title-fullscreen');
+      
+      popupImage.src = imageUrl;
+      popupImage.alt = `Увеличенное изображение - ${this._name}`;
+      popupImageTitle.textContent = this._name;
+      this._openPopup(popupImageForm);
+  }
 }
 
 

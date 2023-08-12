@@ -1,5 +1,5 @@
 //Переменные
-import Card from "./Card.js";
+import Card from "./MyCard.js";
 
 const initialCards = [
   {
@@ -144,7 +144,14 @@ function handleEditButtonClick () {
 //Функция сохранения данных (Сабмита) формы добавления карточки
 function handleAddFormSubmit(ev) {
   ev.preventDefault();
-  const newCardElement = createCard(textName.value, urlName.value);
+  const card = new Card({
+    name: textName.value,
+    link: urlName.value,
+  });
+
+  const newCardElement = card.getCard();
+  cardsContainer.prepend(newCardElement);
+  // const newCardElement = createCard(textName.value, urlName.value);
   cardsContainer.prepend(newCardElement);
   closePopup(popupAddForm);
   ev.submitter.classList.add('popup__button_disabled')
@@ -155,7 +162,7 @@ function openPopupImage(imageUrl, name) {
   popupImage.src = imageUrl;
   popupImage.alt = `Увеличенное изображение - ${name}`;
   popupImageTitle.textContent = name;
-  openPopup(popupImageForm);
+  this._openPopup(popupImageForm);
 }
 //Универсальная функция закрытия попапов
 closeButtons.forEach((button) => {
@@ -201,5 +208,3 @@ popups.forEach((popup) => {
 //Вызов функций
 renderCards();
 enableValidation(validationConfig);
-
-export { openPopup }
