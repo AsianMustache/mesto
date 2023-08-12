@@ -150,7 +150,6 @@ function handleAddFormSubmit(ev) {
   });
 
   const newCardElement = card.getCard();
-  cardsContainer.prepend(newCardElement);
   // const newCardElement = createCard(textName.value, urlName.value);
   cardsContainer.prepend(newCardElement);
   closePopup(popupAddForm);
