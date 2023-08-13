@@ -1,10 +1,10 @@
+import { openPopupImage } from "./index.js"
+
 class Card {
-    constructor({ name, link, openPopupImage, openPopup }) {
-        this._name = name;
-        this._link = link;
-        this._openPopupImage = openPopupImage;
-        this._openPopup = openPopup;
-    }
+    constructor({ name, link }) {
+      this._name = name;
+      this._link = link;
+  }
 
     _getTemplate() {
         const cardTemplate = document  
@@ -27,7 +27,14 @@ class Card {
         this. card = null;
     }
 
-    
+    _setOpenFullImagePopupEventListener() {
+      const cardImage = this._newCard.querySelector('.element__image');
+      cardImage.src = this._link;
+      cardImage.alt = this._name;
+      cardImage.addEventListener('click', () => {
+          openPopupImage(cardImage.src, cardImage.alt);
+      });
+    }
 
     _setListeners() {
         const deleteImageButton = this._newCard.querySelector('.element__image-delete');
@@ -35,12 +42,12 @@ class Card {
         deleteImageButton.alt = 'Кнопка удаления';
         const deleteButton = this._newCard.querySelector('.element__delete-button');
         deleteButton.addEventListener('click', () => { this._handleDeleteElement() });
-        const cardImage = this._newCard.querySelector('.element__image');
-        cardImage.src = this._link;
-        cardImage.alt = this._name;
-        cardImage.addEventListener('click', () => {
-          this._openPopupImage(this._link, this._name);
-        })
+        // const cardImage = this._newCard.querySelector('.element__image');
+        // cardImage.src = this._link;
+        // cardImage.alt = this._name;
+        // cardImage.addEventListener('click', () => {
+        //   openPopup(popupImageForm);
+        // })
         const likeButton = this._newCard.querySelector('.element__group-favorite');
         const likeButtonPath = './images/favorite.svg';
         const likeActiveButtonPath = './images/Favorite-active.svg';
@@ -55,24 +62,23 @@ class Card {
         });
     }
 
+    _openPopupImage(imageUrl, name) {
+      const popupImage = document.querySelector('.popup-image-container__image-fullscreen');
+      const popupImageTitle = document.querySelector('.popup-image-container__title-fullscreen');
+  
+      popupImage.src = imageUrl;
+      popupImage.alt = `Увеличенное изображение - ${name}`;
+      popupImageTitle.textContent = name;
+      openPopup(document.querySelector('.popup_form_image'));
+    }
+
     getCard() {
         this._newCard = this._getTemplate();
         this._setData();
         this._setListeners();
+        this._setOpenFullImagePopupEventListener();
         return this._newCard;
     }
-
-    _openPopupImage() {
-      const imageUrl = this._link;
-      const popupImageForm = document.querySelector('.popup_form_image');
-      const popupImage = popupImageForm.querySelector('.popup-image-container__image-fullscreen');
-      const popupImageTitle = popupImageForm.querySelector('.popup-image-container__title-fullscreen');
-      
-      popupImage.src = imageUrl;
-      popupImage.alt = `Увеличенное изображение - ${this._name}`;
-      popupImageTitle.textContent = this._name;
-      this._openPopup(popupImageForm);
-  }
 }
 
 

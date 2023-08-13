@@ -146,9 +146,8 @@ function handleAddFormSubmit(ev) {
   ev.preventDefault();
   const card = new Card({
     name: textName.value,
-    link: urlName.value,
+    link: urlName.value
   });
-
   const newCardElement = card.getCard();
   // const newCardElement = createCard(textName.value, urlName.value);
   cardsContainer.prepend(newCardElement);
@@ -156,12 +155,13 @@ function handleAddFormSubmit(ev) {
   ev.submitter.classList.add('popup__button_disabled')
   ev.submitter.disabled = true;
 }
-//Функция открытия попапа изображения
+
+// Функция открытия попапа изображения
 function openPopupImage(imageUrl, name) {
   popupImage.src = imageUrl;
   popupImage.alt = `Увеличенное изображение - ${name}`;
   popupImageTitle.textContent = name;
-  this._openPopup(popupImageForm);
+  openPopup(popupImageForm);
 }
 //Универсальная функция закрытия попапов
 closeButtons.forEach((button) => {
@@ -207,3 +207,5 @@ popups.forEach((popup) => {
 //Вызов функций
 renderCards();
 enableValidation(validationConfig);
+
+export { openPopupImage };
