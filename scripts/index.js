@@ -1,5 +1,6 @@
 //Переменные
 import Card from "./Card.js";
+import enableValidation from "./validate.js"
 
 const initialCards = [
   {
@@ -129,7 +130,7 @@ function handleEditFormSubmit (evt) {
 
 function renderCards() {
   initialCards.forEach((card) => {
-    const cardElement = new Card(card);
+    const cardElement = new Card(card, '#template-elements');
     cardsContainer.appendChild(cardElement.getCard());
   });
 }
@@ -146,8 +147,8 @@ function handleAddFormSubmit(ev) {
   ev.preventDefault();
   const card = new Card({
     name: textName.value,
-    link: urlName.value
-  });
+    link: urlName.value,
+  }, '#template-elements');
   const newCardElement = card.getCard();
   // const newCardElement = createCard(textName.value, urlName.value);
   cardsContainer.prepend(newCardElement);
