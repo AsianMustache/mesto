@@ -1,6 +1,6 @@
 //Переменные
 import Card from "./Card.js";
-import enableValidation from "./validate.js"
+import { enableValidation, validators } from "./validate.js"
 
 const initialCards = [
   {
@@ -60,6 +60,7 @@ const containerPopup = document.querySelector('.popup-container');
 const containerPopupImage = document.querySelector('.popup-image-container');
 const popups = document.querySelectorAll('.popup');
 
+
 //Функции
 //Общая функция открытия форм
 function openPopup (popup) {
@@ -70,7 +71,6 @@ function openPopup (popup) {
 function closePopup (popup) {
   popup.classList.remove('popup_opened');
   document.removeEventListener('keydown', closeByEsc);
-  addForm.reset();
 }
 //Функция сохранения данных (Сабмита) формы редактирования
 function handleEditFormSubmit (evt) {
@@ -80,52 +80,14 @@ function handleEditFormSubmit (evt) {
   infoDescription.textContent = descriptionInput.value;
   closePopup(popupEditForm);
 }
-//Функция отрисовки карточек при загрузке страницы
-// function createCard(name, link) {
-//   const cardElement = cardTemplate.querySelector('.element').cloneNode(true);
-//   const deleteImageButton = cardElement.querySelector('.element__image-delete');
-//   const deleteButton = cardElement.querySelector('.element__delete-button');
-//   const cardImage = cardElement.querySelector('.element__image');
-//   const cardTitle = cardElement.querySelector('.element__group-title');
-//   const likeButton = cardElement.querySelector('.element__group-favorite');
-//   const likeButtonPath = './images/favorite.svg';
-//   const likeActiveButtonPath = './images/Favorite-active.svg';
-//   likeButton.src = likeButtonPath;
-
-//   likeButton.alt = 'Избранное';  
-//   cardImage.src = link;
-//   cardImage.alt = name;
-//   cardTitle.textContent = name;
-
-//   deleteImageButton.src = './images/Trash.svg';
-//   deleteImageButton.alt = 'Кнопка удаления';
-//   deleteButton.addEventListener('click', function handleDeleteElement () {
-//     const card = deleteButton.closest('.element');
-//     card.remove();
-//   });
-
-//   cardImage.addEventListener('click', () => {
-//     openPopupImage(link, name);
-//   })
-
-//   likeButton.addEventListener('click', () => {
-//     if (likeButton.getAttribute('src') === likeActiveButtonPath) {
-//       likeButton.src = likeButtonPath;
-//     } else {
-//       likeButton.src = likeActiveButtonPath;
-//     }
-//   });
-
-//   return cardElement;
-// }
-
-// function renderCards() {
-//   initialCards.forEach(function(card) {
-//     const cardElement = createCard(card.name, card.link);
-//     cardsContainer.appendChild(cardElement);
-//   });
-
-// }
+//Функция отрисовки карточки для добавления через сабмит кнопки Add
+function createCard(name, link) {
+  const createCardElement = new Card({
+    name: name,
+    link: link
+  }, "#template-elements");
+  return createCardElement.getCard();
+}
 
 
 function renderCards() {
@@ -145,16 +107,12 @@ function handleEditButtonClick () {
 //Функция сохранения данных (Сабмита) формы добавления карточки
 function handleAddFormSubmit(ev) {
   ev.preventDefault();
-  const card = new Card({
-    name: textName.value,
-    link: urlName.value,
-  }, '#template-elements');
-  const newCardElement = card.getCard();
-  // const newCardElement = createCard(textName.value, urlName.value);
+  const newCardElement = createCard(textName.value, urlName.value);
   cardsContainer.prepend(newCardElement);
   closePopup(popupAddForm);
-  ev.submitter.classList.add('popup__button_disabled')
-  ev.submitter.disabled = true;
+  // ev.submitter.classList.add('popup__button_disabled');
+  // ev.submitter.disabled = true;
+  // validators[popupAddForm.getAttribute('name')].toggleButtonState();
 }
 
 // Функция открытия попапа изображения
@@ -196,7 +154,8 @@ function closeByEsc(evt) {
 editButtonElement.addEventListener('click', handleEditButtonClick); //Слушатель клика для открытия формы редактирования 
 addButtonElement.addEventListener('click', () => {
   openPopup(popupAddForm)
-  enableValidation(validationConfig);
+  validators[popupAddForm.getAttribute('name')].toggleButtonState();
+  addForm.reset();
 }); //Слушатель клика для открытия формы добавления нового места
 editForm.addEventListener('submit', handleEditFormSubmit); //Слушатель сабмита по кнопке формы редактирования
 popupAddForm.addEventListener('submit', handleAddFormSubmit); //Слушатель сабмита по кнопке формы добавления

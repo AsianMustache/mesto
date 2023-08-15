@@ -25,7 +25,7 @@ class Card {
         const deleteButton = this._newCard.querySelector('.element__delete-button');
         this._card = deleteButton.closest('.element');
         this._card.remove();
-        this. card = null;
+        this._card = null;
     }
 
     _setOpenFullImagePopupEventListener() {
