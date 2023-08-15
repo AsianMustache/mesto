@@ -12,7 +12,6 @@ class Card {
         .querySelector(this._templateSelector).content
         .querySelector('.element')
         .cloneNode(true);
-        this._newCard = cardTemplate;
         return cardTemplate;
     }
 
@@ -39,38 +38,23 @@ class Card {
 
     _setListeners() {
         const deleteImageButton = this._newCard.querySelector('.element__image-delete');
-        deleteImageButton.src = './images/Trash.svg';
-        deleteImageButton.alt = 'Кнопка удаления';
+        // deleteImageButton.src = './images/Trash.svg';
+        // deleteImageButton.alt = 'Кнопка удаления';
         const deleteButton = this._newCard.querySelector('.element__delete-button');
         deleteButton.addEventListener('click', () => { this._handleDeleteElement() });
-        // const cardImage = this._newCard.querySelector('.element__image');
-        // cardImage.src = this._link;
-        // cardImage.alt = this._name;
-        // cardImage.addEventListener('click', () => {
-        //   openPopup(popupImageForm);
-        // })
         const likeButton = this._newCard.querySelector('.element__group-favorite');
         const likeButtonPath = './images/favorite.svg';
         const likeActiveButtonPath = './images/Favorite-active.svg';
         likeButton.src = likeButtonPath;
         likeButton.alt = 'Избранное';
         likeButton.addEventListener('click', () => {
-          if (likeButton.getAttribute('src') === likeActiveButtonPath) {
-            likeButton.src = likeButtonPath;
-          } else {
-            likeButton.src = likeActiveButtonPath;
-          }
+          // if (likeButton.getAttribute('src') === likeActiveButtonPath) {
+          //   likeButton.src = likeButtonPath;
+          // } else {
+          //   likeButton.src = likeActiveButtonPath;
+          // }
+          likeButton.src = likeButton.getAttribute('src') === likeActiveButtonPath ? likeButtonPath : likeActiveButtonPath;
         });
-    }
-
-    _openPopupImage(imageUrl, name) {
-      const popupImage = document.querySelector('.popup-image-container__image-fullscreen');
-      const popupImageTitle = document.querySelector('.popup-image-container__title-fullscreen');
-  
-      popupImage.src = imageUrl;
-      popupImage.alt = `Увеличенное изображение - ${name}`;
-      popupImageTitle.textContent = name;
-      openPopup(document.querySelector('.popup_form_image'));
     }
 
     getCard() {
