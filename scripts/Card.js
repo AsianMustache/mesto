@@ -38,21 +38,13 @@ class Card {
 
     _setListeners() {
         const deleteImageButton = this._newCard.querySelector('.element__image-delete');
-        // deleteImageButton.src = './images/Trash.svg';
-        // deleteImageButton.alt = 'Кнопка удаления';
         const deleteButton = this._newCard.querySelector('.element__delete-button');
         deleteButton.addEventListener('click', () => { this._handleDeleteElement() });
         const likeButton = this._newCard.querySelector('.element__group-favorite');
         const likeButtonPath = './images/favorite.svg';
         const likeActiveButtonPath = './images/Favorite-active.svg';
         likeButton.src = likeButtonPath;
-        likeButton.alt = 'Избранное';
         likeButton.addEventListener('click', () => {
-          // if (likeButton.getAttribute('src') === likeActiveButtonPath) {
-          //   likeButton.src = likeButtonPath;
-          // } else {
-          //   likeButton.src = likeActiveButtonPath;
-          // }
           likeButton.src = likeButton.getAttribute('src') === likeActiveButtonPath ? likeButtonPath : likeActiveButtonPath;
         });
     }

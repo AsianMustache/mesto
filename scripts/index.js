@@ -89,7 +89,7 @@ function createCard(name, link) {
   return createCardElement.getCard();
 }
 
-
+//Рендер карточек
 function renderCards() {
   initialCards.forEach((card) => {
     const cardElement = new Card(card, '#template-elements');
@@ -110,9 +110,6 @@ function handleAddFormSubmit(ev) {
   const newCardElement = createCard(textName.value, urlName.value);
   cardsContainer.prepend(newCardElement);
   closePopup(popupAddForm);
-  // ev.submitter.classList.add('popup__button_disabled');
-  // ev.submitter.disabled = true;
-  // validators[popupAddForm.getAttribute('name')].toggleButtonState();
 }
 
 // Функция открытия попапа изображения
@@ -154,8 +151,8 @@ function closeByEsc(evt) {
 editButtonElement.addEventListener('click', handleEditButtonClick); //Слушатель клика для открытия формы редактирования 
 addButtonElement.addEventListener('click', () => {
   openPopup(popupAddForm)
-  validators[popupAddForm.getAttribute('name')].toggleButtonState();
   addForm.reset();
+  validators[addForm.getAttribute('name')].toggleButtonState();
 }); //Слушатель клика для открытия формы добавления нового места
 editForm.addEventListener('submit', handleEditFormSubmit); //Слушатель сабмита по кнопке формы редактирования
 popupAddForm.addEventListener('submit', handleAddFormSubmit); //Слушатель сабмита по кнопке формы добавления
