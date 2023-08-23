@@ -4,34 +4,34 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link  rel="stylesheet" href="./pages/index.css" type="text/css">
-    <link rel="icon" href="./images/favicon.ico">
-    <script type="module" src="./scripts/index.js"></script>
+    <!-- <link  rel="stylesheet" href="./pages/index.css" type="text/css"> -->
+    <link rel="icon" href="<%=require('./images/favicon.ico')%>">
+    <script type="module" src="./index.js"></script>
     <title>MESTO Russia</title>
 </head>
 <body class="body">
     <div class="page">
         <header class="header">
-            <a href="/" class="header__logo"><img src="./images/logo.svg" alt="Место - Россия" class="header__logo-image" /></a>
+            <a href="/" class="header__logo"><img src="<%=require('./images/logo.svg')%>" alt="Место - Россия" class="header__logo-image" /></a>
         </header>
         <main class="content">
             <section class="profile">
-                <img class="profile__avatar" src="./images/jacq.jpg" alt="Жак Ив Кусто" />
+                <img class="profile__avatar" src="<%=require('./images/jacq.jpg')%>" alt="Жак Ив Кусто" />
                 <div class="profile__info">
                     <h1 class="profile__info-name">Жак-Ив Кусто</h1>
                     <p class="profile__info-description">Исследователь океана</p>
-                    <button type="button" class="profile__info-edit-button"><img src="./images/editButton.svg" class="profile__info-edit-button-image" alt="Редактирование кнопка" /></button>
+                    <button type="button" class="profile__info-edit-button"><img src="<%=require('./images/editButton.svg')%>" class="profile__info-edit-button-image" alt="Редактирование кнопка" /></button>
                 </div>
-                <button type="button" class="profile__add-button"><img src="./images/plus.svg" alt="Добавление" class="profile__add-button-image" /></button>
+                <button type="button" class="profile__add-button"><img src="<%=require('./images/plus.svg')%>" alt="Добавление" class="profile__add-button-image" /></button>
             </section>
             <section class="elements">
             <template id="template-elements">
                 <article class="element">
-                    <button type="button" class="element__delete-button"><img class="element__image-delete" src="./images/Trash.svg" alt="Кнопка удаления" /></button>
+                    <button type="button" class="element__delete-button"><img class="element__image-delete" src="<%=require('./images/Trash.svg')%>" alt="Кнопка удаления" /></button>
                     <img class="element__image" />
                     <div class="element__group">
                         <h2 class="element__group-title"></h2>
-                        <button type="button" class="element__group-button"><img class="element__group-favorite" alt="Избранное" src="./images/favorite.svg"/></button>
+                        <button type="button" class="element__group-button"><img class="element__group-favorite" alt="Избранное" src="<%=require('./images/favorite.svg')%>"/></button>
                     </div>
                 </article>
             </template>

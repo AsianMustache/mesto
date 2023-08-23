@@ -1,6 +1,8 @@
 //Переменные
-import Card from "./Card.js";
-import { enableValidation, validators } from "./validate.js"
+import '../src/pages/index.css';
+import Card from "../src/scripts/Card.js";
+import { enableValidation, validators } from "../src/scripts/validate.js"
+
 
 const initialCards = [
   {
