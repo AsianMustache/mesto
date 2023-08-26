@@ -41,12 +41,7 @@ class Card {
         const deleteButton = this._newCard.querySelector('.element__delete-button');
         deleteButton.addEventListener('click', () => { this._handleDeleteElement() });
         const likeButton = this._newCard.querySelector('.element__group-favorite');
-        // const likeButtonPath = './images/favorite.svg';
-        // const likeActiveButtonPath = './images/Favorite-active.svg';
-        // const likeActiveButtonPath = this._newCard.querySelector('.element__group-favorite-active');
-        // likeButton.src = likeButtonPath;
-        likeButton.addEventListener('click', () => {
-        //   likeButton.src = likeButton.getAttribute('src') === likeActiveButtonPath ? likeButtonPath : likeActiveButtonPath;
+        likeButton.addEventListener('click', () => {        
             likeButton.classList.toggle('element__group-favorite_active');
         });
     }
