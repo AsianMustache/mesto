@@ -2,6 +2,7 @@
 import '../src/pages/index.css';
 import Card from "../src/scripts/Card.js";
 import { enableValidation, validators } from "../src/scripts/validate.js"
+import Section from '../src/scripts/Section.js';
 
 
 const initialCards = [
@@ -91,13 +92,26 @@ function createCard(name, link) {
   return createCardElement.getCard();
 }
 
-//Рендер карточек
+// Рендер карточек
+// function renderCards() {
+//   initialCards.forEach((card) => {
+//     const cardElement = new Card(card, '#template-elements');
+//     cardsContainer.appendChild(cardElement.getCard());
+//   });
+// }
+
 function renderCards() {
-  initialCards.forEach((card) => {
-    const cardElement = new Card(card, '#template-elements');
-    cardsContainer.appendChild(cardElement.getCard());
-  });
+  const section = new Section({
+    items: initialCards,
+    renderer: (card) => {
+      const cardElement = new Card(card, '#template-elements');
+      return cardsContainer.appendChild(cardElement.getCard());
+    }
+  }, '.elements');
+  
+  section.renderItems();
 }
+
 
 //Функция занесения данных при открытии формы редактирования
 function handleEditButtonClick () {
@@ -164,7 +178,8 @@ popups.forEach((popup) => {
 });
 
 //Вызов функций
-renderCards();
+// renderCards();
 enableValidation(validationConfig);
+renderCards()
 
 export { openPopupImage };
