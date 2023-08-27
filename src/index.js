@@ -3,6 +3,10 @@ import '../src/pages/index.css';
 import Card from "../src/scripts/Card.js";
 import { enableValidation, validators } from "../src/scripts/validate.js"
 import Section from '../src/scripts/Section.js';
+import Popup from '../src/scripts/Popup.js';
+import PopupWithImage from './scripts/PopupWithImage.js';
+import PopupWithForm from './scripts/PopupWithForm.js';
+import UserInfo from './scripts/UserInfo.js';
 
 
 const initialCards = [
@@ -62,27 +66,47 @@ const closeButtons = document.querySelectorAll('.popup-close') //Поиск вс
 const containerPopup = document.querySelector('.popup-container');
 const containerPopupImage = document.querySelector('.popup-image-container');
 const popups = document.querySelectorAll('.popup');
-
+const classPopup = new Popup('.popup')
+const classPopupWithForm = new PopupWithForm('.popup_form_edit', handleEditFormSubmit);
 
 //Функции
 //Общая функция открытия форм
-function openPopup (popup) {
-  popup.classList.add('popup_opened');
-  document.addEventListener('keydown', closeByEsc);
+// function openPopup (popup) {
+//   popup.classList.add('popup_opened');
+//   document.addEventListener('keydown', closeByEsc);
+// }
+
+function openPopup(popup) {
+  classPopup.open();
 }
+
 //Общая функция закрытия форм
-function closePopup (popup) {
-  popup.classList.remove('popup_opened');
-  document.removeEventListener('keydown', closeByEsc);
+// function closePopup (popup) {
+//   popup.classList.remove('popup_opened');
+//   document.removeEventListener('keydown', closeByEsc);
+// }
+
+function closePopup(popup) {
+  classPopup.close();
 }
+
 //Функция сохранения данных (Сабмита) формы редактирования
-function handleEditFormSubmit (evt) {
+// function handleEditFormSubmit (evt) {
+//   evt.preventDefault();
+//   // Вставляем новые значения с помощью textContent
+//   infoName.textContent = nameInput.value; 
+//   infoDescription.textContent = descriptionInput.value;
+//   closePopup(popupEditForm);
+// }
+
+function handleEditFormSubmit(evt) {
   evt.preventDefault();
-  // Вставляем новые значения с помощью textContent
-  infoName.textContent = nameInput.value; 
-  infoDescription.textContent = descriptionInput.value;
-  closePopup(popupEditForm);
+  const inputValues = classPopupWithForm._getInputValues();
+  infoName.textContent = inputValues['name'];
+  infoDescription.textContent = inputValues['description'];
+  classPopupWithForm.close();
 }
+
 //Функция отрисовки карточки для добавления через сабмит кнопки Add
 function createCard(name, link) {
   const createCardElement = new Card({
@@ -113,12 +137,20 @@ function renderCards() {
 }
 
 
-//Функция занесения данных при открытии формы редактирования
-function handleEditButtonClick () {
-  nameInput.value = infoName.textContent;
-  descriptionInput.value = infoDescription.textContent;
-  openPopup(popupEditForm);
+// Функция занесения данных при открытии формы редактирования
+// function handleEditButtonClick () {
+//   nameInput.value = infoName.textContent;
+//   descriptionInput.value = infoDescription.textContent;
+//   openPopup(popupEditForm);
+// }
+
+function handleEditButtonClick() {
+  const inputValues = classPopupWithForm._getInputValues();
+  infoName.textContent = inputValues['name'];
+  infoDescription.textContent = inputValues['description'];
+  classPopupWithForm.open();
 }
+
 
 //Функция сохранения данных (Сабмита) формы добавления карточки
 function handleAddFormSubmit(ev) {
@@ -140,26 +172,27 @@ closeButtons.forEach((button) => {
   // находим 1 раз ближайший к крестику попап 
   const popup = button.closest('.popup');
   // устанавливаем обработчик закрытия на крестик
-  button.addEventListener('click', () => {
-    closePopup(popup)
-  });
+  // button.addEventListener('click', () => {
+  //   closePopup(popup)
+  // });
+  classPopup.setEventListeners();
 });
 
 //Функция закрытия попапов по клику за пределами форм
-function handlePopupEvents(event) {
-  const target = event.target;
-  const isPopup = target.classList.contains('popup');
-  if (isPopup) {
-    closePopup(target);
-  }
-}
+// function handlePopupEvents(event) {
+//   const target = event.target;
+//   const isPopup = target.classList.contains('popup');
+//   if (isPopup) {
+//     closePopup(target);
+//   }
+// }
 
-function closeByEsc(evt) {
-  if (evt.key === "Escape") {
-    const openedPopup = document.querySelector('.popup_opened');
-    closePopup(openedPopup);
-  }
-}
+// function closeByEsc(evt) {
+//   if (evt.key === "Escape") {
+//     const openedPopup = document.querySelector('.popup_opened');
+//     closePopup(openedPopup);
+//   }
+// }
 
 
 
@@ -173,9 +206,12 @@ addButtonElement.addEventListener('click', () => {
 editForm.addEventListener('submit', handleEditFormSubmit); //Слушатель сабмита по кнопке формы редактирования
 popupAddForm.addEventListener('submit', handleAddFormSubmit); //Слушатель сабмита по кнопке формы добавления
 //Пробегаем по массиву popup для закрытия попапов за пределами попапа
-popups.forEach((popup) => {
-  popup.addEventListener('click', handlePopupEvents);
-});
+// popups.forEach((popup) => {
+//   popup.addEventListener('click', handlePopupEvents);
+// });
+// popups.forEach((popup) => {
+//   classPopup.setEventListeners();
+// });
 
 //Вызов функций
 // renderCards();

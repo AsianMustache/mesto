@@ -1,10 +1,11 @@
 import { openPopupImage } from "../index.js"
 
 class Card {
-    constructor({ name, link }, templateSelector) {
+    constructor({ name, link }, templateSelector, handleCardClick) {
       this._name = name;
       this._link = link;
       this._templateSelector = templateSelector;
+      this._handleCardClick = handleCardClick;
   }
 
     _getTemplate() {
@@ -32,7 +33,8 @@ class Card {
       cardImage.src = this._link;
       cardImage.alt = this._name;
       cardImage.addEventListener('click', () => {
-          openPopupImage(cardImage.src, cardImage.alt);
+        //   openPopupImage(cardImage.src, cardImage.alt);
+        this._handleCardClick(this._link, this._name);
       });
     }
 
@@ -41,7 +43,7 @@ class Card {
         const deleteButton = this._newCard.querySelector('.element__delete-button');
         deleteButton.addEventListener('click', () => { this._handleDeleteElement() });
         const likeButton = this._newCard.querySelector('.element__group-favorite');
-        likeButton.addEventListener('click', () => {        
+        likeButton.addEventListener('click', () => {
             likeButton.classList.toggle('element__group-favorite_active');
         });
     }
