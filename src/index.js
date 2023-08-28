@@ -68,7 +68,16 @@ const containerPopupImage = document.querySelector('.popup-image-container');
 const popups = document.querySelectorAll('.popup');
 const classPopup = new Popup('.popup')
 const classPopupWithFormEdit = new PopupWithForm('.popup_form_edit', handleEditFormSubmit);
-const classPopupWithFormAdd = new PopupWithForm('.popup_form_add', handleAddFormSubmit);
+// const classPopupWithFormAdd = new PopupWithForm('.popup_form_add', handleAddFormSubmit);
+const nameElement = document.getElementById('name-place');
+const urlElement = document.getElementById('url');
+const classPopupWithFormAdd = new PopupWithForm('.popup_form_add', (values) => {
+  const nameInputValue = values['name-place'];
+  const urlInputValue = values.url;
+  nameElement.textContent = nameInputValue;
+  urlElement.textContent = urlInputValue;
+})
+classPopupWithFormAdd.setEventListeners();
 
 //Функции
 //Общая функция открытия форм
@@ -152,7 +161,7 @@ function renderCards() {
 //   classPopupWithForm.open();
 // }
 
-function handleEditButtonClick() {  
+function handleEditButtonClick() {
   const inputs = classPopupWithFormEdit._getInputValues();
   const nameInput = inputs['name'];
   const descriptionInput = inputs['description'];
@@ -169,15 +178,28 @@ function handleEditButtonClick() {
 //   closePopup(popupAddForm);
 // }
 
-function handleAddFormSubmit(ev) {
-  ev.preventDefault();
-  const inputValues = classPopupWithFormAdd._getInputValues();
-  const textinputValue = inputValues['textName'].value;
-  const urlInputValue = inputValues['urlName'].value;
-  const newCardElement = createCard(textinputValue, urlInputValue);
-  cardsContainer.prepend(newCardElement);
-  classPopupWithFormAdd.close();
-}
+// function handleAddFormSubmit(ev) {
+//   ev.preventDefault();
+//   const inputValues = classPopupWithFormAdd.setEventListeners();
+//   const textinputValue = inputValues['textName'].value;
+//   const urlInputValue = inputValues['urlName'].value;
+//   const newCardElement = createCard(textinputValue, urlInputValue);
+//   cardsContainer.prepend(newCardElement);
+//   classPopupWithFormAdd.close();
+// }
+
+// function handleAddFormSubmit(ev) {
+//   ev.preventDefault();
+//   const popupAddForm = new PopupWithForm('.popup_form_add', (inputValues) => {
+//     const textInputValue = inputValues.name;
+//     const urlInputValue = inputValues.url;
+//     const newCardElement = createCard(textInputValue, urlInputValue);
+//     cardsContainer.prepend(newCardElement);
+//     popupAddForm.close();
+//   });
+//   popupAddForm.setEventListeners();
+// }
+
 
 // Функция открытия попапа изображения
 function openPopupImage(imageUrl, name) {
@@ -228,7 +250,8 @@ addButtonElement.addEventListener('click', () => {
   validators[addForm.getAttribute('name')].toggleButtonState();
 }); //Слушатель клика для открытия формы добавления нового места
 editForm.addEventListener('submit', handleEditFormSubmit); //Слушатель сабмита по кнопке формы редактирования
-popupAddForm.addEventListener('submit', handleAddFormSubmit); //Слушатель сабмита по кнопке формы добавления
+// popupAddForm.addEventListener('submit', handleAddFormSubmit); //Слушатель сабмита по кнопке формы добавления
+
 //Пробегаем по массиву popup для закрытия попапов за пределами попапа
 // popups.forEach((popup) => {
 //   popup.addEventListener('click', handlePopupEvents);
