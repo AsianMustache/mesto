@@ -67,7 +67,8 @@ const containerPopup = document.querySelector('.popup-container');
 const containerPopupImage = document.querySelector('.popup-image-container');
 const popups = document.querySelectorAll('.popup');
 const classPopup = new Popup('.popup')
-const classPopupWithForm = new PopupWithForm('.popup_form_edit', handleEditFormSubmit);
+const classPopupWithFormEdit = new PopupWithForm('.popup_form_edit', handleEditFormSubmit);
+const classPopupWithFormAdd = new PopupWithForm('.popup_form_add', handleAddFormSubmit);
 
 //Функции
 //Общая функция открытия форм
@@ -101,10 +102,10 @@ function closePopup(popup) {
 
 function handleEditFormSubmit(evt) {
   evt.preventDefault();
-  const inputValues = classPopupWithForm._getInputValues();
+  const inputValues = classPopupWithFormEdit._getInputValues();
   infoName.textContent = inputValues['name'].value;
   infoDescription.textContent = inputValues['description'].value;
-  classPopupWithForm.close();
+  classPopupWithFormEdit.close();
 }
 
 //Функция отрисовки карточки для добавления через сабмит кнопки Add
@@ -152,20 +153,30 @@ function renderCards() {
 // }
 
 function handleEditButtonClick() {  
-  const inputs = classPopupWithForm._getInputValues();
+  const inputs = classPopupWithFormEdit._getInputValues();
   const nameInput = inputs['name'];
   const descriptionInput = inputs['description'];
   nameInput.value = infoName.textContent;
   descriptionInput.value = infoDescription.textContent;
-  classPopupWithForm.open();
+  classPopupWithFormEdit.open();
 }
 
 //Функция сохранения данных (Сабмита) формы добавления карточки
+// function handleAddFormSubmit(ev) {
+//   ev.preventDefault();
+//   const newCardElement = createCard(textName.value, urlName.value);
+//   cardsContainer.prepend(newCardElement);
+//   closePopup(popupAddForm);
+// }
+
 function handleAddFormSubmit(ev) {
   ev.preventDefault();
-  const newCardElement = createCard(textName.value, urlName.value);
+  const inputValues = classPopupWithFormAdd._getInputValues();
+  const textinputValue = inputValues['textName'].value;
+  const urlInputValue = inputValues['urlName'].value;
+  const newCardElement = createCard(textinputValue, urlInputValue);
   cardsContainer.prepend(newCardElement);
-  closePopup(popupAddForm);
+  classPopupWithFormAdd.close();
 }
 
 // Функция открытия попапа изображения
@@ -206,8 +217,13 @@ closeButtons.forEach((button) => {
 
 //Обработчики событий
 editButtonElement.addEventListener('click', handleEditButtonClick); //Слушатель клика для открытия формы редактирования 
+// addButtonElement.addEventListener('click', () => {
+//   openPopup(popupAddForm);
+//   addForm.reset();
+//   validators[addForm.getAttribute('name')].toggleButtonState();
+// }); //Слушатель клика для открытия формы добавления нового места
 addButtonElement.addEventListener('click', () => {
-  openPopup(popupAddForm)
+  classPopupWithFormAdd.open();
   addForm.reset();
   validators[addForm.getAttribute('name')].toggleButtonState();
 }); //Слушатель клика для открытия формы добавления нового места
