@@ -76,8 +76,11 @@ const classPopupWithFormAdd = new PopupWithForm('.popup_form_add', (values) => {
   const urlInputValue = values.url;
   nameElement.textContent = nameInputValue;
   urlElement.textContent = urlInputValue;
+  const cardElement = createCard(nameInputValue, urlInputValue);
+  cardsContainer.prepend(cardElement);
 })
 classPopupWithFormAdd.setEventListeners();
+
 
 //Функции
 //Общая функция открытия форм
@@ -250,7 +253,10 @@ addButtonElement.addEventListener('click', () => {
   validators[addForm.getAttribute('name')].toggleButtonState();
 }); //Слушатель клика для открытия формы добавления нового места
 editForm.addEventListener('submit', handleEditFormSubmit); //Слушатель сабмита по кнопке формы редактирования
-// popupAddForm.addEventListener('submit', handleAddFormSubmit); //Слушатель сабмита по кнопке формы добавления
+popupAddForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+    classPopupWithFormAdd.close();
+}); //Слушатель сабмита по кнопке формы добавления
 
 //Пробегаем по массиву popup для закрытия попапов за пределами попапа
 // popups.forEach((popup) => {
