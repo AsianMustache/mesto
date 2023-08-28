@@ -102,8 +102,8 @@ function closePopup(popup) {
 function handleEditFormSubmit(evt) {
   evt.preventDefault();
   const inputValues = classPopupWithForm._getInputValues();
-  infoName.textContent = inputValues['name'];
-  infoDescription.textContent = inputValues['description'];
+  infoName.textContent = inputValues['name'].value;
+  infoDescription.textContent = inputValues['description'].value;
   classPopupWithForm.close();
 }
 
@@ -144,13 +144,21 @@ function renderCards() {
 //   openPopup(popupEditForm);
 // }
 
-function handleEditButtonClick() {
-  const inputValues = classPopupWithForm._getInputValues();
-  infoName.textContent = inputValues['name'];
-  infoDescription.textContent = inputValues['description'];
+// function handleEditButtonClick() {
+//   const inputValues = classPopupWithForm._getInputValues();
+//   inputValues['name'].value = infoName.textContent;
+//   inputValues['description'].value = infoDescription.textContent;
+//   classPopupWithForm.open();
+// }
+
+function handleEditButtonClick() {  
+  const inputs = classPopupWithForm._getInputValues();
+  const nameInput = inputs['name'];
+  const descriptionInput = inputs['description'];
+  nameInput.value = infoName.textContent;
+  descriptionInput.value = infoDescription.textContent;
   classPopupWithForm.open();
 }
-
 
 //Функция сохранения данных (Сабмита) формы добавления карточки
 function handleAddFormSubmit(ev) {
