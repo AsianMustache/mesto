@@ -118,10 +118,23 @@ function renderCards() {
 }
 
 // Функция занесения данных при открытии формы редактирования
+// function handleEditButtonClick() {
+//   // const inputs = classPopupWithFormEdit._getInputValues();
+//   inputName.value = infoName.textContent;
+//   inputDescription.value = infoDescription.textContent;
+//   classPopupWithFormEdit.open();
+// }
+
 function handleEditButtonClick() {
-  // const inputs = classPopupWithFormEdit._getInputValues();
-  inputName.value = infoName.textContent;
-  inputDescription.value = infoDescription.textContent;
+  const userInfo = new UserInfo({
+    nameSelector: '.profile__info-name',
+    infoSelector: '.profile__info-description'
+  });
+
+  const userData = userInfo.getUserInfo();
+  inputName.value = userData.name;
+  inputDescription.value = userData.info;
+
   classPopupWithFormEdit.open();
 }
 
