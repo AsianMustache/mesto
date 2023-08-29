@@ -51,51 +51,24 @@ const editForm = popupEditForm.querySelector('.edit-form'); //Поиск фор�
 const addButtonElement = document.querySelector('.profile__add-button'); //Находим кнопку добавления нового места
 const popupAddForm = document.querySelector('.popup_form_add'); //Контейнер добавления нового места
 const addForm = popupAddForm.querySelector('.add-form'); //Находим саму форму добавления нового места
-const infoName = document.querySelector('.profile__info-name');
-const infoDescription = document.querySelector('.profile__info-description');
-// const nameInput = editForm.querySelector('.edit-form__text_input_name'); //Находим поле ввода имени и присваиваем переменную
-// const descriptionInput = editForm.querySelector('.edit-form__text_input_description'); //Находим поле ввода описания и присваиваем переменную
 const cardsContainer = document.querySelector('.elements'); //Находим поле для создания карточек
-// const cardTemplate = document.querySelector('#template-elements').content; //Находим шаблон для создания карточек
-const popupImageForm = document.querySelector('.popup_form_image'); //Попап картинки
-const popupImage = popupImageForm.querySelector('.popup-image-container__image-fullscreen'); //Поиск селектора изображения полноэкранного
-const popupImageTitle = popupImageForm.querySelector('.popup-image-container__title-fullscreen'); //Поиск селектора названия карточки изображения
-// const textName = addForm.querySelector('.add-form__text_input_title'); //Поиск поля для ввода названия, формы добавления нового места
-// const urlName = addForm.querySelector('.add-form__text_input_url'); //Поиск поля для ввода УРЛ, формы добавления нового места
 const closeButtons = document.querySelectorAll('.popup-close') //Поиск всех кнопок закрытия попапов
-// const containerPopup = document.querySelector('.popup-container');
-// const containerPopupImage = document.querySelector('.popup-image-container');
-// const popups = document.querySelectorAll('.popup');
-const classPopup = new Popup('.popup')
-const classPopupWithFormEdit = new PopupWithForm('.popup_form_edit', handleEditFormSubmit);
-const nameElement = document.getElementById('name-place');
-const urlElement = document.getElementById('url');
-const inputName = document.querySelector('input[name="name"]');
-const inputDescription = document.querySelector('input[name="description"]');
+const classPopup = new Popup('.popup') //экземпляр класса Popup
+const classPopupWithFormEdit = new PopupWithForm('.popup_form_edit', handleEditFormSubmit); //Экземпляр класса PopupWithForm
+const nameElement = document.getElementById('name-place'); //Переменная с ID имени формы добавления карточки
+const urlElement = document.getElementById('url'); //Переменная с ID url формы добавления карточки
+const inputName = document.querySelector('input[name="name"]'); //Поиск элемента input, у которого атрибут равен name
+const inputDescription = document.querySelector('input[name="description"]'); //Поиск элемента input, у которого атрибут равен description
+const popupWithImage = new PopupWithImage('.popup_form_image'); //Экземпляр класса PopupWithImage
 const classPopupWithFormAdd = new PopupWithForm('.popup_form_add', (values) => {
-  const nameInputValue = values['name'];
-  const urlInputValue = values.url;
+  const nameInputValue = values['name-place'];
+  const urlInputValue = values['url'];
   nameElement.textContent = nameInputValue;
   urlElement.textContent = urlInputValue;
   const cardElement = createCard(nameInputValue, urlInputValue);
   cardsContainer.prepend(cardElement);
-})
+})                                                                    //Экземпляр класса PopupWithForm - добавление нового места
 classPopupWithFormAdd.setEventListeners();
-
-function openPopup(popup) {
-  classPopup.open();
-}
-
-function closePopup(popup) {
-  classPopup.close();
-}
-
-// function handleEditFormSubmit(evt) {
-//   evt.preventDefault();
-//   infoName.textContent = inputName.value;
-//   infoDescription.textContent = inputDescription.value;
-//   classPopupWithFormEdit.close();
-// }
 
 function handleEditFormSubmit(evt) {
   evt.preventDefault();
@@ -115,7 +88,7 @@ function handleEditFormSubmit(evt) {
 function createCard(name, link) {
   const createCardElement = new Card({
     name: name,
-    link: link
+    link: link,
   }, "#template-elements");
   return createCardElement.getCard();
 }
@@ -131,14 +104,6 @@ function renderCards() {
   section.renderItems();
 }
 
-// Функция занесения данных при открытии формы редактирования
-// function handleEditButtonClick() {
-//   // const inputs = classPopupWithFormEdit._getInputValues();
-//   inputName.value = infoName.textContent;
-//   inputDescription.value = infoDescription.textContent;
-//   classPopupWithFormEdit.open();
-// }
-
 function handleEditButtonClick() {
   const userInfo = new UserInfo({
     nameSelector: '.profile__info-name',
@@ -153,13 +118,11 @@ function handleEditButtonClick() {
 }
 
 
-// Функция открытия попапа изображения
 function openPopupImage(imageUrl, name) {
-  popupImage.src = imageUrl;
-  popupImage.alt = `Увеличенное изображение - ${name}`;
-  popupImageTitle.textContent = name;
-  openPopup(popupImageForm);
+  popupWithImage.open(imageUrl, `${name}`);
 }
+popupWithImage.setEventListeners();
+
 //Универсальная функция закрытия попапов
 closeButtons.forEach(() => {
   classPopup.setEventListeners();

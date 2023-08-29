@@ -3,7 +3,7 @@ import Popup from './Popup.js';
 class PopupWithImage extends Popup {
     constructor(popupSelector) {
         super(popupSelector);
-        this._image = this._popup.querySelector('.popup-image');
+        this._image = this._popup.querySelector('.popup-image-container__image-fullscreen');
         this._caption = this._popup.querySelector('.popup-image-container__title-fullscreen');
     }
 
@@ -12,6 +12,9 @@ class PopupWithImage extends Popup {
         this._image.title = caption;
         this._caption.textContent = caption;
         super.open();
+    }
+    setEventListeners() {
+        super.setEventListeners();
     }
 }
 

@@ -33,8 +33,7 @@ class Card {
       cardImage.src = this._link;
       cardImage.alt = this._name;
       cardImage.addEventListener('click', () => {
-        //   openPopupImage(cardImage.src, cardImage.alt);
-        this._handleCardClick(this._link, this._name);
+        openPopupImage(this._link, this._name);
       });
     }
 
