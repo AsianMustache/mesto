@@ -90,10 +90,24 @@ function closePopup(popup) {
   classPopup.close();
 }
 
+// function handleEditFormSubmit(evt) {
+//   evt.preventDefault();
+//   infoName.textContent = inputName.value;
+//   infoDescription.textContent = inputDescription.value;
+//   classPopupWithFormEdit.close();
+// }
+
 function handleEditFormSubmit(evt) {
   evt.preventDefault();
-  infoName.textContent = inputName.value;
-  infoDescription.textContent = inputDescription.value;
+
+  const newUserInfo = new UserInfo({
+    nameSelector: '.profile__info-name',
+    infoSelector: '.profile__info-description'
+  })
+  const name = inputName.value;
+  const info = inputDescription.value;
+  newUserInfo.setUserInfo({ name, info });
+
   classPopupWithFormEdit.close();
 }
 

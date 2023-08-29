@@ -11,8 +11,8 @@ class UserInfo {
       };
     }
   
-    setUserInfo({ newName, info }) {
-      this._nameSelector.textContent = newName;
+    setUserInfo({ name, info }) {
+      this._nameSelector.textContent = name;
       this._infoSelector.textContent = info;
     }
   }
