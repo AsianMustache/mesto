@@ -71,8 +71,10 @@ const classPopupWithFormEdit = new PopupWithForm('.popup_form_edit', handleEditF
 // const classPopupWithFormAdd = new PopupWithForm('.popup_form_add', handleAddFormSubmit);
 const nameElement = document.getElementById('name-place');
 const urlElement = document.getElementById('url');
+const inputName = document.querySelector('input[name="name"]');
+const inputDescription = document.querySelector('input[name="description"]');
 const classPopupWithFormAdd = new PopupWithForm('.popup_form_add', (values) => {
-  const nameInputValue = values['name-place'];
+  const nameInputValue = values['name'];
   const urlInputValue = values.url;
   nameElement.textContent = nameInputValue;
   urlElement.textContent = urlInputValue;
@@ -114,9 +116,9 @@ function closePopup(popup) {
 
 function handleEditFormSubmit(evt) {
   evt.preventDefault();
-  const inputValues = classPopupWithFormEdit._getInputValues();
-  infoName.textContent = inputValues['name'].value;
-  infoDescription.textContent = inputValues['description'].value;
+  // const inputValues = classPopupWithFormEdit._getInputValues();
+  infoName.textContent = inputName.value;
+  infoDescription.textContent = inputDescription.value;
   classPopupWithFormEdit.close();
 }
 
@@ -128,7 +130,6 @@ function createCard(name, link) {
   }, "#template-elements");
   return createCardElement.getCard();
 }
-
 // Рендер карточек
 // function renderCards() {
 //   initialCards.forEach((card) => {
@@ -145,7 +146,6 @@ function renderCards() {
       return cardsContainer.appendChild(cardElement.getCard());
     }
   }, '.elements');
-  
   section.renderItems();
 }
 
@@ -166,10 +166,12 @@ function renderCards() {
 
 function handleEditButtonClick() {
   const inputs = classPopupWithFormEdit._getInputValues();
-  const nameInput = inputs['name'];
-  const descriptionInput = inputs['description'];
-  nameInput.value = infoName.textContent;
-  descriptionInput.value = infoDescription.textContent;
+  // const nameInput = inputs['name'];
+  
+  // const descriptionInput = inputs['description'];
+  
+  inputName.value = infoName.textContent;
+  inputDescription.value = infoDescription.textContent;
   classPopupWithFormEdit.open();
 }
 
