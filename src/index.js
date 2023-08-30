@@ -53,7 +53,14 @@ const popupAddForm = document.querySelector('.popup_form_add'); //Контейн
 const addForm = popupAddForm.querySelector('.add-form'); //Находим саму форму добавления нового места
 const cardsContainer = document.querySelector('.elements'); //Находим поле для создания карточек
 const closeButtons = document.querySelectorAll('.popup-close') //Поиск всех кнопок закрытия попапов
-const classPopup = new Popup('.popup') //экземпляр класса Popup
+// const classPopup = new Popup('.popup') //экземпляр класса Popup
+const popupWithFormEdit = new Popup('.popup_form_edit');
+const popupWithFormAdd = new Popup('.popup_form_add');
+const newUserInfo = new UserInfo({
+    nameSelector: '.profile__info-name',
+    infoSelector: '.profile__info-description'
+  })
+
 const classPopupWithFormEdit = new PopupWithForm('.popup_form_edit', handleEditFormSubmit); //Экземпляр класса PopupWithForm
 const nameElement = document.getElementById('name-place'); //Переменная с ID имени формы добавления карточки
 const urlElement = document.getElementById('url'); //Переменная с ID url формы добавления карточки
@@ -70,13 +77,9 @@ const classPopupWithFormAdd = new PopupWithForm('.popup_form_add', (values) => {
 })                                                                    //Экземпляр класса PopupWithForm - добавление нового места
 classPopupWithFormAdd.setEventListeners();
 
+
 function handleEditFormSubmit(evt) {
   evt.preventDefault();
-
-  const newUserInfo = new UserInfo({
-    nameSelector: '.profile__info-name',
-    infoSelector: '.profile__info-description'
-  })
   const name = inputName.value;
   const info = inputDescription.value;
   newUserInfo.setUserInfo({ name, info });
@@ -97,8 +100,8 @@ function renderCards() {
   const section = new Section({
     items: initialCards,
     renderer: (card) => {
-      const cardElement = new Card(card, '#template-elements');
-      return cardsContainer.appendChild(cardElement.getCard());
+      const cardElement = createCard(card.name, card.link);
+      return cardsContainer.appendChild(cardElement);
     }
   }, '.elements');
   section.renderItems();
@@ -124,8 +127,17 @@ function openPopupImage(imageUrl, name) {
 popupWithImage.setEventListeners();
 
 //Универсальная функция закрытия попапов
+// closeButtons.forEach(() => {
+//   classPopup.setEventListeners();
+// });
 closeButtons.forEach(() => {
-  classPopup.setEventListeners();
+  popupWithFormEdit.setEventListeners();
+});
+closeButtons.forEach(() => {
+  popupWithFormAdd.setEventListeners();
+});
+closeButtons.forEach(() => {
+  popupWithImage.setEventListeners();
 });
 
 
