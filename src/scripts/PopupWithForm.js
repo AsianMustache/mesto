@@ -16,7 +16,7 @@ class PopupWithForm extends Popup {
     return values;
   }
 
-  setInputValues(data) {  
+  setInputValues(data) {
     const inputs = Array.from(this._form.querySelectorAll('.popup__input'));
     inputs.forEach((input) => {
       if (input.name === 'info') {
@@ -25,6 +25,15 @@ class PopupWithForm extends Popup {
         input.value = data[input.name];
       }
     });
+  }
+
+  setEventListeners() {
+    this._form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const inputValues = this._getInputValues();
+      this._handleSubmitForm(inputValues);
+    });
+    super.setEventListeners();
   }
 }
 

@@ -34,26 +34,17 @@ const section = new Section({
   renderer: createCard
 }, '.elements');
 
-const classPopupWithFormEdit = new PopupWithForm('.popup_form_edit', handleEditFormSubmit); //Экземпляр класса PopupWithForm
-// const classPopupWithFormAdd = new PopupWithForm('.popup_form_add', (values) => {
-//   const nameInputValue = values['name-place'];
-//   const urlInputValue = values['url'];
-//   nameElement.textContent = nameInputValue;
-//   urlElement.textContent = urlInputValue;
-//   const cardElement = createCard(nameInputValue, urlInputValue);
-//   cardsContainer.prepend(cardElement);
-// })                                                                    //Экземпляр класса PopupWithForm - добавление нового места
+const classPopupWithFormEdit = new PopupWithForm('.popup_form_edit', handleEditFormSubmit);
 const classPopupWithFormAdd = new PopupWithForm('.popup_form_add', (values) => {
   const nameInputValue = values['name-place'];
   const urlInputValue = values['url'];
   const cardElement = createCard(nameInputValue, urlInputValue);
   section.addItem(cardElement);
-});
+});                                                                    //Экземпляр класса PopupWithForm - добавление нового места
 classPopupWithFormAdd.setEventListeners();
 
 
 function handleEditFormSubmit(evt) {
-  // evt.preventDefault();
   const name = inputName.value;
   const info = inputDescription.value;
   newUserInfo.setUserInfo({ name, info });
@@ -82,11 +73,6 @@ function renderCards() {
 }
 
 function handleEditButtonClick() {
-  // const userInfo = new UserInfo({
-  //   nameSelector: '.profile__info-name',
-  //   infoSelector: '.profile__info-description'
-  // });
-
   const userData = newUserInfo.getUserInfo();
   inputName.value = userData.name;
   inputDescription.value = userData.info;
@@ -100,7 +86,7 @@ function openPopupImage(imageUrl, name) {
 popupWithImage.setEventListeners();
 
 //Универсальная функция закрытия попапов
-classPopupWithFormEdit.setEventListeners();
+
 
 closeButtons.forEach(() => {
   popupWithImage.setEventListeners();
@@ -114,7 +100,8 @@ addButtonElement.addEventListener('click', () => {
   addForm.reset();
   validators[addForm.getAttribute('name')].toggleButtonState();
 }); //Слушатель клика для открытия формы добавления нового места
-editForm.addEventListener('submit', handleEditFormSubmit); //Слушатель сабмита по кнопке формы редактирования
+// editForm.addEventListener('submit', handleEditFormSubmit); //Слушатель сабмита по кнопке формы редактирования
+classPopupWithFormEdit.setEventListeners();
 popupAddForm.addEventListener('submit', (event) => {
     event.preventDefault();
     classPopupWithFormAdd.close();
