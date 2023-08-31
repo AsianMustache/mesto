@@ -1,7 +1,3 @@
-import Popup from "../scripts/Popup";
-import PopupWithImage from '../scripts/PopupWithImage.js';
-import PopupWithForm from '../scripts/PopupWithForm.js';
-
 const initialCards = [
     {
       name: 'Архыз',
@@ -46,20 +42,20 @@ const initialCards = [
   const addForm = popupAddForm.querySelector('.add-form'); //Находим саму форму добавления нового места
   const cardsContainer = document.querySelector('.elements'); //Находим поле для создания карточек
   const closeButtons = document.querySelectorAll('.popup-close') //Поиск всех кнопок закрытия попапов
-  const classPopup = new Popup('.popup') //экземпляр класса Popup
+//   const classPopup = new Popup('.popup') //экземпляр класса Popup
   const nameElement = document.getElementById('name-place'); //Переменная с ID имени формы добавления карточки
   const urlElement = document.getElementById('url'); //Переменная с ID url формы добавления карточки
   const inputName = document.querySelector('input[name="name"]'); //Поиск элемента input, у которого атрибут равен name
   const inputDescription = document.querySelector('input[name="description"]'); //Поиск элемента input, у которого атрибут равен description
-  const popupWithImage = new PopupWithImage('.popup_form_image'); //Экземпляр класса PopupWithImage
-  const classPopupWithFormAdd = new PopupWithForm('.popup_form_add', (values) => {
-    const nameInputValue = values['name-place'];
-    const urlInputValue = values['url'];
-    nameElement.textContent = nameInputValue;
-    urlElement.textContent = urlInputValue;
-    const cardElement = createCard(nameInputValue, urlInputValue);
-    cardsContainer.prepend(cardElement);
-  })                                                                    //Экземпляр класса PopupWithForm - добавление нового места
+//   const popupWithImage = new PopupWithImage('.popup_form_image'); //Экземпляр класса PopupWithImage
+//   const classPopupWithFormAdd = new PopupWithForm('.popup_form_add', (values) => {
+//     const nameInputValue = values['name-place'];
+//     const urlInputValue = values['url'];
+//     nameElement.textContent = nameInputValue;
+//     urlElement.textContent = urlInputValue;
+//     const cardElement = createCard(nameInputValue, urlInputValue);
+//     cardsContainer.prepend(cardElement);
+//   })                                                                    //Экземпляр класса PopupWithForm - добавление нового места
   export {
     initialCards,
     validationConfig,
@@ -71,11 +67,8 @@ const initialCards = [
     addForm,
     cardsContainer,
     closeButtons,
-    classPopup,
     nameElement,
     urlElement,
     inputName,
-    inputDescription,
-    popupWithImage,
-    classPopupWithFormAdd
+    inputDescription
   };
