@@ -28,15 +28,27 @@ const newUserInfo = new UserInfo({
     nameSelector: '.profile__info-name',
     infoSelector: '.profile__info-description'
 });
+
+const section = new Section({
+  items: [],
+  renderer: createCard
+}, '.elements');
+
 const classPopupWithFormEdit = new PopupWithForm('.popup_form_edit', handleEditFormSubmit); //Экземпляр класса PopupWithForm
+// const classPopupWithFormAdd = new PopupWithForm('.popup_form_add', (values) => {
+//   const nameInputValue = values['name-place'];
+//   const urlInputValue = values['url'];
+//   nameElement.textContent = nameInputValue;
+//   urlElement.textContent = urlInputValue;
+//   const cardElement = createCard(nameInputValue, urlInputValue);
+//   cardsContainer.prepend(cardElement);
+// })                                                                    //Экземпляр класса PopupWithForm - добавление нового места
 const classPopupWithFormAdd = new PopupWithForm('.popup_form_add', (values) => {
   const nameInputValue = values['name-place'];
   const urlInputValue = values['url'];
-  nameElement.textContent = nameInputValue;
-  urlElement.textContent = urlInputValue;
   const cardElement = createCard(nameInputValue, urlInputValue);
-  cardsContainer.prepend(cardElement);
-})                                                                    //Экземпляр класса PopupWithForm - добавление нового места
+  section.addItem(cardElement);
+});
 classPopupWithFormAdd.setEventListeners();
 
 
@@ -113,5 +125,5 @@ popupAddForm.addEventListener('submit', (event) => {
 
 enableValidation(validationConfig);
 renderCards()
-
+section.renderItems();
 export { openPopupImage };
