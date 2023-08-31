@@ -33,7 +33,6 @@ const section = new Section({
   items: [],
   renderer: createCard
 }, '.elements');
-
 const classPopupWithFormEdit = new PopupWithForm('.popup_form_edit', handleEditFormSubmit);
 const classPopupWithFormAdd = new PopupWithForm('.popup_form_add', (values) => {
   const nameInputValue = values['name-place'];
@@ -41,10 +40,9 @@ const classPopupWithFormAdd = new PopupWithForm('.popup_form_add', (values) => {
   const cardElement = createCard(nameInputValue, urlInputValue);
   section.addItem(cardElement);
 });                                                                    //Экземпляр класса PopupWithForm - добавление нового места
-classPopupWithFormAdd.setEventListeners();
 
 
-function handleEditFormSubmit(evt) {
+function handleEditFormSubmit() {
   const name = inputName.value;
   const info = inputDescription.value;
   newUserInfo.setUserInfo({ name, info });
@@ -79,15 +77,13 @@ function handleEditButtonClick() {
   classPopupWithFormEdit.open();
 }
 
-
 function openPopupImage(imageUrl, name) {
   popupWithImage.open(imageUrl, `${name}`);
 }
+
 popupWithImage.setEventListeners();
 
 //Универсальная функция закрытия попапов
-
-
 closeButtons.forEach(() => {
   popupWithImage.setEventListeners();
 });
@@ -100,13 +96,12 @@ addButtonElement.addEventListener('click', () => {
   addForm.reset();
   validators[addForm.getAttribute('name')].toggleButtonState();
 }); //Слушатель клика для открытия формы добавления нового места
-// editForm.addEventListener('submit', handleEditFormSubmit); //Слушатель сабмита по кнопке формы редактирования
 classPopupWithFormEdit.setEventListeners();
+classPopupWithFormAdd.setEventListeners();
 popupAddForm.addEventListener('submit', (event) => {
     event.preventDefault();
     classPopupWithFormAdd.close();
 });
-
 //Вызов функций
 
 enableValidation(validationConfig);
