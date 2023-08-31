@@ -3,7 +3,6 @@ import '../src/pages/index.css';
 import Card from "../src/scripts/Card.js";
 import { enableValidation, validators } from "../src/scripts/validate.js"
 import Section from '../src/scripts/Section.js';
-import Popup from '../src/scripts/Popup.js';
 import PopupWithImage from './scripts/PopupWithImage.js';
 import PopupWithForm from './scripts/PopupWithForm.js';
 import UserInfo from './scripts/UserInfo.js';
@@ -25,8 +24,6 @@ import {
 } from './utils/constants.js'
 
 const popupWithImage = new PopupWithImage('.popup_form_image'); //Экземпляр класса PopupWithImage
-const popupWithFormEdit = new Popup('.popup_form_edit');
-const popupWithFormAdd = new Popup('.popup_form_add');
 const newUserInfo = new UserInfo({
     nameSelector: '.profile__info-name',
     infoSelector: '.profile__info-description'
@@ -44,7 +41,7 @@ classPopupWithFormAdd.setEventListeners();
 
 
 function handleEditFormSubmit(evt) {
-  evt.preventDefault();
+  // evt.preventDefault();
   const name = inputName.value;
   const info = inputDescription.value;
   newUserInfo.setUserInfo({ name, info });
@@ -92,15 +89,8 @@ function openPopupImage(imageUrl, name) {
 popupWithImage.setEventListeners();
 
 //Универсальная функция закрытия попапов
-// closeButtons.forEach(() => {
-//   classPopup.setEventListeners();
-// });
-closeButtons.forEach(() => {
-  popupWithFormEdit.setEventListeners();
-});
-closeButtons.forEach(() => {
-  popupWithFormAdd.setEventListeners();
-});
+classPopupWithFormEdit.setEventListeners();
+
 closeButtons.forEach(() => {
   popupWithImage.setEventListeners();
 });
