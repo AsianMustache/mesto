@@ -82,15 +82,14 @@ function renderCards() {
 }
 
 function handleEditButtonClick() {
-  const userInfo = new UserInfo({
-    nameSelector: '.profile__info-name',
-    infoSelector: '.profile__info-description'
-  });
+  // const userInfo = new UserInfo({
+  //   nameSelector: '.profile__info-name',
+  //   infoSelector: '.profile__info-description'
+  // });
 
-  const userData = userInfo.getUserInfo();
+  const userData = newUserInfo.getUserInfo();
   inputName.value = userData.name;
   inputDescription.value = userData.info;
-
   classPopupWithFormEdit.open();
 }
 
