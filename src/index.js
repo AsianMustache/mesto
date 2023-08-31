@@ -27,7 +27,7 @@ const popupWithImage = new PopupWithImage('.popup_form_image'); //Экземпл
 const newUserInfo = new UserInfo({
     nameSelector: '.profile__info-name',
     infoSelector: '.profile__info-description'
-  })
+});
 const classPopupWithFormEdit = new PopupWithForm('.popup_form_edit', handleEditFormSubmit); //Экземпляр класса PopupWithForm
 const classPopupWithFormAdd = new PopupWithForm('.popup_form_add', (values) => {
   const nameInputValue = values['name-place'];
