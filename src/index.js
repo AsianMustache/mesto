@@ -58,14 +58,22 @@ function createCard(name, link) {
   return createCardElement.getCard();
 }
 
+// function renderCards() {
+//   const section = new Section({
+//     items: initialCards,
+//     renderer: (card) => {
+//       const cardElement = createCard(card.name, card.link);
+//       return cardsContainer.appendChild(cardElement);
+//     }
+//   }, '.elements');
+//   section.renderItems();
+// }
+
 function renderCards() {
-  const section = new Section({
-    items: initialCards,
-    renderer: (card) => {
-      const cardElement = createCard(card.name, card.link);
-      return cardsContainer.appendChild(cardElement);
-    }
-  }, '.elements');
+  initialCards.forEach((card) => {
+    const cardElement = createCard(card.name, card.link);
+    section.addItem(cardElement);
+  });
   section.renderItems();
 }
 
