@@ -41,10 +41,6 @@ const classPopupWithFormAdd = new PopupWithForm('.popup_form_add', (values) => {
   section.addItem(cardElement);
 });                                                                    //Экземпляр класса PopupWithForm - добавление нового места
 
-const card = new Card ({
-  name: initialCards.name, link: initialCards.link
-  }, '#template-elements', openPopupImage)
-
 function handleEditFormSubmit() {
   const name = inputName.value;
   const info = inputDescription.value;
@@ -58,7 +54,7 @@ function createCard(name, link) {
   const createCardElement = new Card({
     name: name,
     link: link,
-  }, "#template-elements");
+  }, "#template-elements", openPopupImage);
   return createCardElement.getCard();
 }
 
@@ -110,5 +106,4 @@ popupAddForm.addEventListener('submit', (event) => {
 enableValidation(validationConfig);
 renderCards()
 section.renderItems();
-card.getCard()
 // export { openPopupImage };
