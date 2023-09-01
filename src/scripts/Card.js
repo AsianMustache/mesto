@@ -9,7 +9,7 @@ class Card {
   }
 
     _getTemplate() {
-        const cardTemplate = document  
+        const cardTemplate = document
         .querySelector(this._templateSelector).content
         .querySelector('.element')
         .cloneNode(true);
@@ -19,6 +19,14 @@ class Card {
     _setData() {
         const cardTitle = this._newCard.querySelector('.element__group-title');
         cardTitle.textContent = this._name;
+        const cardImage = this._newCard.querySelector('.element__image');
+        cardImage.src = this._link;
+        cardImage.alt = this._name;
+        cardImage.addEventListener('click', () => {
+            // openPopupImage(this._link, this._name);
+            console.log(this);
+            this._handleCardClick(this._link, this._name);
+        });
     }
 
     _deleteCard() {
@@ -28,15 +36,11 @@ class Card {
         this._card = null;
     }
 
-    _handleImageClick() {
-      const cardImage = this._newCard.querySelector('.element__image');
-      cardImage.src = this._link;
-      cardImage.alt = this._name;
-      cardImage.addEventListener('click', () => {
-        openPopupImage(this._link, this._name);
-        // this._handleCardClick(this._link, this._name);
-    });
-    }
+    // _handleImageClick() {
+    //   const cardImage = this._newCard.querySelector('.element__image');
+    //   cardImage.src = this._link;
+    //   cardImage.alt = this._name;
+    // }
 
     _toggleLike(){
         const likeButton = this._newCard.querySelector('.element__group-favorite');
@@ -49,14 +53,13 @@ class Card {
         const deleteImageButton = this._newCard.querySelector('.element__image-delete');
         const deleteButton = this._newCard.querySelector('.element__delete-button');
         deleteButton.addEventListener('click', () => { this._deleteCard() });
-        
     }
 
     getCard() {
         this._newCard = this._getTemplate();
         this._setData();
         this._setListeners();
-        this._handleImageClick();
+        // this._handleImageClick();
         this._toggleLike();
         return this._newCard;
     }
