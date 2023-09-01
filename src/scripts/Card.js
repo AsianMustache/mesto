@@ -1,5 +1,3 @@
-import { openPopupImage } from "../index.js"
-
 class Card {
     constructor({ name, link }, templateSelector, handleCardClick) {
       this._name = name;
@@ -23,8 +21,6 @@ class Card {
         cardImage.src = this._link;
         cardImage.alt = this._name;
         cardImage.addEventListener('click', () => {
-            // openPopupImage(this._link, this._name);
-            console.log(this);
             this._handleCardClick(this._link, this._name);
         });
     }
@@ -35,12 +31,6 @@ class Card {
         this._card.remove();
         this._card = null;
     }
-
-    // _handleImageClick() {
-    //   const cardImage = this._newCard.querySelector('.element__image');
-    //   cardImage.src = this._link;
-    //   cardImage.alt = this._name;
-    // }
 
     _toggleLike(){
         const likeButton = this._newCard.querySelector('.element__group-favorite');
@@ -59,11 +49,9 @@ class Card {
         this._newCard = this._getTemplate();
         this._setData();
         this._setListeners();
-        // this._handleImageClick();
         this._toggleLike();
         return this._newCard;
     }
 }
-
 
 export default Card;
