@@ -41,9 +41,17 @@ const classPopupWithFormAdd = new PopupWithForm('.popup_form_add', (values) => {
   section.addItem(cardElement);
 });                                                                    //Экземпляр класса PopupWithForm - добавление нового места
 
-function handleEditFormSubmit() {
-  const name = inputName.value;
-  const info = inputDescription.value;
+// function handleEditFormSubmit() {
+//   const name = inputName.value;
+//   const info = inputDescription.value;
+//   newUserInfo.setUserInfo({ name, info });
+
+//   classPopupWithFormEdit.close();
+// }
+
+function handleEditFormSubmit(inputValues) {
+  const name = inputValues['name'];
+  const info = inputValues['description'];
   newUserInfo.setUserInfo({ name, info });
 
   classPopupWithFormEdit.close();
