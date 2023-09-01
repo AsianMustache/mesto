@@ -41,13 +41,6 @@ const classPopupWithFormAdd = new PopupWithForm('.popup_form_add', (values) => {
   section.addItem(cardElement);
 });                                                                    //Экземпляр класса PopupWithForm - добавление нового места
 
-// function handleEditFormSubmit() {
-//   const name = inputName.value;
-//   const info = inputDescription.value;
-//   newUserInfo.setUserInfo({ name, info });
-
-//   classPopupWithFormEdit.close();
-// }
 
 function handleEditFormSubmit(inputValues) {
   const name = inputValues['name'];
@@ -65,17 +58,6 @@ function createCard(name, link) {
   }, "#template-elements", openPopupImage);
   return createCardElement.getCard();
 }
-
-// function renderCards() {
-//   const section = new Section({
-//     items: initialCards,
-//     renderer: (card) => {
-//       const cardElement = createCard(card.name, card.link);
-//       return cardsContainer.appendChild(cardElement);
-//     }
-//   }, '.elements');
-//   section.renderItems();
-// }
 
 function renderCards() {
   initialCards.forEach((card) => {
@@ -96,13 +78,6 @@ function openPopupImage(imageUrl, name) {
   popupWithImage.open(imageUrl, name);
 }
 
-popupWithImage.setEventListeners();
-
-//Универсальная функция закрытия попапов
-closeButtons.forEach(() => {
-  popupWithImage.setEventListeners();
-});
-
 
 //Обработчики событий
 editButtonElement.addEventListener('click', handleEditButtonClick); //Слушатель клика для открытия формы редактирования 
@@ -111,8 +86,12 @@ addButtonElement.addEventListener('click', () => {
   addForm.reset();
   validators[addForm.getAttribute('name')].toggleButtonState();
 }); //Слушатель клика для открытия формы добавления нового места
+
+//Закртыие форм по крестику
+popupWithImage.setEventListeners();
 classPopupWithFormEdit.setEventListeners();
 classPopupWithFormAdd.setEventListeners();
+
 popupAddForm.addEventListener('submit', (event) => {
     event.preventDefault();
     classPopupWithFormAdd.close();

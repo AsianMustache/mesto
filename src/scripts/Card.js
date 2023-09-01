@@ -15,38 +15,40 @@ class Card {
     }
 
     _setData() {
-        const cardTitle = this._newCard.querySelector('.element__group-title');
-        cardTitle.textContent = this._name;
-        const cardImage = this._newCard.querySelector('.element__image');
-        cardImage.src = this._link;
-        cardImage.alt = this._name;
-        cardImage.addEventListener('click', () => {
-            this._handleCardClick(this._link, this._name);
-        });
+        this._cardTitle = this._newCard.querySelector('.element__group-title');
+        this._cardTitle.textContent = this._name;
+        this._cardImage = this._newCard.querySelector('.element__image');
+        this._cardImage.src = this._link;
+        this._cardImage.alt = this._name;
+        
     }
 
     _deleteCard() {
-        const deleteButton = this._newCard.querySelector('.element__delete-button');
-        this._card = deleteButton.closest('.element');
+        // this._deleteButton = this._newCard.querySelector('.element__delete-button');
+        this._card = this._deleteButton.closest('.element');
         this._card.remove();
         this._card = null;
     }
 
     _toggleLike(){
-        const likeButton = this._newCard.querySelector('.element__group-favorite');
-        likeButton.addEventListener('click', () => {
-            likeButton.classList.toggle('element__group-favorite_active');
-        });
+        this._likeButton = this._newCard.querySelector('.element__group-favorite');
+        this._likeButton.addEventListener('click', () => {
+            this._likeButton.classList.toggle('element__group-favorite_active'); 
+        })
+        
     }
 
     _setListeners() {
         const deleteImageButton = this._newCard.querySelector('.element__image-delete');
-        const deleteButton = this._newCard.querySelector('.element__delete-button');
-        deleteButton.addEventListener('click', () => { this._deleteCard() });
+        this._deleteButton.addEventListener('click', () => { this._deleteCard() });
+        this._cardImage.addEventListener('click', () => {
+            this._handleCardClick(this._link, this._name);
+        });
     }
 
     getCard() {
         this._newCard = this._getTemplate();
+        this._deleteButton = this._newCard.querySelector('.element__delete-button');
         this._setData();
         this._setListeners();
         this._toggleLike();
