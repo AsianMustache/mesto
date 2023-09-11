@@ -19,10 +19,13 @@ class PopupWithForm extends Popup {
   setInputValues(data) {
     this._inputList.forEach((input) => {
       if (input.name === 'info') {
-        input.value = data[input.name];
+        // input.value = data[input.name];
+        input.value = data.info;
       } else {
         input.value = data[input.name];
       }
+      console.log(JSON.stringify(data));
+        console.log(data);
     });
   }
 

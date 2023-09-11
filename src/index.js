@@ -5,23 +5,19 @@ import { enableValidation, validators } from "../src/scripts/validate.js"
 import Section from '../src/scripts/Section.js';
 import PopupWithImage from './scripts/PopupWithImage.js';
 import PopupWithForm from './scripts/PopupWithForm.js';
+import PopupDelete from './scripts/PopupDelete';
 import UserInfo from './scripts/UserInfo.js';
 import {
   initialCards,
   validationConfig,
   editButtonElement,
-  popupEditForm,
-  editForm,
   addButtonElement,
   popupAddForm,
   addForm,
-  cardsContainer,
-  closeButtons,
-  nameElement,
-  urlElement,
   inputName,
   inputDescription
 } from './utils/constants.js'
+import Api from './scripts/Api';
 
 const popupWithImage = new PopupWithImage('.popup_form_image'); //Экземпляр класса PopupWithImage
 const newUserInfo = new UserInfo({
@@ -40,14 +36,54 @@ const classPopupWithFormAdd = new PopupWithForm('.popup_form_add', (values) => {
   const cardElement = createCard(nameInputValue, urlInputValue);
   section.addItem(cardElement);
 });                                                                    //Экземпляр класса PopupWithForm - добавление нового места
+const avatarElement = document.getElementById('profile-avatar');
+const nameElement = document.getElementById('profile-name');
+const descriptionElement = document.getElementById('profile-description');
+const cardsApi = { 
+  url: 'https://mesto.nomoreparties.co/v1/cohort-75/cards', 
+  headers: {
+    authorization: 'de840de0-da05-4c0b-8b96-55f691e0c5a8',
+    'Content-Type': "application/json"
+  }
+}
+const userInfoApi = {
+  url: 'https://nomoreparties.co/v1/cohort-75',
+  headers: {
+    authorization: 'de840de0-da05-4c0b-8b96-55f691e0c5a8',
+    'Content-Type': "application/json"
+  }
+}
 
+const classPopupDelete = new PopupDelete('.popup_form_delete', handleButtonDelete);
+const api = new Api(cardsApi);
+const userApi = new Api(userInfoApi);
+const editApiUser = new Api(userInfoApi);
+classPopupDelete.setSubmitHandler(() => {
+  const cardForDelete = classPopupDelete._deleteButton.closest('.element');
+  if (cardForDelete) {
+    section.remove(cardForDelete);
+  }
+  console.log(cardForDelete)
+});
+
+function handleButtonDelete() {
+  classPopupDelete.open();
+}
 
 function handleEditFormSubmit(inputValues) {
   const name = inputValues['name'];
   const info = inputValues['description'];
-  newUserInfo.setUserInfo({ name, info });
+  // newUserInfo.setUserInfo({ name, info });
 
-  classPopupWithFormEdit.close();
+  editApiUser.editApiProfile(name, info)
+    .then((data) => {
+      newUserInfo.setUserInfo(data);
+      classPopupWithFormEdit.close();
+    })  
+    .catch((error) => {
+      console.log(error);
+    });
+  // classPopupWithFormEdit.close();
 }
 
 //Функция отрисовки карточки для добавления через сабмит кнопки Add
@@ -59,13 +95,40 @@ function createCard(name, link) {
   return createCardElement.getCard();
 }
 
-function renderCards() {
-  initialCards.forEach((card) => {
-    const cardElement = createCard(card.name, card.link);
-    section.addItem(cardElement);
+// function renderCards() {
+//   initialCards.forEach((card) => {
+//     const cardElement = createCard(card.name, card.link);
+//     section.addItem(cardElement);
+//   });
+//   section.renderItems();
+
+//   const deleteButton = document.querySelector('.popup-container__delete-button');
+//     deleteButton.addEventListener('click', () => {
+//       classPopupDelete.setSubmitHandler(() => {
+//         cardElement.remove();
+//         console.log(cardElement);
+//       });
+//     });
+// }
+
+api.getAllCards()
+  .then((cards) => {
+    cards.forEach((card) => {
+      const cardElement = createCard(card.name, card.link);
+      section.addItem(cardElement);
+    })
+    section.renderItems();
+  })
+
+  userApi.getApiUserInfo()
+  .then(userInfoApi => {
+    avatarElement.src = userInfoApi.avatar;
+    nameElement.textContent = userInfoApi.name;
+    descriptionElement.textContent = userInfoApi.about;
+  })
+  .catch(error => {
+    console.log(error);
   });
-  section.renderItems();
-}
 
 function handleEditButtonClick() {
   const userData = newUserInfo.getUserInfo();
@@ -91,14 +154,17 @@ addButtonElement.addEventListener('click', () => {
 popupWithImage.setEventListeners();
 classPopupWithFormEdit.setEventListeners();
 classPopupWithFormAdd.setEventListeners();
+classPopupDelete.setEventListeners();
 
 popupAddForm.addEventListener('submit', (event) => {
     event.preventDefault();
     classPopupWithFormAdd.close();
 });
+
+
 //Вызов функций
 
 enableValidation(validationConfig);
-renderCards()
+// renderCards()
 section.renderItems();
 // export { openPopupImage };
