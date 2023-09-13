@@ -42,6 +42,17 @@ class Api {
             })
         })
     }
+
+    addNewCardApi(name, link) {
+        return this._sendRequest(`${this._url}`, {
+            method: "POST",
+            headers: this._headers,
+            body: JSON.stringify({
+                name: name,
+                link: link
+            })
+        });
+    }
 }
 
 export default Api

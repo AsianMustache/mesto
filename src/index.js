@@ -15,7 +15,9 @@ import {
   popupAddForm,
   addForm,
   inputName,
-  inputDescription
+  inputDescription,
+  nameElement,
+  urlElement
 } from './utils/constants.js'
 import Api from './scripts/Api';
 
@@ -37,7 +39,7 @@ const classPopupWithFormAdd = new PopupWithForm('.popup_form_add', (values) => {
   section.addItem(cardElement);
 });                                                                    //Экземпляр класса PopupWithForm - добавление нового места
 const avatarElement = document.getElementById('profile-avatar');
-const nameElement = document.getElementById('profile-name');
+const nameProfileElement = document.getElementById('profile-name');
 const descriptionElement = document.getElementById('profile-description');
 const cardsApi = { 
   url: 'https://mesto.nomoreparties.co/v1/cohort-75/cards', 
@@ -86,7 +88,7 @@ function handleEditFormSubmit(inputValues) {
   // classPopupWithFormEdit.close();
 }
 
-//Функция отрисовки карточки для добавления через сабмит кнопки Add
+// Функция отрисовки карточки для добавления через сабмит кнопки Add
 function createCard(name, link) {
   const createCardElement = new Card({
     name: name,
@@ -94,6 +96,48 @@ function createCard(name, link) {
   }, "#template-elements", openPopupImage);
   return createCardElement.getCard();
 }
+
+// function createCard(name, link) {
+//   const createCardElement = new Card(
+//     {  
+//       name: name,
+//       link: link,
+//     },  
+//     "#template-elements",
+//     openPopupImage
+//   );  
+  
+//   return api.addNewCardApi(name, link)
+//     .then(() => {
+//       return createCardElement.getCard(); // Возвращаем отрисованную карточку
+//     })
+//     .catch((error) => {
+//       console.log(error);
+//       throw error; // Пробрасываем ошибку для дальнейшей обработки
+//     });
+// }
+// function createCard(name, link) {
+//   return api.addNewCardApi(name, link)
+//     .then((cardData) => {
+//       const createCardElement = new Card(
+//         {  
+//           name: cardData.name,
+//           link: cardData.link,
+//         },  
+//         "#template-elements",
+//         openPopupImage
+//       );  
+//       return createCardElement.getCard(); // Возвращаем отрисованную карточку
+//     })
+//     .catch((error) => {
+//       console.log(error);
+//       throw error; // Пробрасываем ошибку для дальнейшей обработки
+//     })
+//     .then((cardElement) => {
+//       return cardElement; // Возвращаем отрисованную карточку
+//     });
+// }
+
 
 // function renderCards() {
 //   initialCards.forEach((card) => {
@@ -123,12 +167,33 @@ api.getAllCards()
   userApi.getApiUserInfo()
   .then(userInfoApi => {
     avatarElement.src = userInfoApi.avatar;
-    nameElement.textContent = userInfoApi.name;
+    nameProfileElement.textContent = userInfoApi.name;
     descriptionElement.textContent = userInfoApi.about;
   })
   .catch(error => {
     console.log(error);
-  });
+});
+
+// Promise.all([api.getAllCards(), userApi.getApiUserInfo()])
+//   .then(([cards, userInfoApi]) => {
+//     cards.forEach((card) => {
+//       createCard(card.name, card.link)
+//         .then((cardElement) => {
+//           section.addItem(cardElement);
+//         })
+//         .catch((error) => {
+//           console.log(error);
+//         });
+//     });
+//     section.renderItems();
+
+//     avatarElement.src = userInfoApi.avatar;
+//     nameElement.textContent = userInfoApi.name;
+//     descriptionElement.textContent = userInfoApi.about;
+//   })
+//   .catch((error) => {
+//     console.log(error);
+//   });
 
 function handleEditButtonClick() {
   const userData = newUserInfo.getUserInfo();
@@ -156,15 +221,32 @@ classPopupWithFormEdit.setEventListeners();
 classPopupWithFormAdd.setEventListeners();
 classPopupDelete.setEventListeners();
 
+// popupAddForm.addEventListener('submit', (event) => {
+//     event.preventDefault();
+//     classPopupWithFormAdd.close();
+// });
+
 popupAddForm.addEventListener('submit', (event) => {
-    event.preventDefault();
-    classPopupWithFormAdd.close();
+  event.preventDefault();
+  const nameInputValue = nameElement.value;
+  const urlInputValue = urlElement.value;
+  // Отправка запроса на сервер для создания новой карточки
+  api.addNewCardApi(nameInputValue, urlInputValue)
+    .then((data) => {
+      // Создание карточки
+      const cardElement = createCard(data.name, data.link);
+      // Добавление карточки в разметку
+      section.addItem(cardElement);
+      // Закрытие попапа
+      classPopupWithFormAdd.close();
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 });
 
-
 //Вызов функций
-
 enableValidation(validationConfig);
 // renderCards()
-section.renderItems();
+// section.renderItems();
 // export { openPopupImage };

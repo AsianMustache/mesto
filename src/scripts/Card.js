@@ -4,6 +4,7 @@ class Card {
       this._link = link;
       this._templateSelector = templateSelector;
       this._handleCardClick = handleCardClick;
+    //   this._likesCountElement = this._element.querySelector('.element__likes');
   }
 
     _getTemplate() {
@@ -58,6 +59,7 @@ class Card {
 
     getCard() {
         this._newCard = this._getTemplate();
+        // this._likesCountElement.textContent = this._likes.length;
         this._setData();
         this._setListeners();
         return this._newCard;
