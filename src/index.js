@@ -36,7 +36,7 @@ const classPopupWithFormAdd = new PopupWithForm('.popup_form_add', (values) => {
   const nameInputValue = values['name-place'];
   const urlInputValue = values['url'];
   const cardElement = createCard(nameInputValue, urlInputValue);
-  section.addItem(cardElement);
+  // section.addItem(cardElement);
 });                                                                    //Экземпляр класса PopupWithForm - добавление нового места
 const avatarElement = document.getElementById('profile-avatar');
 const nameProfileElement = document.getElementById('profile-name');
@@ -226,18 +226,30 @@ classPopupDelete.setEventListeners();
 //     classPopupWithFormAdd.close();
 // });
 
+// popupAddForm.addEventListener('submit', (event) => {
+//   event.preventDefault();
+//   const nameInputValue = nameElement.value;
+//   const urlInputValue = urlElement.value;
+//   api.addNewCardApi(nameInputValue, urlInputValue)
+//     .then((data) => {
+//       classPopupWithFormAdd.close();
+//       const cardAddElement = createCard(data.name, data.link);
+//       section.addItem(cardAddElement);
+//     })
+//     .catch((error) => {
+//       console.log(error);
+//     });
+// });
+
 popupAddForm.addEventListener('submit', (event) => {
   event.preventDefault();
   const nameInputValue = nameElement.value;
   const urlInputValue = urlElement.value;
-  // Отправка запроса на сервер для создания новой карточки
+
   api.addNewCardApi(nameInputValue, urlInputValue)
     .then((data) => {
-      // Создание карточки
       const cardElement = createCard(data.name, data.link);
-      // Добавление карточки в разметку
       section.addItem(cardElement);
-      // Закрытие попапа
       classPopupWithFormAdd.close();
     })
     .catch((error) => {
