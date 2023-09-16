@@ -41,12 +41,14 @@ const classPopupWithFormAdd = new PopupWithForm('.popup_form_add', (values) => {
 const avatarElement = document.getElementById('profile-avatar');
 const nameProfileElement = document.getElementById('profile-name');
 const descriptionElement = document.getElementById('profile-description');
+
 const cardsApi = { 
   url: 'https://mesto.nomoreparties.co/v1/cohort-75/cards', 
   headers: {
     authorization: 'de840de0-da05-4c0b-8b96-55f691e0c5a8',
     'Content-Type': "application/json"
-  }
+  },
+  
 }
 const userInfoApi = {
   url: 'https://nomoreparties.co/v1/cohort-75',
@@ -55,11 +57,19 @@ const userInfoApi = {
     'Content-Type': "application/json"
   }
 }
-
+const _id = '6504b0a0a989200bf26179a6';
 const classPopupDelete = new PopupDelete('.popup_form_delete', handleButtonDelete);
-const api = new Api(cardsApi);
+const api = new Api(cardsApi, _id);
 const userApi = new Api(userInfoApi);
 const editApiUser = new Api(userInfoApi);
+
+
+
+
+
+
+
+
 classPopupDelete.setSubmitHandler(() => {
   const cardForDelete = classPopupDelete._deleteButton.closest('.element');
   if (cardForDelete) {
@@ -158,12 +168,23 @@ function createCard(name, link) {
 api.getAllCards()
   .then((cards) => {
     cards.forEach((card) => {
-      const cardElement = createCard(card.name, card.link);
+      const cardElement = createCard(card.name, card.link, card['likes'], card['_id']);
       section.addItem(cardElement);
+      // console.log(card['likes'])
+      if (cardElement.querySelector('.element__group-favorite').classList.contains('element__group-favorite_active')) {
+        api.likeCard(card['_id'])
+        .then(() => {
+          console.log('Success')
+        })
+      } else {
+        api.unlikeCard(card['_id'])
+        .then(() => {
+          console.log('Success of Unlike')
+        })
+      }
     })
     section.renderItems();
   })
-
   userApi.getApiUserInfo()
   .then(userInfoApi => {
     avatarElement.src = userInfoApi.avatar;
@@ -173,6 +194,8 @@ api.getAllCards()
   .catch(error => {
     console.log(error);
 });
+
+
 
 // Promise.all([api.getAllCards(), userApi.getApiUserInfo()])
 //   .then(([cards, userInfoApi]) => {
@@ -194,6 +217,7 @@ api.getAllCards()
 //   .catch((error) => {
 //     console.log(error);
 //   });
+
 
 function handleEditButtonClick() {
   const userData = newUserInfo.getUserInfo();
