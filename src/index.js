@@ -47,9 +47,8 @@ const cardsApi = {
   headers: {
     authorization: 'de840de0-da05-4c0b-8b96-55f691e0c5a8',
     'Content-Type': "application/json"
-  },
-  
-}
+  }
+};
 const userInfoApi = {
   url: 'https://nomoreparties.co/v1/cohort-75',
   headers: {
@@ -57,13 +56,10 @@ const userInfoApi = {
     'Content-Type': "application/json"
   }
 }
-const _id = '6504b0a0a989200bf26179a6';
 const classPopupDelete = new PopupDelete('.popup_form_delete', handleButtonDelete);
-const api = new Api(cardsApi, _id);
+const api = new Api(cardsApi);
 const userApi = new Api(userInfoApi);
 const editApiUser = new Api(userInfoApi);
-
-
 
 
 
@@ -106,6 +102,7 @@ function createCard(name, link) {
   }, "#template-elements", openPopupImage);
   return createCardElement.getCard();
 }
+
 
 // function createCard(name, link) {
 //   const createCardElement = new Card(
@@ -168,24 +165,39 @@ function createCard(name, link) {
 api.getAllCards()
   .then((cards) => {
     cards.forEach((card) => {
-      const cardElement = createCard(card.name, card.link, card['likes'], card['_id']);
-      section.addItem(cardElement);
-      // console.log(card['likes'])
-      if (cardElement.querySelector('.element__group-favorite').classList.contains('element__group-favorite_active')) {
-        api.likeCard(card['_id'])
-        .then(() => {
-          console.log('Success')
-        })
-      } else {
-        api.unlikeCard(card['_id'])
-        .then(() => {
-          console.log('Success of Unlike')
-        })
-      }
-    })
+      const cardElement = createCard(card.name, card.link);
+      section.addItem(cardElement); 
+    });
     section.renderItems();
   })
-  userApi.getApiUserInfo()
+  .catch((error) => {
+    console.log(error);
+  });
+// api.getAllCards()
+//   .then((cards) => {
+//     cards.forEach((card) => {
+//       const cardElement = createCard(card.name, card.link, card.likes, card._id);
+//       section.addItem(cardElement);
+
+//       // Обработчик события для кнопки лайка
+//       // const likeButton = cardElement.querySelector('.element__group-favorite');
+//       // likeButton.addEventListener('click', () => {
+//       //   const isLiked = cardElement.classList.contains('element__group-favorite_active');
+//       //   const handleCardClick = (link, name) => {
+//       //     cardElement.addEventListener('click', () => {
+
+//       //     })
+//       //   };
+        
+//       // });
+//     });
+//     section.renderItems();
+//   })
+//   .catch((error) => {
+//     console.log(error);
+//   });
+
+userApi.getApiUserInfo()
   .then(userInfoApi => {
     avatarElement.src = userInfoApi.avatar;
     nameProfileElement.textContent = userInfoApi.name;
@@ -193,10 +205,7 @@ api.getAllCards()
   })
   .catch(error => {
     console.log(error);
-});
-
-
-
+  });
 // Promise.all([api.getAllCards(), userApi.getApiUserInfo()])
 //   .then(([cards, userInfoApi]) => {
 //     cards.forEach((card) => {

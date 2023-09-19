@@ -1,8 +1,7 @@
 class Api {
-    constructor({url, headers}, _id) {
+    constructor({url, headers}) {
         this._url = url;
         this._headers = headers;
-        this._id = _id;
     }
 
     _sendRequest(url, options) {
@@ -55,39 +54,16 @@ class Api {
         });
     }
 
-    likeCard() {
-        return fetch(`${this._url}/cards/${this._id}/likes`, {
-          method: 'PUT',
-          headers: this._headers,
-        })
-          .then((response) => {
-            if (response.ok) {
-              return response.json();
-            }
-            throw new Error('Error');
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      }
+    changeLikeStatus(cardId, isLiked) {
+        const method = isLiked ? 'PUT' : 'DELETE';
+        const url = `${this._url}/${cardId}/likes`;
     
-      unlikeCard() {
-        return fetch(`${this._url}/cards/${this._id}/likes`, {
-          method: 'DELETE',
+        return fetch(url, {
+          method: method,
           headers: this._headers,
         })
-          .then((response) => {
-            if (response.ok) {
-              return response.json();
-            }
-            throw new Error('Error');
-          })
-          .catch((error) => {
-            console.log(error);
-          });
+        .then((response) => response.json());
       }
-
-
 }
 
 export default Api
