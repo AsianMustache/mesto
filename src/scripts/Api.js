@@ -63,7 +63,7 @@ class Api {
           headers: this._headers,
         })
         .then((response) => response.json());
-      }
+    }
 }
 
 export default Api

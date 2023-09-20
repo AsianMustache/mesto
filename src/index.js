@@ -22,9 +22,11 @@ import {
 import Api from './scripts/Api';
 
 const popupWithImage = new PopupWithImage('.popup_form_image'); //Экземпляр класса PopupWithImage
-const newUserInfo = new UserInfo({
+const currentUser = new UserInfo({
     nameSelector: '.profile__info-name',
-    infoSelector: '.profile__info-description'
+    infoSelector: '.profile__info-description',
+    
+    //смену аватара добавить
 });
 
 const section = new Section({
@@ -62,9 +64,24 @@ const userApi = new Api(userInfoApi);
 const editApiUser = new Api(userInfoApi);
 
 
+const handleLikeClick = (cardId, isLiked) => {
+  api.changeLikeStatus(cardId, isLiked)
+    .then((changeLikeStatus) => {
+      // Обновляем состояние лайка в карточке
+      card.updateLikes(changeLikeStatus);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
 
-
-
+const card = new Card({
+  name: api.name,
+  link: api.link,
+  likes: api.likes,
+  _id: api._id,
+  handleLikeClick: handleLikeClick,
+});
 
 classPopupDelete.setSubmitHandler(() => {
   const cardForDelete = classPopupDelete._deleteButton.closest('.element');
@@ -80,158 +97,69 @@ function handleButtonDelete() {
 
 function handleEditFormSubmit(inputValues) {
   const name = inputValues['name'];
-  const info = inputValues['description'];
-  // newUserInfo.setUserInfo({ name, info });
+  const about = inputValues['description'];
 
-  editApiUser.editApiProfile(name, info)
+  userApi.editApiProfile(name, about)
     .then((data) => {
-      newUserInfo.setUserInfo(data);
+      currentUser.setUserInfo(data);
       classPopupWithFormEdit.close();
     })  
     .catch((error) => {
       console.log(error);
     });
-  // classPopupWithFormEdit.close();
 }
 
 // Функция отрисовки карточки для добавления через сабмит кнопки Add
-function createCard(name, link) {
+function createCard({name, link, id, likes, isLiked}) {
   const createCardElement = new Card({
     name: name,
     link: link,
-  }, "#template-elements", openPopupImage);
+    id: id,
+    likes: likes,
+    isLiked: isLiked
+  }, "#template-elements",
+  openPopupImage,
+  (isLiked) => api.changeLikeStatus(id, isLiked) //handleLikeClikc function
+  );
   return createCardElement.getCard();
 }
 
-
-// function createCard(name, link) {
-//   const createCardElement = new Card(
-//     {  
-//       name: name,
-//       link: link,
-//     },  
-//     "#template-elements",
-//     openPopupImage
-//   );  
-  
-//   return api.addNewCardApi(name, link)
-//     .then(() => {
-//       return createCardElement.getCard(); // Возвращаем отрисованную карточку
-//     })
-//     .catch((error) => {
-//       console.log(error);
-//       throw error; // Пробрасываем ошибку для дальнейшей обработки
-//     });
-// }
-// function createCard(name, link) {
-//   return api.addNewCardApi(name, link)
-//     .then((cardData) => {
-//       const createCardElement = new Card(
-//         {  
-//           name: cardData.name,
-//           link: cardData.link,
-//         },  
-//         "#template-elements",
-//         openPopupImage
-//       );  
-//       return createCardElement.getCard(); // Возвращаем отрисованную карточку
-//     })
-//     .catch((error) => {
-//       console.log(error);
-//       throw error; // Пробрасываем ошибку для дальнейшей обработки
-//     })
-//     .then((cardElement) => {
-//       return cardElement; // Возвращаем отрисованную карточку
-//     });
-// }
-
-
-// function renderCards() {
-//   initialCards.forEach((card) => {
-//     const cardElement = createCard(card.name, card.link);
-//     section.addItem(cardElement);
-//   });
-//   section.renderItems();
-
-//   const deleteButton = document.querySelector('.popup-container__delete-button');
-//     deleteButton.addEventListener('click', () => {
-//       classPopupDelete.setSubmitHandler(() => {
-//         cardElement.remove();
-//         console.log(cardElement);
-//       });
-//     });
-// }
-
 api.getAllCards()
   .then((cards) => {
+    const {id: userId} = currentUser.getUserInfo()
     cards.forEach((card) => {
-      const cardElement = createCard(card.name, card.link);
-      section.addItem(cardElement); 
+      const isLiked = card.likes.some((user) => user._id === userId)
+      const cardElement = createCard({
+        name: card.name,
+        link: card.link,
+        id: card._id,
+        likes: card.likes,
+        isLiked: isLiked
+      });
+      section.addItem(cardElement);
     });
+
     section.renderItems();
   })
   .catch((error) => {
     console.log(error);
   });
-// api.getAllCards()
-//   .then((cards) => {
-//     cards.forEach((card) => {
-//       const cardElement = createCard(card.name, card.link, card.likes, card._id);
-//       section.addItem(cardElement);
 
-//       // Обработчик события для кнопки лайка
-//       // const likeButton = cardElement.querySelector('.element__group-favorite');
-//       // likeButton.addEventListener('click', () => {
-//       //   const isLiked = cardElement.classList.contains('element__group-favorite_active');
-//       //   const handleCardClick = (link, name) => {
-//       //     cardElement.addEventListener('click', () => {
-
-//       //     })
-//       //   };
-        
-//       // });
-//     });
-//     section.renderItems();
-//   })
-//   .catch((error) => {
-//     console.log(error);
-//   });
 
 userApi.getApiUserInfo()
-  .then(userInfoApi => {
-    avatarElement.src = userInfoApi.avatar;
-    nameProfileElement.textContent = userInfoApi.name;
-    descriptionElement.textContent = userInfoApi.about;
+  .then(user => {
+    currentUser.setUserInfo(user)
+    avatarElement.src = user.avatar;
   })
   .catch(error => {
     console.log(error);
   });
-// Promise.all([api.getAllCards(), userApi.getApiUserInfo()])
-//   .then(([cards, userInfoApi]) => {
-//     cards.forEach((card) => {
-//       createCard(card.name, card.link)
-//         .then((cardElement) => {
-//           section.addItem(cardElement);
-//         })
-//         .catch((error) => {
-//           console.log(error);
-//         });
-//     });
-//     section.renderItems();
-
-//     avatarElement.src = userInfoApi.avatar;
-//     nameElement.textContent = userInfoApi.name;
-//     descriptionElement.textContent = userInfoApi.about;
-//   })
-//   .catch((error) => {
-//     console.log(error);
-//   });
 
 
 function handleEditButtonClick() {
-  const userData = newUserInfo.getUserInfo();
+  const userData = currentUser.getUserInfo();
   inputName.value = userData.name;
-  inputDescription.value = userData.info;
+  inputDescription.value = userData.about;
   classPopupWithFormEdit.open();
 }
 
@@ -248,31 +176,13 @@ addButtonElement.addEventListener('click', () => {
   validators[addForm.getAttribute('name')].toggleButtonState();
 }); //Слушатель клика для открытия формы добавления нового места
 
+
 //Закртыие форм по крестику
 popupWithImage.setEventListeners();
 classPopupWithFormEdit.setEventListeners();
 classPopupWithFormAdd.setEventListeners();
 classPopupDelete.setEventListeners();
 
-// popupAddForm.addEventListener('submit', (event) => {
-//     event.preventDefault();
-//     classPopupWithFormAdd.close();
-// });
-
-// popupAddForm.addEventListener('submit', (event) => {
-//   event.preventDefault();
-//   const nameInputValue = nameElement.value;
-//   const urlInputValue = urlElement.value;
-//   api.addNewCardApi(nameInputValue, urlInputValue)
-//     .then((data) => {
-//       classPopupWithFormAdd.close();
-//       const cardAddElement = createCard(data.name, data.link);
-//       section.addItem(cardAddElement);
-//     })
-//     .catch((error) => {
-//       console.log(error);
-//     });
-// });
 
 popupAddForm.addEventListener('submit', (event) => {
   event.preventDefault();
@@ -281,7 +191,7 @@ popupAddForm.addEventListener('submit', (event) => {
 
   api.addNewCardApi(nameInputValue, urlInputValue)
     .then((data) => {
-      const cardElement = createCard(data.name, data.link);
+      const cardElement = createCard(data.name, data.link, data._id, data.likes);
       section.addItem(cardElement);
       classPopupWithFormAdd.close();
     })
@@ -292,6 +202,3 @@ popupAddForm.addEventListener('submit', (event) => {
 
 //Вызов функций
 enableValidation(validationConfig);
-// renderCards()
-// section.renderItems();
-// export { openPopupImage };
