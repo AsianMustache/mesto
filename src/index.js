@@ -35,14 +35,14 @@ const section = new Section({
 }, '.elements');
 const classPopupWithFormEdit = new PopupWithForm('.popup_form_edit', handleEditFormSubmit);
 const classPopupWithFormAdd = new PopupWithForm('.popup_form_add', (values) => {
-  const nameInputValue = values['name-place'];
-  const urlInputValue = values['url'];
-  const cardElement = createCard(nameInputValue, urlInputValue);
+  // const nameInputValue = values['name-place'];
+  // const urlInputValue = values['url'];
+  // const cardElement = createCard(nameInputValue, urlInputValue);
   // section.addItem(cardElement);
 });                                                                    //Экземпляр класса PopupWithForm - добавление нового места
 const avatarElement = document.getElementById('profile-avatar');
-const nameProfileElement = document.getElementById('profile-name');
-const descriptionElement = document.getElementById('profile-description');
+// const nameProfileElement = document.getElementById('profile-name');
+// const descriptionElement = document.getElementById('profile-description');
 
 const cardsApi = { 
   url: 'https://mesto.nomoreparties.co/v1/cohort-75/cards', 
@@ -61,7 +61,6 @@ const userInfoApi = {
 const classPopupDelete = new PopupDelete('.popup_form_delete', handleButtonDelete);
 const api = new Api(cardsApi);
 const userApi = new Api(userInfoApi);
-const editApiUser = new Api(userInfoApi);
 
 
 const handleLikeClick = (cardId, isLiked) => {
@@ -119,7 +118,8 @@ function createCard({name, link, id, likes, isLiked}) {
     isLiked: isLiked
   }, "#template-elements",
   openPopupImage,
-  (isLiked) => api.changeLikeStatus(id, isLiked) //handleLikeClikc function
+  (isLiked) => api.changeLikeStatus(id, isLiked),
+  
   );
   return createCardElement.getCard();
 }
