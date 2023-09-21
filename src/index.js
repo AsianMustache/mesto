@@ -191,7 +191,11 @@ popupAddForm.addEventListener('submit', (event) => {
 
   api.addNewCardApi(nameInputValue, urlInputValue)
     .then((data) => {
-      const cardElement = createCard(data.name, data.link, data._id, data.likes);
+      const cardElement = createCard({
+        name: data.name, 
+        link: data.link, 
+        id: data._id, 
+        likes: data.likes});
       section.addItem(cardElement);
       classPopupWithFormAdd.close();
     })

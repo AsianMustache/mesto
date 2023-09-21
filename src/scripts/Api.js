@@ -49,7 +49,7 @@ class Api {
             headers: this._headers,
             body: JSON.stringify({
                 name: name,
-                link: link
+                link: link,
             })
         });
     }
