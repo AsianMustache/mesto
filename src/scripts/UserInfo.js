@@ -20,6 +20,7 @@ class UserInfo {
       this._inputName.textContent = name;
       this._inputDescription.textContent = about;
     }
+    
   }
 
 export default UserInfo;

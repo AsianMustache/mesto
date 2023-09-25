@@ -24,7 +24,7 @@ import Api from './scripts/Api';
 const popupWithImage = new PopupWithImage('.popup_form_image'); //Экземпляр класса PopupWithImage
 const currentUser = new UserInfo({
     nameSelector: '.profile__info-name',
-    infoSelector: '.profile__info-description',
+    infoSelector: '.profile__info-description'
     
     //смену аватара добавить
 });
@@ -61,7 +61,6 @@ const userInfoApi = {
 const classPopupDelete = new PopupDelete('.popup_form_delete', handleButtonDelete);
 const api = new Api(cardsApi);
 const userApi = new Api(userInfoApi);
-
 
 const handleLikeClick = (cardId, isLiked) => {
   api.changeLikeStatus(cardId, isLiked)
@@ -119,7 +118,7 @@ function createCard({name, link, id, likes, isLiked}) {
   }, "#template-elements",
   openPopupImage,
   (isLiked) => api.changeLikeStatus(id, isLiked),
-  
+  currentUser.getUserInfo().id
   );
   return createCardElement.getCard();
 }
@@ -144,7 +143,6 @@ api.getAllCards()
   .catch((error) => {
     console.log(error);
   });
-
 
 userApi.getApiUserInfo()
   .then(user => {
@@ -192,9 +190,9 @@ popupAddForm.addEventListener('submit', (event) => {
   api.addNewCardApi(nameInputValue, urlInputValue)
     .then((data) => {
       const cardElement = createCard({
-        name: data.name, 
-        link: data.link, 
-        id: data._id, 
+        name: data.name,
+        link: data.link,
+        id: data._id,
         likes: data.likes});
       section.addItem(cardElement);
       classPopupWithFormAdd.close();

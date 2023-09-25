@@ -1,5 +1,5 @@
 class Card {
-    constructor({ name, link, id, likes, isLiked}, templateSelector, handleCardClick, handleLikeClick, handleDeleteClick) {
+    constructor({ name, link, id, likes, isLiked}, templateSelector, handleCardClick, handleLikeClick, handleDeleteClick, currentUserId) {
       this._name = name;
       this._link = link;
       this._id = id;
@@ -8,6 +8,7 @@ class Card {
       this._templateSelector = templateSelector;
       this._handleCardClick = handleCardClick;
       this._handleLikeClick = handleLikeClick;
+      this._currentUserId = currentUserId;
 }
 
     _getTemplate() {
@@ -15,6 +16,10 @@ class Card {
         .querySelector(this._templateSelector).content
         .querySelector('.element')
         .cloneNode(true);
+        const trashButton = cardTemplate.querySelector('.element__delete-button');
+        if (this._id !== this._currentUserId) {
+            trashButton.style.display = 'none';
+        }
         return cardTemplate;
     }
 
@@ -30,6 +35,7 @@ class Card {
         this._likesCountElement.textContent = this._likes.length;
         this._deleteButton = this._newCard.querySelector('.element__delete-button');
     }
+
 
     _deletePopupCard() {
         this._form = document.querySelector('.popup_form_delete');
