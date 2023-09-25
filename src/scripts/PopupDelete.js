@@ -44,13 +44,14 @@ class PopupDelete extends Popup {
 
     open(handleSubmit) {
       this._submitHandler  = handleSubmit
-      super.open()
+      // super.open()
+      console.log(this._submitHandler)
     }
   
     setEventListeners() {
       super.setEventListeners();
       this._deleteButton.addEventListener('click', () => this._submitHandler());
-      console.log(this._deleteButton)
+      
     }
   }
 

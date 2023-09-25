@@ -29,7 +29,7 @@ const currentUser = new UserInfo({
     //смену аватара добавить
 });
 
-const popupDelete = new PopupDelete('.popup-container__delete-button')
+const popupDelete = new PopupDelete('.popup_form_delete')
 
 const section = new Section({
   items: [],
@@ -194,6 +194,7 @@ addButtonElement.addEventListener('click', () => {
 popupWithImage.setEventListeners();
 classPopupWithFormEdit.setEventListeners();
 classPopupWithFormAdd.setEventListeners();
+popupDelete.setEventListeners();
 
 popupAddForm.addEventListener('submit', (event) => {
   event.preventDefault();
