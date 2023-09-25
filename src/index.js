@@ -43,8 +43,6 @@ const classPopupWithFormAdd = new PopupWithForm('.popup_form_add', (values) => {
   // section.addItem(cardElement);
 });                                                                    //Экземпляр класса PopupWithForm - добавление нового места
 const avatarElement = document.getElementById('profile-avatar');
-// const nameProfileElement = document.getElementById('profile-name');
-// const descriptionElement = document.getElementById('profile-description');
 
 const cardsApi = { 
   url: 'https://mesto.nomoreparties.co/v1/cohort-75/cards', 
@@ -60,40 +58,8 @@ const userInfoApi = {
     'Content-Type': "application/json"
   }
 }
-// const classPopupDelete = new PopupDelete('.popup_form_delete', handleButtonDelete);
 const api = new Api(cardsApi);
 const userApi = new Api(userInfoApi);
-
-const handleLikeClick = (cardId, isLiked) => {
-  api.changeLikeStatus(cardId, isLiked)
-    .then((changeLikeStatus) => {
-      // Обновляем состояние лайка в карточке
-      card.updateLikes(changeLikeStatus);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-};
-
-// const card = new Card({
-//   name: api.name,
-//   link: api.link,
-//   likes: api.likes,
-//   _id: api._id,
-//   handleLikeClick: handleLikeClick,
-// }, currentUser.getUserInfo().id);
-
-// classPopupDelete.setSubmitHandler(() => {
-//   const cardForDelete = classPopupDelete._deleteButton.closest('.element');
-//   if (cardForDelete) {
-//     section.remove(cardForDelete);
-//   }
-//   console.log(cardForDelete)
-// });
-
-// function handleButtonDelete() {
-//   classPopupDelete.open();
-// }
 
 function handleEditFormSubmit(inputValues) {
   const name = inputValues['name'];
