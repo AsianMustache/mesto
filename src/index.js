@@ -126,7 +126,8 @@ function createCard({name, link, id, likes, isLiked, ownerId}) {
 api.getApiUserInfo()
   .then(user => {
     currentUser.setUserInfo(user)
-    avatarElement.src = user.avatar;
+    const backgroundImage = `url(${user.avatar})`;
+    avatarElement.style.backgroundImage = backgroundImage;
   })
     .then(() => api.getAllCards())
     .then((cards) => {
