@@ -5,7 +5,7 @@ import { enableValidation, validators } from "../src/scripts/validate.js"
 import Section from '../src/scripts/Section.js';
 import PopupWithImage from './scripts/PopupWithImage.js';
 import PopupWithForm from './scripts/PopupWithForm.js';
-import PopupDelete from './scripts/PopupDelete';
+import PopupDelete from './scripts/PopupDelete.js';
 import UserInfo from './scripts/UserInfo.js';
 import {
   initialCards,
@@ -19,7 +19,7 @@ import {
   nameElement,
   urlElement
 } from './utils/constants.js'
-import Api from './scripts/Api';
+import Api from './scripts/Api.js';
 
 const popupWithImage = new PopupWithImage('.popup_form_image'); //Экземпляр класса PopupWithImage
 const currentUser = new UserInfo({
@@ -44,28 +44,28 @@ const classPopupWithFormAdd = new PopupWithForm('.popup_form_add', (values) => {
 });                                                                    //Экземпляр класса PopupWithForm - добавление нового места
 const avatarElement = document.getElementById('profile-avatar');
 
-const cardsApi = { 
-  url: 'https://mesto.nomoreparties.co/v1/cohort-75/cards', 
+const optionsApi = { 
+  url: 'https://mesto.nomoreparties.co/v1/cohort-75', 
   headers: {
     authorization: 'de840de0-da05-4c0b-8b96-55f691e0c5a8',
     'Content-Type': "application/json"
   }
 };
-const userInfoApi = {
-  url: 'https://nomoreparties.co/v1/cohort-75',
-  headers: {
-    authorization: 'de840de0-da05-4c0b-8b96-55f691e0c5a8',
-    'Content-Type': "application/json"
-  }
-}
-const api = new Api(cardsApi);
-const userApi = new Api(userInfoApi);
+// const userInfoApi = {
+//   url: 'https://nomoreparties.co/v1/cohort-75',
+//   headers: {
+//     authorization: 'de840de0-da05-4c0b-8b96-55f691e0c5a8',
+//     'Content-Type': "application/json"
+//   }
+// }
+const api = new Api(optionsApi);
+// const api = new Api(userInfoApi);
 
 function handleEditFormSubmit(inputValues) {
   const name = inputValues['name'];
   const about = inputValues['description'];
 
-  userApi.editApiProfile(name, about)
+  api.editApiProfile(name, about)
     .then((data) => {
       currentUser.setUserInfo(data);
       classPopupWithFormEdit.close();
@@ -87,48 +87,65 @@ function createCard({name, link, id, likes, isLiked, ownerId}) {
   }, "#template-elements",
   openPopupImage,
     (isLiked) => api.changeLikeStatus(id, isLiked),
-    () => {
-      popupDelete.open(() => {
-        api.deleteCard(id)
+    () => 
+     popupDelete.open(() => {
+        api.deleteCardApi(id)
           .then(() => {
-            cardElement.remove();
+            createCardElement.deleteCard();
+            popupDelete.close();
           })
           .catch((error) => {
             console.log(error);
           });
-      });
-    }, currentUser.getUserInfo().id
-  );
+      }), currentUser.getUserInfo().id);
   return createCardElement.getCard();
 }
 
-api.getAllCards()
-  .then((cards) => {
-    const {id: userId} = currentUser.getUserInfo()
-    cards.forEach((card) => {
-      const isLiked = card.likes.some((user) => user._id === userId)
-      const cardElement = createCard({
-        name: card.name,
-        link: card.link,
-        id: card._id,
-        likes: card.likes,
-        isLiked: isLiked,
-        ownerId: card.owner._id
-      }, currentUser.getUserInfo().id);
-      section.addItem(cardElement);
-    });
+// api.getAllCards()
+//   .then((cards) => {
+//     const {id: userId} = currentUser.getUserInfo()
+//     cards.forEach((card) => {
+//       const isLiked = card.likes.some((user) => user._id === userId)
+//       const cardElement = createCard({
+//         name: card.name,
+//         link: card.link,
+//         id: card._id,
+//         likes: card.likes,
+//         isLiked: isLiked,
+//         ownerId: card.owner._id
+//       }, currentUser.getUserInfo().id);
+//       section.addItem(cardElement);
+//     });
 
-    section.renderItems();
-  })
-  .catch((error) => {
-    console.log(error);
-  });
+//     section.renderItems();
+//   })
+//   .catch((error) => {
+//     console.log(error);
+//   });
 
-userApi.getApiUserInfo()
+api.getApiUserInfo()
   .then(user => {
     currentUser.setUserInfo(user)
     avatarElement.src = user.avatar;
   })
+    .then(() => api.getAllCards())
+    .then((cards) => {
+      const {id: userId} = currentUser.getUserInfo()
+      cards.reverse().forEach((card) => {
+        const isLiked = card.likes.some((user) => user._id === userId)
+        const cardElement = createCard({
+          name: card.name,
+          link: card.link,
+          id: card._id,
+          likes: card.likes,
+          isLiked: isLiked,
+          ownerId: card.owner._id
+        });
+        section.addItem(cardElement);
+      });
+  
+      section.renderItems();
+    })
   .catch(error => {
     console.log(error);
 });

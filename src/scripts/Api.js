@@ -19,7 +19,7 @@ class Api {
     }
 
     getAllCards() {
-        return this._sendRequest(`${this._url}`, {
+        return this._sendRequest(`${this._url}/cards`, {
             method: "GET",
             headers: this._headers,
         });
@@ -44,7 +44,7 @@ class Api {
     }
 
     addNewCardApi(name, link) {
-        return this._sendRequest(`${this._url}`, {
+        return this._sendRequest(`${this._url}/cards`, {
             method: "POST",
             headers: this._headers,
             body: JSON.stringify({
@@ -55,8 +55,8 @@ class Api {
     }
 
     changeLikeStatus(cardId, isLiked) {
-        const method = isLiked ? 'PUT' : 'DELETE';
-        const url = `${this._url}/${cardId}/likes`;
+        const method = !isLiked ? 'PUT' : 'DELETE';
+        const url = `${this._url}/cards/${cardId}/likes`;
     
         return fetch(url, {
           method: method,

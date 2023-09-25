@@ -39,16 +39,16 @@ class Card {
     }
 
 
-    _deletePopupCard() {
-        this._form = document.querySelector('.popup_form_delete');
-        this._form.classList.add('popup_opened');
-      }
+    // _deletePopupCard() {
+    //     this._form = document.querySelector('.popup_form_delete');
+    //     this._form.classList.add('popup_opened');
+    //   }
 
-    // _deleteCard() {
-    //     this._card = this._deleteButton.closest('.element');
-    //     this._card.remove();
-    //     this._card = null;
-    // }
+    deleteCard() {
+        this._card = this._deleteButton.closest('.element');
+        this._card.remove();
+        this._card = null;
+    }
 
     _handleImageClick() {
         this._handleCardClick(this._link, this._name);
@@ -56,7 +56,7 @@ class Card {
 
     _setListeners() {
         // this._deleteCardButton.addEventListener('click', () => { this._deleteCard() });
-        this._deleteButton.addEventListener('click', () => { this._deletePopupCard() });
+        this._deleteButton.addEventListener('click', () => this._handleDeleteClick());
         this._cardImage.addEventListener('click', () => { this._handleImageClick() });
         this._likeButton.addEventListener('click', () => {
             this._handleLikeClick(this._isLiked)
@@ -64,7 +64,7 @@ class Card {
                 this._likes = card.likes;
                 this._isLiked = !this._isLiked;
                 this._likesCountElement.textContent = this._likes.length;
-                !this._isLiked ? this._likeButton.classList.add('element__group-favorite_active') : this._likeButton.classList.remove('element__group-favorite_active')
+                this._isLiked ? this._likeButton.classList.add('element__group-favorite_active') : this._likeButton.classList.remove('element__group-favorite_active')
             })
             .catch((error) => console.log(error))
         });
