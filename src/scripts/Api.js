@@ -64,6 +64,13 @@ class Api {
         })
         .then((response) => response.json());
     }
+
+    deleteCardApi(cardId) {
+        return this._sendRequest(`${this._url}/cards/${cardId}`, {
+            method: "DELETE",
+            headers: this._headers
+        }
+    )}
 }
 
 export default Api

@@ -37,25 +37,20 @@ import Popup from './Popup.js';
 //   }
 
 class PopupDelete extends Popup {
-    constructor(popupSelector, handleButtonDelete) {
+    constructor(popupSelector) {
       super(popupSelector);
-      this._handleButtonDelete = handleButtonDelete;
       this._deleteButton = this._popup.querySelector('.popup-container__delete-button');
-      this._submitHandler = null;
     }
-  
-    setSubmitHandler(handler) {
-      this._submitHandler = handler;
+
+    open(handleSubmit) {
+      this._submitHandler  = handleSubmit
+      super.open()
     }
   
     setEventListeners() {
-      this._deleteButton.addEventListener('click', () => {
-        if (this._submitHandler) {
-          this._submitHandler();
-        }
-        this.close();
-      });
       super.setEventListeners();
+      this._deleteButton.addEventListener('click', () => this._submitHandler());
+      console.log(this._deleteButton)
     }
   }
 

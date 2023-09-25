@@ -1,5 +1,5 @@
 class Card {
-    constructor({ name, link, id, likes, isLiked}, templateSelector, handleCardClick, handleLikeClick, handleDeleteClick, currentUserId) {
+    constructor({ name, link, id, likes, isLiked, ownerId}, templateSelector, handleCardClick, handleLikeClick, handleDeleteClick, currentUserId) {
       this._name = name;
       this._link = link;
       this._id = id;
@@ -9,6 +9,8 @@ class Card {
       this._handleCardClick = handleCardClick;
       this._handleLikeClick = handleLikeClick;
       this._currentUserId = currentUserId;
+      this._handleDeleteClick = handleDeleteClick;
+      this._ownerId = ownerId;
 }
 
     _getTemplate() {
@@ -17,7 +19,7 @@ class Card {
         .querySelector('.element')
         .cloneNode(true);
         const trashButton = cardTemplate.querySelector('.element__delete-button');
-        if (this._id !== this._currentUserId) {
+        if (this._ownerId !== this._currentUserId) {
             trashButton.style.display = 'none';
         }
         return cardTemplate;
@@ -42,11 +44,11 @@ class Card {
         this._form.classList.add('popup_opened');
       }
 
-    _deleteCard() {
-        this._card = this._deleteButton.closest('.element');
-        this._card.remove();
-        this._card = null;
-    }
+    // _deleteCard() {
+    //     this._card = this._deleteButton.closest('.element');
+    //     this._card.remove();
+    //     this._card = null;
+    // }
 
     _handleImageClick() {
         this._handleCardClick(this._link, this._name);

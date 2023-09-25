@@ -29,6 +29,8 @@ const currentUser = new UserInfo({
     //смену аватара добавить
 });
 
+const popupDelete = new PopupDelete('.popup-container__delete-button')
+
 const section = new Section({
   items: [],
   renderer: createCard
@@ -58,7 +60,7 @@ const userInfoApi = {
     'Content-Type': "application/json"
   }
 }
-const classPopupDelete = new PopupDelete('.popup_form_delete', handleButtonDelete);
+// const classPopupDelete = new PopupDelete('.popup_form_delete', handleButtonDelete);
 const api = new Api(cardsApi);
 const userApi = new Api(userInfoApi);
 
@@ -73,25 +75,25 @@ const handleLikeClick = (cardId, isLiked) => {
     });
 };
 
-const card = new Card({
-  name: api.name,
-  link: api.link,
-  likes: api.likes,
-  _id: api._id,
-  handleLikeClick: handleLikeClick,
-});
+// const card = new Card({
+//   name: api.name,
+//   link: api.link,
+//   likes: api.likes,
+//   _id: api._id,
+//   handleLikeClick: handleLikeClick,
+// }, currentUser.getUserInfo().id);
 
-classPopupDelete.setSubmitHandler(() => {
-  const cardForDelete = classPopupDelete._deleteButton.closest('.element');
-  if (cardForDelete) {
-    section.remove(cardForDelete);
-  }
-  console.log(cardForDelete)
-});
+// classPopupDelete.setSubmitHandler(() => {
+//   const cardForDelete = classPopupDelete._deleteButton.closest('.element');
+//   if (cardForDelete) {
+//     section.remove(cardForDelete);
+//   }
+//   console.log(cardForDelete)
+// });
 
-function handleButtonDelete() {
-  classPopupDelete.open();
-}
+// function handleButtonDelete() {
+//   classPopupDelete.open();
+// }
 
 function handleEditFormSubmit(inputValues) {
   const name = inputValues['name'];
@@ -108,17 +110,28 @@ function handleEditFormSubmit(inputValues) {
 }
 
 // Функция отрисовки карточки для добавления через сабмит кнопки Add
-function createCard({name, link, id, likes, isLiked}) {
+function createCard({name, link, id, likes, isLiked, ownerId}) {
   const createCardElement = new Card({
     name: name,
     link: link,
     id: id,
     likes: likes,
-    isLiked: isLiked
+    isLiked: isLiked,
+    ownerId: ownerId
   }, "#template-elements",
   openPopupImage,
-  (isLiked) => api.changeLikeStatus(id, isLiked),
-  currentUser.getUserInfo().id
+    (isLiked) => api.changeLikeStatus(id, isLiked),
+    () => {
+      popupDelete.open(() => {
+        api.deleteCard(id)
+          .then(() => {
+            cardElement.remove();
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      });
+    }, currentUser.getUserInfo().id
   );
   return createCardElement.getCard();
 }
@@ -133,8 +146,9 @@ api.getAllCards()
         link: card.link,
         id: card._id,
         likes: card.likes,
-        isLiked: isLiked
-      });
+        isLiked: isLiked,
+        ownerId: card.owner._id
+      }, currentUser.getUserInfo().id);
       section.addItem(cardElement);
     });
 
@@ -151,7 +165,8 @@ userApi.getApiUserInfo()
   })
   .catch(error => {
     console.log(error);
-  });
+});
+
 
 
 function handleEditButtonClick() {
@@ -179,8 +194,6 @@ addButtonElement.addEventListener('click', () => {
 popupWithImage.setEventListeners();
 classPopupWithFormEdit.setEventListeners();
 classPopupWithFormAdd.setEventListeners();
-classPopupDelete.setEventListeners();
-
 
 popupAddForm.addEventListener('submit', (event) => {
   event.preventDefault();
