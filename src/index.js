@@ -161,7 +161,10 @@ popupAddForm.addEventListener('submit', (event) => {
         name: data.name,
         link: data.link,
         id: data._id,
-        likes: data.likes});
+        likes: data.likes,
+        isLiked: false,
+        ownerId: data.owner._id
+      });
       section.addItem(cardElement);
       classPopupWithFormAdd.close();
     })
