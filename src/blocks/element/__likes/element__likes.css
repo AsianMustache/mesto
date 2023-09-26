@@ -9,3 +9,16 @@
     display: flex;
     margin: 0 26px 22px 245px;
 }
+
+@media (max-width: 1250px) {
+    .element__likes {
+        margin: 0px 0px 10px 165px;
+    }
+}
+
+@media (max-width: 750px) {
+    .element__likes {
+        margin: 0px 0px 10px 245px;
+    }
+}
+

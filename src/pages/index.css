@@ -49,6 +49,7 @@
 @import url(../blocks/popup-container/__title-delete/popup-container__title-delete.css);
 @import url(../blocks/popup-container/__add-popup-close-button/popup-container__add-popup-close-button.css);
 @import url(../blocks/popup-container/__delete-button/popup-container__delete-button.css);
+@import url(../blocks/popup-container/__title-avatar-edit/popup-container__title-avatar-edit.css);
 @import url(../blocks/add-form/__container-button/_invalid/add-form__container-button_invalid.css);
 @import url(../blocks/popup-image-container/popup-image-container.css);
 @import url(../blocks/popup-image-container/__image-fullscreen/popup-image-container__image-fullscreen.css);
@@ -57,3 +58,8 @@
 @import url(../blocks/popup/_form/popup_form_image.css);
 @import url(../blocks/popup/__input-error/_visible/popup__input-error_visible.css);
 @import url(../blocks/popup/__button/_disabled/popup__button_disabled.css);
+@import url(../blocks/avatar-edit-form/__avatar-button/avatar-edit-form__avatar-button.css);
+@import url(../blocks/avatar-edit-form/__input_url/avatar-edit-form__input-url.css);
+@import url(../blocks/avatar-edit-form/avatar-edit-form.css);
+@import url(../blocks/avatar-edit-form/__button/avatar-edit-form__button.css);
+@import url(../blocks/url-avatar-error/url-avatar-error.css)

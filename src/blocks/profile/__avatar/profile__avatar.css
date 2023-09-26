@@ -10,7 +10,7 @@
     position: relative;
 }
 
-.profile__avatar:hover::after {
+.profile__avatar::after {
     content: "";
     background-image: url('../../../images/edit-avatar.svg');
     background-repeat: no-repeat;
@@ -24,7 +24,14 @@
     height: 100%;
     cursor: pointer;
     background-color: rgba(0, 0, 0, .8);
-    transition: opacity 0.8s ease-in-out 0.8s;
+    transition: opacity 0.1s ease-in-out 0.1s, visibility 0.1s ease-in-out 0.1s;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.profile__avatar:hover::after {
+    opacity: 0.8;
+    visibility: visible;
 }
 
 @media (max-width: 1050px) {
