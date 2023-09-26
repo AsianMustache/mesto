@@ -24,7 +24,7 @@
     height: 100%;
     cursor: pointer;
     background-color: rgba(0, 0, 0, .8);
-    transition: ease-in-out 0.2s;
+    transition: opacity 0.8s ease-in-out 0.8s;
 }
 
 @media (max-width: 1050px) {
