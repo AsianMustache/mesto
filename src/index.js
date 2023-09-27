@@ -8,7 +8,7 @@ import PopupWithForm from './scripts/PopupWithForm.js';
 import PopupDelete from './scripts/PopupDelete.js';
 import UserInfo from './scripts/UserInfo.js';
 import {
-  initialCards,
+  popupEditForm,
   validationConfig,
   editButtonElement,
   addButtonElement,
@@ -22,12 +22,11 @@ import {
 import Api from './scripts/Api.js';
 
 const popupWithImage = new PopupWithImage('.popup_form_image'); //Экземпляр класса PopupWithImage
+const avatarElement = document.querySelector('.profile__avatar');
 const currentUser = new UserInfo({
     nameSelector: '.profile__info-name',
     infoSelector: '.profile__info-description',
-    avatar: '.profile__avatar'
-    //смену аватара добавить
-});
+}, avatarElement);
 const popupEditAvatar = new PopupWithForm('.popup_form_edit-avatar', handleEditAvatarFormSubmit);
 const popupDelete = new PopupDelete('.popup_form_delete')
 
@@ -42,7 +41,6 @@ const classPopupWithFormAdd = new PopupWithForm('.popup_form_add', (values) => {
   // const cardElement = createCard(nameInputValue, urlInputValue);
   // section.addItem(cardElement);
 });                                                                    //Экземпляр класса PopupWithForm - добавление нового места
-const avatarElement = document.querySelector('.profile__avatar');
 
 const optionsApi = { 
   url: 'https://mesto.nomoreparties.co/v1/cohort-76', 
@@ -56,7 +54,7 @@ const api = new Api(optionsApi);
 function handleEditFormSubmit(inputValues) {
   const name = inputValues['name'];
   const about = inputValues['description'];
-
+  classPopupWithFormEdit.showPreloader()
   api.editApiProfile(name, about)
     .then((data) => {
       currentUser.setUserInfo(data);
@@ -64,7 +62,8 @@ function handleEditFormSubmit(inputValues) {
     })  
     .catch((error) => {
       console.log(error);
-    });
+    })
+    .finally(() => classPopupWithFormEdit.showPreloader(false))
 }
 
 // Функция отрисовки карточки для добавления через сабмит кнопки Add
@@ -123,34 +122,19 @@ api.getApiUserInfo()
 
 function handleEditAvatarFormSubmit(inputValues) {
   const avatarUrl = inputValues['url'];
-  
+  popupEditAvatar.showPreloader()
   api.editAvatar(avatarUrl)
     .then((data) => {
-      avatarElement.style.backgroundImage = `url(${data.avatar})`;
+      currentUser.setUserInfo(data);
       popupEditAvatar.close();
+      popupEditAvatar.clearInputValues();
+      const formName = popupEditAvatar.getFormName();
+      validators[formName].toggleButtonState();
     })
-    .catch((error) => {
+    .catch((error) => {  
       console.log(error);
     })
-    .finally(() => {
-      showLoader(popupEditAvatar.popupSelector);
-      popupEditAvatar.close();
-    })
-}
-// Показать прелоадер
-function showLoader(popupSelector) {
-  const popup = document.querySelector(popupSelector);
-  const submitButton = popup.querySelector('.avatar-edit-form__button');
-  submitButton.textContent = 'Сохранение...';
-  submitButton.disabled = true;
-}
-
-// // Скрыть прелоадер
-function hideLoader(popupSelector) {
-  const popup = document.querySelector(popupSelector);
-  const submitButton = popup.querySelector('.avatar-edit-form__button');
-  submitButton.textContent = 'Сохранить';
-  submitButton.disabled = false;
+    .finally(() => popupEditAvatar.showPreloader(false) )
 }
 
 function handleEditButtonClick() {

@@ -6,6 +6,8 @@ class PopupWithForm extends Popup {
     this._form = this._popup.querySelector('.popup__form');
     this._handleSubmitForm = handleSubmitForm;
     this._inputList = Array.from(this._form.querySelectorAll('.popup__input'));
+    this._submitButton = this._form.querySelector('.popup__button');
+    this._submitButtonDefault = this._submitButton.textContent;
   }
 
   _getInputValues() {
@@ -19,7 +21,6 @@ class PopupWithForm extends Popup {
   setInputValues(data) {
     this._inputList.forEach((input) => {
       if (input.name === 'info') {
-        // input.value = data[input.name];
         input.value = data.info;
       } else {
         input.value = data[input.name];
@@ -27,6 +28,20 @@ class PopupWithForm extends Popup {
       console.log(JSON.stringify(data));
         console.log(data);
     });
+  }
+
+  showPreloader(isLoading = true) {
+    isLoading ? this._submitButton.textContent = 'Сохранение...' : this._submitButton.textContent = this._submitButtonDefault
+  }
+
+  clearInputValues() {
+    this._inputList.forEach((input) => {
+      input.value = '';
+    });
+  }
+
+  getFormName() {
+    return this._form.getAttribute('name');
   }
 
   setEventListeners() {

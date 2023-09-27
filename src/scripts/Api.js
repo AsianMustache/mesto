@@ -51,9 +51,6 @@ class Api {
                 avatar: avatarUrl
             })
         })
-        .finally(() => {
-            showLoader();
-        })
     }
 
     addNewCardApi(name, link) {

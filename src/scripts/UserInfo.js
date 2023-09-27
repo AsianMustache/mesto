@@ -1,7 +1,8 @@
 class UserInfo {
-    constructor({ nameSelector, infoSelector }) {
+    constructor({ nameSelector, infoSelector }, avatarSelector) {
       this._inputName = document.querySelector(nameSelector);
       this._inputDescription = document.querySelector(infoSelector);
+      this._avatarSelector = avatarSelector;
     }
   
     getUserInfo() {
@@ -19,6 +20,7 @@ class UserInfo {
       this._id = _id;
       this._inputName.textContent = name;
       this._inputDescription.textContent = about;
+      this._avatarSelector.style.backgroundImage = `url(${this._avatar})`;
     }
     
   }
