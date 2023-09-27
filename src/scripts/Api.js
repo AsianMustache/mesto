@@ -43,6 +43,19 @@ class Api {
         });
     }
 
+    editAvatar(avatarUrl) {
+        return this._sendRequest(`${this._url}/users/me/avatar`, {
+            method: "PATCH",
+            headers: this._headers,
+            body: JSON.stringify({
+                avatar: avatarUrl
+            })
+        })
+        .finally(() => {
+            showLoader();
+        })
+    }
+
     addNewCardApi(name, link) {
         return this._sendRequest(`${this._url}/cards`, {
             method: "POST",

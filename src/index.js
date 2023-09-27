@@ -24,11 +24,11 @@ import Api from './scripts/Api.js';
 const popupWithImage = new PopupWithImage('.popup_form_image'); //Экземпляр класса PopupWithImage
 const currentUser = new UserInfo({
     nameSelector: '.profile__info-name',
-    infoSelector: '.profile__info-description'
-    
+    infoSelector: '.profile__info-description',
+    avatar: '.profile__avatar'
     //смену аватара добавить
 });
-
+const popupEditAvatar = new PopupWithForm('.popup_form_edit-avatar', handleEditAvatarFormSubmit);
 const popupDelete = new PopupDelete('.popup_form_delete')
 
 const section = new Section({
@@ -42,7 +42,7 @@ const classPopupWithFormAdd = new PopupWithForm('.popup_form_add', (values) => {
   // const cardElement = createCard(nameInputValue, urlInputValue);
   // section.addItem(cardElement);
 });                                                                    //Экземпляр класса PopupWithForm - добавление нового места
-const avatarElement = document.getElementById('profile-avatar');
+const avatarElement = document.querySelector('.profile__avatar');
 
 const optionsApi = { 
   url: 'https://mesto.nomoreparties.co/v1/cohort-76', 
@@ -121,7 +121,37 @@ api.getApiUserInfo()
     console.log(error);
 });
 
+function handleEditAvatarFormSubmit(inputValues) {
+  const avatarUrl = inputValues['url'];
+  
+  api.editAvatar(avatarUrl)
+    .then((data) => {
+      avatarElement.style.backgroundImage = `url(${data.avatar})`;
+      popupEditAvatar.close();
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+    .finally(() => {
+      showLoader(popupEditAvatar.popupSelector);
+      popupEditAvatar.close();
+    })
+}
+// Показать прелоадер
+function showLoader(popupSelector) {
+  const popup = document.querySelector(popupSelector);
+  const submitButton = popup.querySelector('.avatar-edit-form__button');
+  submitButton.textContent = 'Сохранение...';
+  submitButton.disabled = true;
+}
 
+// // Скрыть прелоадер
+function hideLoader(popupSelector) {
+  const popup = document.querySelector(popupSelector);
+  const submitButton = popup.querySelector('.avatar-edit-form__button');
+  submitButton.textContent = 'Сохранить';
+  submitButton.disabled = false;
+}
 
 function handleEditButtonClick() {
   const userData = currentUser.getUserInfo();
@@ -143,12 +173,16 @@ addButtonElement.addEventListener('click', () => {
   validators[addForm.getAttribute('name')].toggleButtonState();
 }); //Слушатель клика для открытия формы добавления нового места
 
+avatarElement.addEventListener('click', () => {
+  popupEditAvatar.open();
+});
 
 //Закртыие форм по крестику
 popupWithImage.setEventListeners();
 classPopupWithFormEdit.setEventListeners();
 classPopupWithFormAdd.setEventListeners();
 popupDelete.setEventListeners();
+popupEditAvatar.setEventListeners();
 
 popupAddForm.addEventListener('submit', (event) => {
   event.preventDefault();
