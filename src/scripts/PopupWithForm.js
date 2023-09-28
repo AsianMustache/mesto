@@ -34,10 +34,9 @@ class PopupWithForm extends Popup {
     isLoading ? this._submitButton.textContent = 'Сохранение...' : this._submitButton.textContent = this._submitButtonDefault
   }
 
-  clearInputValues() {
-    this._inputList.forEach((input) => {
-      input.value = '';
-    });
+  close() {
+    super.close();
+    this._form.reset();
   }
 
   getFormName() {

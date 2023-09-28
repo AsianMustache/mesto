@@ -35,6 +35,10 @@ class Card {
         this._likesCountElement = this._newCard.querySelector('.element__likes');
         this._likesCountElement.textContent = this._likes.length;
         this._deleteButton = this._newCard.querySelector('.element__delete-button');
+
+        if (this._likes.some(user => user._id === this._currentUserId)) {
+            this._likeButton.classList.add('element__group-favorite_active');
+        }
     }
 
     deleteCard() {

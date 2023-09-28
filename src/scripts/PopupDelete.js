@@ -13,8 +13,15 @@ class PopupDelete extends Popup {
   
     setEventListeners() {
       super.setEventListeners();
-      this._deleteButton.addEventListener('click', () => {this._submitHandler()});
-      super.close();
+      this._deleteButton.addEventListener('click', () => {
+        Promise.resolve(this._submitHandler())
+          .then(() => {
+            super.close();
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      });
     }
   }
 

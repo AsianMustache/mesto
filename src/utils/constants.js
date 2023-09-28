@@ -46,6 +46,15 @@ const initialCards = [
   const urlElement = document.getElementById('url'); //Переменная с ID url формы добавления карточки
   const inputName = document.querySelector('input[name="name"]'); //Поиск элемента input, у которого атрибут равен name
   const inputDescription = document.querySelector('input[name="description"]'); //Поиск элемента input, у которого атрибут равен description
+  const optionsApi = { 
+    url: 'https://mesto.nomoreparties.co/v1/cohort-76', 
+    headers: {
+      authorization: '83dc9433-9b9b-4fa6-92f5-5a62f5b1db23',
+      'Content-Type': "application/json"
+    }
+  };
+
+
   export {
     initialCards,
     validationConfig,
@@ -60,5 +69,6 @@ const initialCards = [
     nameElement,
     urlElement,
     inputName,
-    inputDescription
+    inputDescription,
+    optionsApi
   };

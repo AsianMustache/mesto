@@ -17,7 +17,8 @@ import {
   inputName,
   inputDescription,
   nameElement,
-  urlElement
+  urlElement,
+  optionsApi
 } from './utils/constants.js'
 import Api from './scripts/Api.js';
 
@@ -35,20 +36,9 @@ const section = new Section({
   renderer: createCard
 }, '.elements');
 const classPopupWithFormEdit = new PopupWithForm('.popup_form_edit', handleEditFormSubmit);
-const classPopupWithFormAdd = new PopupWithForm('.popup_form_add', (values) => {
-  // const nameInputValue = values['name-place'];
-  // const urlInputValue = values['url'];
-  // const cardElement = createCard(nameInputValue, urlInputValue);
-  // section.addItem(cardElement);
-});                                                                    //Экземпляр класса PopupWithForm - добавление нового места
+const classPopupWithFormAdd = new PopupWithForm('.popup_form_add', handleAddFormSubmit);            //Экземпляр класса PopupWithForm - добавление нового места
 
-const optionsApi = { 
-  url: 'https://mesto.nomoreparties.co/v1/cohort-76', 
-  headers: {
-    authorization: '83dc9433-9b9b-4fa6-92f5-5a62f5b1db23',
-    'Content-Type': "application/json"
-  }
-};
+
 const api = new Api(optionsApi);
 
 function handleEditFormSubmit(inputValues) {
@@ -127,7 +117,6 @@ function handleEditAvatarFormSubmit(inputValues) {
     .then((data) => {
       currentUser.setUserInfo(data);
       popupEditAvatar.close();
-      popupEditAvatar.clearInputValues();
       const formName = popupEditAvatar.getFormName();
       validators[formName].toggleButtonState();
     })
@@ -148,31 +137,11 @@ function openPopupImage(imageUrl, name) {
   popupWithImage.open(imageUrl, name);
 }
 
+function handleAddFormSubmit(inputValues) {
 
-//Обработчики событий
-editButtonElement.addEventListener('click', handleEditButtonClick); //Слушатель клика для открытия формы редактирования 
-addButtonElement.addEventListener('click', () => {
-  classPopupWithFormAdd.open();
-  addForm.reset();
-  validators[addForm.getAttribute('name')].toggleButtonState();
-}); //Слушатель клика для открытия формы добавления нового места
-
-avatarElement.addEventListener('click', () => {
-  popupEditAvatar.open();
-});
-
-//Закртыие форм по крестику
-popupWithImage.setEventListeners();
-classPopupWithFormEdit.setEventListeners();
-classPopupWithFormAdd.setEventListeners();
-popupDelete.setEventListeners();
-popupEditAvatar.setEventListeners();
-
-popupAddForm.addEventListener('submit', (event) => {
-  event.preventDefault();
-  const nameInputValue = nameElement.value;
-  const urlInputValue = urlElement.value;
-
+  const nameInputValue = inputValues['name-place'];
+  const urlInputValue = inputValues.url;
+  classPopupWithFormAdd.showPreloader()
   api.addNewCardApi(nameInputValue, urlInputValue)
     .then((data) => {
       const cardElement = createCard({
@@ -188,8 +157,56 @@ popupAddForm.addEventListener('submit', (event) => {
     })
     .catch((error) => {
       console.log(error);
-    });
+    })
+    .finally(() => { classPopupWithFormAdd.showPreloader(false) })
+}
+
+//Обработчики событий
+editButtonElement.addEventListener('click', handleEditButtonClick); //Слушатель клика для открытия формы редактирования 
+addButtonElement.addEventListener('click', () => {
+  classPopupWithFormAdd.open();
+  addForm.reset();
+  validators[addForm.getAttribute('name')].toggleButtonState();
+}); //Слушатель клика для открытия формы добавления нового места
+
+avatarElement.addEventListener('click', () => {
+  const avatarEditPopup = document.querySelector('.popup_form_edit-avatar');
+  const avatarEditForm = avatarEditPopup.querySelector('.avatar-edit-form');
+  popupEditAvatar.open();
+  avatarEditForm.reset();
+  validators[avatarEditForm.getAttribute('name')].toggleButtonState();
 });
+
+//Закртыие форм по крестику
+popupWithImage.setEventListeners();
+classPopupWithFormEdit.setEventListeners();
+classPopupWithFormAdd.setEventListeners();
+popupDelete.setEventListeners();
+popupEditAvatar.setEventListeners();
+// popupAddForm.addEventListener('submit', (event) => {
+//   event.preventDefault();
+//   const nameInputValue = nameElement.value;
+//   const urlInputValue = urlElement.value;
+
+//   api.addNewCardApi(nameInputValue, urlInputValue)
+//     .then((data) => {
+//       const cardElement = createCard({
+//         name: data.name,
+//         link: data.link,
+//         id: data._id,
+//         likes: data.likes,
+//         isLiked: false,
+//         ownerId: data.owner._id
+//       });
+//       section.addItem(cardElement);
+//       classPopupWithFormAdd.close();
+//     })
+//     .catch((error) => {
+//       console.log(error);
+//     });
+// });
+
+
 
 //Вызов функций
 enableValidation(validationConfig);

@@ -13,9 +13,6 @@ class Api {
     
             throw new Error("Error");
           })
-          .catch((error) => {
-            console.log(error);
-          });
     }
 
     getAllCards() {
@@ -72,7 +69,12 @@ class Api {
           method: method,
           headers: this._headers,
         })
-        .then((response) => response.json());
+        .then((response) => {
+            if (!response.ok) {
+                return response.json().then(err => { throw err; });
+            }
+            return response.json();
+        });
     }
 
     deleteCardApi(cardId) {
